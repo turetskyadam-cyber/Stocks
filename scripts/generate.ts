@@ -1,6 +1,6 @@
 import { writeFileSync, mkdirSync } from 'fs'
 import { join } from 'path'
-import { lessons, TOTAL_LESSONS } from '../data/lessons'
+import { lessons, TOTAL_LESSONS, Lesson, SlotAWidget, SlotBWidget } from '../data/lessons'
 
 const dist = join(__dirname, '../dist')
 
@@ -554,12 +554,167 @@ footer {
   line-height: 1.5;
 }
 
+/* ── Stat block ── */
+.stat-block { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 540px) { .stat-block { grid-template-columns: repeat(3, 1fr); } }
+.stat-card { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; padding: 18px 16px; display: flex; flex-direction: column; gap: 6px; }
+.stat-value { font-family: 'JetBrains Mono', monospace; font-size: clamp(22px, 5vw, 30px); font-weight: 700; color: #00ff88; line-height: 1; }
+.stat-label { font-size: 13px; font-weight: 600; color: #fff; }
+.stat-sub { font-size: 11px; color: #9ca3af; }
+
+/* ── Comparison table ── */
+.comparison-wrap { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; overflow: hidden; }
+.comparison-header { display: grid; grid-template-columns: 1fr 1fr; }
+.comp-hdr { padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+.comp-hdr.left { color: #00ff88; border-right: 1px solid #2d2d3d; }
+.comp-hdr.right { color: #ef4444; }
+.comp-row { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #2d2d3d; }
+.comp-cell { padding: 10px 16px; font-size: 13px; color: #fff; line-height: 1.45; }
+.comp-cell.left { border-right: 1px solid #2d2d3d; color: #d1fae5; }
+
+/* ── Timeline ── */
+.timeline-wrap { display: flex; flex-direction: column; }
+.timeline-event { display: flex; gap: 14px; }
+.timeline-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 24px; }
+.timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: #00ff88; flex-shrink: 0; margin-top: 4px; }
+.timeline-line { flex: 1; width: 2px; background: #2d2d3d; margin: 4px 0; min-height: 12px; }
+.timeline-event:last-child .timeline-line { display: none; }
+.timeline-content { padding-bottom: 18px; }
+.timeline-label { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.timeline-body { font-size: 13px; color: #9ca3af; line-height: 1.5; }
+
+/* ── Alert trio ── */
+.alert-trio-grid { display: flex; flex-direction: column; gap: 10px; }
+.alert-card { display: flex; gap: 12px; align-items: flex-start; background: #1a1a24; border: 1px solid #2d2d3d; border-left-width: 3px; border-radius: 10px; padding: 14px 16px; }
+.alert-icon { font-size: 20px; flex-shrink: 0; }
+.alert-content-heading { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.alert-content-body { font-size: 13px; color: #9ca3af; line-height: 1.5; }
+
+/* ── Quote hero ── */
+.quote-hero-wrap { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 16px; padding: 28px 24px; position: relative; overflow: hidden; }
+.quote-glyph { position: absolute; top: -8px; left: 16px; font-size: 80px; color: #00ff8815; font-family: Georgia, serif; line-height: 1; pointer-events: none; }
+.quote-text { font-size: clamp(15px, 3vw, 19px); font-weight: 600; color: #fff; line-height: 1.55; position: relative; }
+.quote-attribution { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #00ff88; margin-top: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* ── Leaderboard ── */
+.leaderboard-wrap { display: flex; flex-direction: column; gap: 8px; }
+.lb-row { display: grid; grid-template-columns: 28px 1fr 70px; align-items: center; gap: 12px; background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 10px; padding: 12px 14px; }
+.lb-rank { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: #9ca3af; }
+.lb-label { font-size: 13px; font-weight: 600; color: #fff; }
+.lb-sub { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+.lb-bar-track { height: 4px; background: #2d2d3d; border-radius: 2px; }
+.lb-bar-fill { height: 4px; border-radius: 2px; }
+
+/* ── Checklist ── */
+.checklist-wrap { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
+.check-item { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; user-select: none; }
+.check-box { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid #4d4d5d; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: background 150ms, border-color 150ms; }
+.check-item.checked .check-box { background: #00ff88; border-color: #00ff88; }
+.check-tick { font-size: 11px; color: #000; display: none; }
+.check-item.checked .check-tick { display: block; }
+.check-text { font-size: 13px; color: #fff; line-height: 1.5; }
+.check-item.checked .check-text { color: #9ca3af; text-decoration: line-through; }
+
+/* ── Before / After ── */
+.before-after-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ba-panel { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; padding: 14px; }
+.ba-panel-header { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.ba-panel-header.before { color: #9ca3af; }
+.ba-panel-header.after  { color: #00ff88; }
+.ba-items { display: flex; flex-direction: column; gap: 6px; }
+.ba-item { font-size: 12px; color: #fff; line-height: 1.45; padding: 5px 8px; background: #0f0f14; border-radius: 6px; }
+
+/* ── Myth busters ── */
+.myth-grid { display: flex; flex-direction: column; gap: 10px; }
+@media (min-width: 540px) { .myth-grid.cols-2 { flex-direction: row; } }
+.myth-card-wrap { flex: 1; height: 130px; perspective: 800px; cursor: pointer; }
+.myth-card-wrap.cols-3 { height: 150px; }
+.myth-card-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1); }
+.myth-card-wrap.flipped .myth-card-inner { transform: rotateY(180deg); }
+.myth-face { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+.myth-front { background: #2d1a1a; border: 1px solid #ef444440; }
+.myth-back  { background: #0d2b1a; border: 1px solid #00ff8840; transform: rotateY(180deg); }
+.myth-badge-red   { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #ef4444; text-transform: uppercase; letter-spacing: 0.1em; }
+.myth-badge-green { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #00ff88; text-transform: uppercase; letter-spacing: 0.1em; }
+.myth-text { font-size: 13px; color: #fff; line-height: 1.45; }
+
+/* ── Steps ── */
+.steps-wrap { display: flex; flex-direction: column; }
+.step-item { display: flex; gap: 14px; }
+.step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 28px; }
+.step-num-circle { width: 24px; height: 24px; border-radius: 50%; background: #00ff8820; border: 1.5px solid #00ff88; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-num-text { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: #00ff88; }
+.step-conn { flex: 1; width: 2px; background: #2d2d3d; margin: 3px 0; min-height: 10px; }
+.step-item:last-child .step-conn { display: none; }
+.step-content { padding-bottom: 16px; }
+.step-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 3px; margin-top: 2px; }
+.step-body { font-size: 13px; color: #9ca3af; line-height: 1.5; }
+
+/* ── Diagram ── */
+.diagram-wrap { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; overflow: hidden; }
+.diagram-svg { width: 100%; display: block; }
+.diagram-caption { font-size: 11px; color: #9ca3af; text-align: center; padding: 8px 16px 12px; font-family: 'JetBrains Mono', monospace; }
+
+/* ── True / False ── */
+.tf-wrap { display: flex; flex-direction: column; gap: 10px; }
+.tf-item { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.tf-statement { font-size: 14px; color: #fff; line-height: 1.55; }
+.tf-buttons { display: flex; gap: 8px; }
+.tf-btn { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid #2d2d3d; background: #0f0f14; color: #9ca3af; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 150ms; font-family: 'Inter', sans-serif; }
+.tf-btn:hover:not([disabled]) { border-color: #4d4d5d; color: #fff; }
+.tf-btn.correct   { border-color: #00ff88; background: rgba(0,255,136,0.1); color: #00ff88; }
+.tf-btn.incorrect { border-color: #ef4444; background: rgba(239,68,68,0.1); color: #ef4444; }
+.tf-explain { font-size: 12px; color: #9ca3af; line-height: 1.5; display: none; padding-top: 8px; border-top: 1px solid #2d2d3d; }
+.tf-explain.visible { display: block; }
+
+/* ── Scenario ── */
+.scenario-wrap { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.scenario-setup { font-size: 14px; color: #fff; line-height: 1.65; }
+.scenario-options { display: flex; flex-direction: column; gap: 8px; }
+.scenario-btn { background: #0f0f14; border: 1px solid #2d2d3d; border-radius: 10px; padding: 12px 14px; text-align: left; color: #fff; font-size: 13px; line-height: 1.5; cursor: pointer; font-family: 'Inter', sans-serif; transition: border-color 150ms; }
+.scenario-btn:hover:not([disabled]) { border-color: #4d4d5d; }
+.scenario-btn.correct   { border-color: #00ff88; background: rgba(0,255,136,0.08); }
+.scenario-btn.incorrect { border-color: #ef4444; background: rgba(239,68,68,0.08); }
+.scenario-explain { font-size: 12px; color: #9ca3af; line-height: 1.5; padding: 10px 14px; background: #0f0f14; border-radius: 8px; display: none; }
+.scenario-explain.visible { display: block; }
+
+/* ── Calculator ── */
+.calc-wrap { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.calc-label { font-size: 12px; color: #9ca3af; font-weight: 500; margin-bottom: 6px; }
+.calc-input { background: #0f0f14; border: 1px solid #2d2d3d; border-radius: 8px; padding: 10px 14px; font-size: 16px; color: #fff; font-family: 'JetBrains Mono', monospace; width: 100%; -webkit-appearance: none; }
+.calc-input:focus { outline: none; border-color: #00ff88; }
+.calc-result { background: #0f0f14; border: 1px solid #2d2d3d; border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
+.calc-result-label { font-size: 12px; color: #9ca3af; }
+.calc-result-value { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: #00ff88; }
+.calc-note { font-size: 12px; color: #9ca3af; line-height: 1.5; }
+
+/* ── Pros / Cons ── */
+.pros-cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pc-col { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; padding: 14px; }
+.pc-header { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.pc-header.pros { color: #00ff88; }
+.pc-header.cons { color: #ef4444; }
+.pc-items { display: flex; flex-direction: column; gap: 8px; }
+.pc-item { font-size: 12px; color: #fff; line-height: 1.45; padding-left: 12px; position: relative; }
+.pc-col.pros .pc-item::before { content: ''; position: absolute; left: 0; top: 6px; width: 4px; height: 4px; border-radius: 50%; background: #00ff88; }
+.pc-col.cons .pc-item::before { content: ''; position: absolute; left: 0; top: 6px; width: 4px; height: 4px; border-radius: 50%; background: #ef4444; }
+
+/* ── DYK variants ── */
+.dyk-card.style-data    { border-color: #3b82f640; }
+.dyk-card.style-data    .dyk-label { color: #3b82f6; }
+.dyk-card.style-pro-tip { border-color: #f9731640; }
+.dyk-card.style-pro-tip .dyk-label { color: #f97316; }
+.dyk-card.style-mistake { border-color: #ef444440; }
+.dyk-card.style-mistake .dyk-label { color: #ef4444; }
+.dyk-card.style-quote   { border-color: #8b5cf640; }
+.dyk-card.style-quote   .dyk-label { color: #8b5cf6; }
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .ticker-track, .gradient-border-card, .shimmer,
   .section-dot-anim, .lesson-start, .board-enter,
   .c1,.c2,.c3,.f1,.f2,.f3,.v1,.v2,.v3,.dyk-enter,.nav-enter,
-  .vocab-card-inner { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  .vocab-card-inner, .myth-card-inner { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
 }
 
 /* ── Section heading ── */
@@ -700,6 +855,143 @@ function generateBoardPage(): string {
 </html>`
 }
 
+function renderSlotA(lesson: Lesson): string {
+  const w = lesson.slotA
+  if (!w || w.type === 'facts') {
+    const factsHTML = lesson.facts
+      .map((f, i) => `<div class="fact-card f${i + 1}"><span class="fact-icon">${f.icon}</span><p class="fact-text">${escHtml(f.text)}</p></div>`)
+      .join('\n')
+    return `<section class="c3"><p class="section-h2">3 things to know</p><div class="facts-grid">${factsHTML}</div></section>`
+  }
+
+  if (w.type === 'stat-block') {
+    const cards = w.stats.map(s => `<div class="stat-card"><span class="stat-value">${escHtml(s.value)}</span><span class="stat-label">${escHtml(s.label)}</span>${s.sub ? `<span class="stat-sub">${escHtml(s.sub)}</span>` : ''}</div>`).join('\n')
+    return `<section class="c3"><div class="stat-block">${cards}</div></section>`
+  }
+
+  if (w.type === 'comparison') {
+    const rows = w.rows.map(r => `<div class="comp-row"><div class="comp-cell left">${escHtml(r.left)}</div><div class="comp-cell">${escHtml(r.right)}</div></div>`).join('\n')
+    return `<section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">${escHtml(w.leftLabel)}</div><div class="comp-hdr right">${escHtml(w.rightLabel)}</div></div>${rows}</div></section>`
+  }
+
+  if (w.type === 'timeline') {
+    const events = w.events.map(e => `<div class="timeline-event"><div class="timeline-left"><div class="timeline-dot"></div><div class="timeline-line"></div></div><div class="timeline-content"><p class="timeline-label">${escHtml(e.label)}</p><p class="timeline-body">${escHtml(e.body)}</p></div></div>`).join('\n')
+    return `<section class="c3"><p class="section-h2">${escHtml(w.heading)}</p><div class="timeline-wrap">${events}</div></section>`
+  }
+
+  if (w.type === 'alert-trio') {
+    const cards = w.items.map(i => `<div class="alert-card" style="border-left-color:${i.accent};"><span class="alert-icon">${i.icon}</span><div><p class="alert-content-heading">${escHtml(i.heading)}</p><p class="alert-content-body">${escHtml(i.body)}</p></div></div>`).join('\n')
+    return `<section class="c3"><div class="alert-trio-grid">${cards}</div></section>`
+  }
+
+  if (w.type === 'quote-hero') {
+    return `<section class="c3"><div class="quote-hero-wrap"><span class="quote-glyph">"</span><p class="quote-text">${escHtml(w.quote)}</p><p class="quote-attribution">— ${escHtml(w.attribution)}</p></div></section>`
+  }
+
+  if (w.type === 'leaderboard') {
+    const rows = w.items.map(i => `<div class="lb-row"><span class="lb-rank">#${i.rank}</span><div><p class="lb-label">${escHtml(i.label)}</p><p class="lb-sub">${escHtml(i.sub)}</p></div><div><div class="lb-bar-track"><div class="lb-bar-fill" style="width:${i.pct}%;background:${i.color};"></div></div></div></div>`).join('\n')
+    return `<section class="c3"><p class="section-h2">${escHtml(w.heading)}</p><div class="leaderboard-wrap">${rows}</div></section>`
+  }
+
+  if (w.type === 'checklist') {
+    const items = w.items.map((item, idx) => `<div class="check-item" id="ci-${idx}" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">${escHtml(item)}</span></div>`).join('\n')
+    return `<section class="c3"><p class="section-h2">${escHtml(w.heading)}</p><div class="checklist-wrap">${items}</div></section>`
+  }
+
+  if (w.type === 'before-after') {
+    const leftItems = w.leftItems.map(i => `<div class="ba-item">${escHtml(i)}</div>`).join('\n')
+    const rightItems = w.rightItems.map(i => `<div class="ba-item">${escHtml(i)}</div>`).join('\n')
+    return `<section class="c3"><div class="before-after-grid"><div class="ba-panel"><p class="ba-panel-header before">${escHtml(w.leftLabel)}</p><div class="ba-items">${leftItems}</div></div><div class="ba-panel"><p class="ba-panel-header after">${escHtml(w.rightLabel)}</p><div class="ba-items">${rightItems}</div></div></div></section>`
+  }
+
+  if (w.type === 'myth-busters') {
+    const cards = w.myths.map((m, i) => `<div class="myth-card-wrap cols-3" id="mba-${i}" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">${escHtml(m.myth)}</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">${escHtml(m.reality)}</p></div></div></div>`).join('\n')
+    return `<section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid">${cards}</div></section>`
+  }
+
+  return ''
+}
+
+function renderSlotB(lesson: Lesson): string {
+  const w = lesson.slotB
+  if (!w || w.type === 'vocab') {
+    const vocabHTML = lesson.vocab
+      .map((v, i) => `<div class="vocab-card-wrap v${i + 1}" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for ${escHtml(v.term)}"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">${escHtml(v.term)}</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">${escHtml(v.definition)}</p></div></div></div>`)
+      .join('\n')
+    return `<section><p class="section-h2">Key vocabulary — tap each card</p><div class="vocab-grid">${vocabHTML}</div></section>`
+  }
+
+  if (w.type === 'steps') {
+    const steps = w.steps.map(s => `<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">${s.num}</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">${escHtml(s.title)}</p><p class="step-body">${escHtml(s.body)}</p></div></div>`).join('\n')
+    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="steps-wrap">${steps}</div></section>`
+  }
+
+  if (w.type === 'diagram') {
+    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="diagram-wrap">${w.svgContent}${w.caption ? `<p class="diagram-caption">${escHtml(w.caption)}</p>` : ''}</div></section>`
+  }
+
+  if (w.type === 'scenario') {
+    const lid = lesson.id
+    const opts = w.options.map((o, i) => {
+      const isCorrect = o.correct ? 'true' : 'false'
+      return `<button class="scenario-btn" onclick="handleScenario(this,${lid},${i},${isCorrect})">${escHtml(o.label)}</button><div class="scenario-explain" id="sexp-${lid}-${i}">${escHtml(o.explanation)}</div>`
+    }).join('\n')
+    return `<section><div class="scenario-wrap"><p class="scenario-setup">${escHtml(w.setup)}</p><div class="scenario-options">${opts}</div></div></section>`
+  }
+
+  if (w.type === 'true-false') {
+    const lid = lesson.id
+    const items = w.statements.map((s, i) => {
+      const ans = s.answer ? 'true' : 'false'
+      return `<div class="tf-item" id="tf-${lid}-${i}"><p class="tf-statement">${escHtml(s.text)}</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,${lid},${i},'true','${ans}')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,${lid},${i},'false','${ans}')">False</button></div><p class="tf-explain" id="tfexp-${lid}-${i}">${escHtml(s.explanation)}</p></div>`
+    }).join('\n')
+    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="tf-wrap">${items}</div></section>`
+  }
+
+  if (w.type === 'myth-buster') {
+    const cards = w.myths.map((m, i) => `<div class="myth-card-wrap cols-2" id="mbb-${lesson.id}-${i}" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">${escHtml(m.myth)}</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">${escHtml(m.reality)}</p></div></div></div>`).join('\n')
+    return `<section><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid cols-2">${cards}</div></section>`
+  }
+
+  if (w.type === 'calculator') {
+    const lid = lesson.id
+    const prefix = w.resultPrefix ?? ''
+    const suffix = w.resultSuffix ?? ''
+    return `<section><div class="calc-wrap"><p class="section-h2">${escHtml(w.heading)}</p><div><p class="calc-label">${escHtml(w.inputLabel)}</p><input class="calc-input" id="calc-input-${lid}" type="number" value="${w.inputDefault}" min="${w.inputMin}" max="${w.inputMax}" step="${w.inputStep}" data-factor="${w.factor}" data-prefix="${prefix}" data-suffix="${suffix}" oninput="updateCalc(${lid})"></div><div class="calc-result"><span class="calc-result-label">${escHtml(w.resultLabel)}</span><span class="calc-result-value" id="calc-output-${lid}">${prefix}${(w.inputDefault * w.factor).toFixed(2)}${suffix}</span></div>${w.note ? `<p class="calc-note">${escHtml(w.note)}</p>` : ''}</div></section>`
+  }
+
+  if (w.type === 'pros-cons') {
+    const pros = w.pros.map(p => `<div class="pc-item">${escHtml(p)}</div>`).join('\n')
+    const cons = w.cons.map(c => `<div class="pc-item">${escHtml(c)}</div>`).join('\n')
+    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="pros-cons-grid"><div class="pc-col pros"><p class="pc-header pros">✓ Pros</p><div class="pc-items">${pros}</div></div><div class="pc-col cons"><p class="pc-header cons">✗ Cons</p><div class="pc-items">${cons}</div></div></div></section>`
+  }
+
+  return ''
+}
+
+const INLINE_JS = `
+<script>
+function handleTF(btn, lid, idx, chosen, correct) {
+  var item = document.getElementById('tf-' + lid + '-' + idx);
+  item.querySelectorAll('.tf-btn').forEach(function(b) { b.disabled = true; });
+  btn.classList.add(chosen === correct ? 'correct' : 'incorrect');
+  document.getElementById('tfexp-' + lid + '-' + idx).classList.add('visible');
+}
+function handleScenario(btn, lid, idx, isCorrect) {
+  var wrap = btn.closest('.scenario-options');
+  wrap.querySelectorAll('.scenario-btn').forEach(function(b) { b.disabled = true; });
+  btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+  document.getElementById('sexp-' + lid + '-' + idx).classList.add('visible');
+}
+function updateCalc(lid) {
+  var inp = document.getElementById('calc-input-' + lid);
+  var out = document.getElementById('calc-output-' + lid);
+  var v = parseFloat(inp.value) || 0;
+  var result = (v * parseFloat(inp.dataset.factor)).toFixed(2);
+  out.textContent = (inp.dataset.prefix || '') + result + (inp.dataset.suffix || '');
+}
+</script>`
+
 function generateLessonPage(lessonId: number): string {
   const lesson = lessons.find((l) => l.id === lessonId)!
   const pct = ((lesson.id / TOTAL_LESSONS) * 100).toFixed(1)
@@ -708,33 +1000,13 @@ function generateLessonPage(lessonId: number): string {
   const hasNext = availableIds.has(nextId)
   const hasPrev = lesson.id > 1
 
-  const factsHTML = lesson.facts
-    .map(
-      (f, i) =>
-        `<div class="fact-card f${i + 1}">
-          <span class="fact-icon">${f.icon}</span>
-          <p class="fact-text">${escHtml(f.text)}</p>
-        </div>`
-    )
-    .join('\n')
-
-  const vocabHTML = lesson.vocab
-    .map(
-      (v, i) =>
-        `<div class="vocab-card-wrap v${i + 1}" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for ${escHtml(v.term)}">
-          <div class="vocab-card-inner">
-            <div class="vocab-face vocab-front">
-              <p class="vocab-term">${escHtml(v.term)}</p>
-              <p class="vocab-hint">tap to reveal</p>
-            </div>
-            <div class="vocab-face vocab-back">
-              <div class="shimmer"></div>
-              <p class="vocab-def">${escHtml(v.definition)}</p>
-            </div>
-          </div>
-        </div>`
-    )
-    .join('\n')
+  const dykCfg = ({
+    'default':  { icon: '💡', label: 'Did you know?',     cls: '' },
+    'pro-tip':  { icon: '⚡', label: 'Pro tip',           cls: 'style-pro-tip' },
+    'mistake':  { icon: '⚠️', label: 'Common mistake',    cls: 'style-mistake' },
+    'data':     { icon: '📊', label: 'The data says',     cls: 'style-data' },
+    'quote':    { icon: '🗣️', label: 'Legendary trader',  cls: 'style-quote' },
+  } as const)[lesson.dykStyle ?? 'default']
 
   const backBtn = hasPrev
     ? `<a href="../${prevId}/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson ${prevId}</span></a>`
@@ -796,27 +1068,15 @@ ${tickerSection()}
     </div>
   </section>
 
-  <!-- Key Facts -->
-  <section class="c3">
-    <p class="section-h2">3 things to know</p>
-    <div class="facts-grid">
-      ${factsHTML}
-    </div>
-  </section>
+  ${renderSlotA(lesson)}
 
-  <!-- Vocab -->
-  <section>
-    <p class="section-h2">Key vocabulary — tap each card</p>
-    <div class="vocab-grid">
-      ${vocabHTML}
-    </div>
-  </section>
+  ${renderSlotB(lesson)}
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter">
-    <span class="dyk-icon">💡</span>
+  <div class="dyk-card dyk-enter ${dykCfg.cls}">
+    <span class="dyk-icon">${dykCfg.icon}</span>
     <div>
-      <p class="dyk-label">Did you know?</p>
+      <p class="dyk-label">${dykCfg.label}</p>
       <p class="dyk-text">${escHtml(lesson.didYouKnow)}</p>
     </div>
   </div>
@@ -831,6 +1091,7 @@ ${tickerSection()}
 <footer>
   <p class="footer-text">Lesson ${lesson.id} of ${TOTAL_LESSONS} · Momentum Trading Course</p>
 </footer>
+${INLINE_JS}
 </body>
 </html>`
 }
