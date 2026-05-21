@@ -1,23 +1,39 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 interface VocabCardProps {
   term: string
   definition: string
-  index: number
 }
 
-export default function VocabCard({ term, definition, index }: VocabCardProps) {
+export default function VocabCard({ term, definition }: VocabCardProps) {
   const [flipped, setFlipped] = useState(false)
 
-  const staggerClass = ['card-stagger-1', 'card-stagger-2', 'card-stagger-3'][index] ?? ''
+  // Perspective tilt — tracks cursor, springs back on leave
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), { stiffness: 200, damping: 20 })
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), { stiffness: 200, damping: 20 })
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (flipped) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
 
   return (
-    <div
-      className={`${staggerClass}`}
-      style={{ perspective: '900px' }}
+    <motion.div
+      style={{ perspective: '900px', rotateX, rotateY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
       <motion.button
         onClick={() => setFlipped((f) => !f)}
@@ -26,7 +42,7 @@ export default function VocabCard({ term, definition, index }: VocabCardProps) {
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ type: 'spring', duration: 0.5, bounce: 0.15 }}
         whileTap={{ scale: 0.97 }}
-        aria-label={`Vocab card: ${term}. ${flipped ? 'Click to hide definition' : 'Click to reveal definition'}`}
+        aria-label={`${term}: ${flipped ? 'showing definition, click to hide' : 'click to reveal definition'}`}
       >
         {/* Front */}
         <div
@@ -35,18 +51,20 @@ export default function VocabCard({ term, definition, index }: VocabCardProps) {
         >
           <span className="font-mono text-xs text-muted uppercase tracking-widest">Term</span>
           <span className="text-xl font-bold text-white">{term}</span>
-          <span className="font-mono text-xs text-accent/60 mt-1">tap to reveal →</span>
+          <span className="font-mono text-xs text-accent/50 mt-0.5">tap to reveal →</span>
         </div>
 
         {/* Back */}
         <div
-          className="absolute inset-0 rounded-xl border border-accent/30 bg-accent/5 flex flex-col items-center justify-center gap-2 p-5 text-center"
+          className="absolute inset-0 rounded-xl border border-accent/30 bg-accent/5 flex flex-col items-center justify-center gap-2 p-5 text-center overflow-hidden"
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <span className="font-mono text-xs text-accent uppercase tracking-widest">Definition</span>
-          <p className="text-sm text-white leading-relaxed">{definition}</p>
+          {/* Shimmer overlay */}
+          <div className="absolute inset-0 shimmer-overlay pointer-events-none" />
+          <span className="relative font-mono text-xs text-accent uppercase tracking-widest">Definition</span>
+          <p className="relative text-sm text-white leading-relaxed">{definition}</p>
         </div>
       </motion.button>
-    </div>
+    </motion.div>
   )
 }

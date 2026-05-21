@@ -59,6 +59,59 @@ body {
 /* Next button entrance */
 .next-btn-enter { animation: card-in 320ms var(--ease-out) 600ms both; }
 
+/* ── Animated gradient border on core concept card ── */
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to { --gradient-angle: 360deg; }
+}
+
+.gradient-border-card {
+  background: conic-gradient(
+    from var(--gradient-angle),
+    #2d2d3d 0%,
+    rgba(0, 255, 136, 0.22) 35%,
+    #2d2d3d 65%
+  );
+  animation: border-spin 12s linear infinite;
+}
+
+/* ── Shimmer on vocab card back face ── */
+@keyframes shimmer-slide {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-overlay {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 255, 136, 0.07) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-slide 3s linear infinite;
+}
+
+/* ── Section label colored dot ── */
+.section-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--section-color, #10b981);
+  flex-shrink: 0;
+  animation: dot-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50%       { box-shadow: 0 0 6px 2px var(--section-color, #10b981); }
+}
+
 /* Lesson 1 "start here" pulse */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
@@ -79,6 +132,9 @@ body {
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  .gradient-border-card,
+  .shimmer-overlay,
+  .section-dot,
   .lesson-start,
   .board-enter,
   .ticker-track,
