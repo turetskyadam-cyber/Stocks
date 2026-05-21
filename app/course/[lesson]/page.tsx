@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getLessonById, TOTAL_LESSONS } from '@/data/lessons'
+import { lessons, getLessonById, TOTAL_LESSONS } from '@/data/lessons'
 import ProgressBar from '@/components/ProgressBar'
 import TickerTape from '@/components/TickerTape'
 import VocabCard from '@/components/VocabCard'
@@ -10,9 +10,7 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  return Array.from({ length: TOTAL_LESSONS }, (_, i) => ({
-    lesson: String(i + 1),
-  }))
+  return lessons.map((l) => ({ lesson: String(l.id) }))
 }
 
 export default function LessonPage({ params }: PageProps) {
