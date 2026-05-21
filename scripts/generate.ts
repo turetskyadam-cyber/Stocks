@@ -817,7 +817,7 @@ function generateBoardPage(): string {
 
       if (!available) return `<div>${cellDiv}</div>`
 
-      return `<a href="course/${id}.html" class="cell-link${isStart ? ' lesson-start' : ''}" aria-label="Go to lesson ${id}">${cellDiv}</a>`
+      return `<a href="${id}.html" class="cell-link${isStart ? ' lesson-start' : ''}" aria-label="Go to lesson ${id}">${cellDiv}</a>`
     })
     .join('\n')
 
@@ -845,7 +845,7 @@ function generateBoardPage(): string {
 </main>
 
 <div class="cta-wrap">
-  <a href="course/1.html" class="btn-cta">Begin Lesson 1 <span>→</span></a>
+  <a href="1.html" class="btn-cta">Begin Lesson 1 <span>→</span></a>
 </div>
 
 <footer>
@@ -1020,7 +1020,7 @@ function generateLessonPage(lessonId: number): string {
         </span>
         <span class="btn-arrow">→</span>
       </a>`
-    : `<a href="../index.html" class="btn-next">
+    : `<a href="index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">You finished!</span>
           <span class="btn-next-title">Back to Course Map</span>
@@ -1105,10 +1105,9 @@ writeFileSync(join(dist, 'index.html'), generateBoardPage())
 console.log('✓ dist/index.html')
 
 // Lessons
-mkdirSync(join(dist, 'course'), { recursive: true })
 for (const lesson of lessons) {
-  writeFileSync(join(dist, 'course', `${lesson.id}.html`), generateLessonPage(lesson.id))
-  console.log(`✓ dist/course/${lesson.id}.html`)
+  writeFileSync(join(dist, `${lesson.id}.html`), generateLessonPage(lesson.id))
+  console.log(`✓ dist/${lesson.id}.html`)
 }
 
 console.log(`\n✅ Generated ${1 + lessons.length} files in dist/`)
