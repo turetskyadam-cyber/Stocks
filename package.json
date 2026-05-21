@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "tsx scripts/generate.ts && rm -f deploy.zip && cd dist && zip -r ../deploy.zip ."
+    "export": "tsx scripts/generate.ts && rm -f deploy.zip && cd dist && find . -type f | sort | zip -@ ../deploy.zip"
   },
   "dependencies": {
     "framer-motion": "^11.3.0",
