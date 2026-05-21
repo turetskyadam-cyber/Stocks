@@ -2,41 +2,42 @@ import { NextResponse } from 'next/server'
 
 const SYMBOLS = ['AAPL', 'TSLA', 'NVDA', 'AMZN', 'MSFT', 'GOOGL', 'META', 'SPY', 'AMD', 'GME']
 
-export const revalidate = 60 // cache 60 s
+export const revalidate = 60
 
 export async function GET() {
   try {
     const url =
-      `https://query1.finance.yahoo.com/v7/finance/quote` +
-      `?symbols=${SYMBOLS.join(',')}&fields=regularMarketPrice,regularMarketChangePercent`
+      `https://query1.finance.yahoo.com/v8/finance/spark` +
+      `?symbols=${SYMBOLS.join(',')}&range=1d&interval=5m`
 
     const res = await fetch(url, {
       headers: {
         'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36',
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
         Accept: 'application/json',
-        'Accept-Language': 'en-US,en;q=0.9',
       },
       next: { revalidate: 60 },
     })
 
-    if (!res.ok) throw new Error(`Yahoo Finance responded ${res.status}`)
+    if (!res.ok) throw new Error(`Yahoo spark responded ${res.status}`)
 
     const json = await res.json()
-    const results: Record<string, unknown>[] = json?.quoteResponse?.result ?? []
 
-    const tickers = results.map((q) => {
-      const pct = q.regularMarketChangePercent as number | undefined
+    const tickers = SYMBOLS.map((sym) => {
+      const data = json[sym]
+      if (!data) return { symbol: sym, price: '--', change: '--', positive: true }
+
+      const closes: number[] = data.close ?? []
+      const prev: number = data.previousClose ?? 0
+      const current = closes.length > 0 ? closes[closes.length - 1] : prev
+
+      const pct = prev > 0 ? ((current - prev) / prev) * 100 : 0
+
       return {
-        symbol: q.symbol as string,
-        price: typeof q.regularMarketPrice === 'number'
-          ? (q.regularMarketPrice as number).toFixed(2)
-          : '--',
-        change:
-          pct != null
-            ? `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%`
-            : '--',
-        positive: (pct ?? 0) >= 0,
+        symbol: sym,
+        price: current > 0 ? current.toFixed(2) : '--',
+        change: prev > 0 ? `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%` : '--',
+        positive: pct >= 0,
       }
     })
 

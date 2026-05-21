@@ -28,7 +28,7 @@ export default function TickerTape() {
 
   const fetchQuotes = async () => {
     try {
-      const res = await fetch('/api/quotes')
+      const res = await fetch('/api/quotes/')
       if (!res.ok) return
       const data: Ticker[] = await res.json()
       if (Array.isArray(data) && data.length > 0) {
