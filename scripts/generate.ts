@@ -731,18 +731,31 @@ footer {
 .pizza-wrap { flex-shrink: 0; }
 `
 
-const TICKER_ITEMS = [
-  { sym: 'AAPL', price: '189.84', ch: '+1.2%', up: true },
-  { sym: 'TSLA', price: '248.42', ch: '+3.8%', up: true },
-  { sym: 'SPY',  price: '521.67', ch: '+0.4%', up: true },
-  { sym: 'NVDA', price: '875.39', ch: '+2.1%', up: true },
-  { sym: 'META', price: '502.12', ch: '-0.6%', up: false },
-  { sym: 'AMD',  price: '168.75', ch: '+1.9%', up: true },
-  { sym: 'GME',  price: '14.22',  ch: '-2.3%', up: false },
-  { sym: 'MSFT', price: '415.06', ch: '+0.8%', up: true },
-  { sym: 'QQQ',  price: '444.33', ch: '+0.5%', up: true },
-  { sym: 'AMZN', price: '185.90', ch: '+1.3%', up: true },
-]
+const SYMBOLS = ['AAPL', 'TSLA', 'NVDA', 'AMZN', 'MSFT', 'GOOGL', 'META', 'SPY', 'AMD', 'GME']
+
+let TICKER_ITEMS: { sym: string; price: string; ch: string; up: boolean }[] = []
+
+async function fetchTickers() {
+  try {
+    const url = `https://query1.finance.yahoo.com/v8/finance/spark?symbols=${SYMBOLS.join(',')}&range=1d&interval=5m`
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } })
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    const json = await res.json() as Record<string, { close?: number[]; previousClose?: number }>
+    TICKER_ITEMS = SYMBOLS.map(sym => {
+      const d = json[sym]
+      if (!d) return { sym, price: '--', ch: '--', up: true }
+      const closes = d.close ?? []
+      const prev = d.previousClose ?? 0
+      const cur = closes.length ? closes[closes.length - 1] : prev
+      const pct = prev > 0 ? ((cur - prev) / prev) * 100 : 0
+      return { sym, price: cur > 0 ? cur.toFixed(2) : '--', ch: prev > 0 ? `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%` : '--', up: pct >= 0 }
+    })
+    console.log('✓ Live prices fetched from Yahoo Finance')
+  } catch (e) {
+    console.warn('⚠️  Could not fetch live prices, using placeholders:', e)
+    TICKER_ITEMS = SYMBOLS.map(sym => ({ sym, price: '--', ch: '--', up: true }))
+  }
+}
 
 function buildTickerHTML(): string {
   const items = [...TICKER_ITEMS, ...TICKER_ITEMS] // doubled for seamless loop
@@ -1098,16 +1111,20 @@ ${INLINE_JS}
 
 // ── Generate files ──────────────────────────────────────────────────────────
 
-mkdirSync(dist, { recursive: true })
+async function main() {
+  await fetchTickers()
 
-// Board
-writeFileSync(join(dist, 'index.html'), generateBoardPage())
-console.log('✓ dist/index.html')
+  mkdirSync(dist, { recursive: true })
 
-// Lessons
-for (const lesson of lessons) {
-  writeFileSync(join(dist, `${lesson.id}.html`), generateLessonPage(lesson.id))
-  console.log(`✓ dist/${lesson.id}.html`)
+  writeFileSync(join(dist, 'index.html'), generateBoardPage())
+  console.log('✓ dist/index.html')
+
+  for (const lesson of lessons) {
+    writeFileSync(join(dist, `${lesson.id}.html`), generateLessonPage(lesson.id))
+    console.log(`✓ dist/${lesson.id}.html`)
+  }
+
+  console.log(`\n✅ Generated ${1 + lessons.length} files in dist/`)
 }
 
-console.log(`\n✅ Generated ${1 + lessons.length} files in dist/`)
+main().catch(console.error)
