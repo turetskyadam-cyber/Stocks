@@ -27,6 +27,13 @@ export type SlotBWidget =
 
 export type DykStyle = 'default' | 'pro-tip' | 'mistake' | 'data' | 'quote'
 
+export interface QuizQuestion {
+  q: string
+  options: string[]
+  correct: number
+  explanation: string
+}
+
 export interface Lesson {
   id: number
   title: string
@@ -42,6 +49,7 @@ export interface Lesson {
   dykStyle?: DykStyle
   didYouKnow: string
   nextTitle: string
+  checkpointQuiz?: QuizQuestion[]
 }
 
 export const lessons: Lesson[] = [
@@ -73,9 +81,46 @@ export const lessons: Lesson[] = [
         definition: 'The marketplace where stocks are bought and sold. The two biggest US exchanges are NYSE and NASDAQ.',
       },
     ],
+    slotA: {
+      type: 'stat-block',
+      stats: [
+        { value: '6,000+', label: 'US public companies', sub: 'available to buy right now on US exchanges' },
+        { value: '$1', label: 'Minimum investment', sub: 'fractional shares available at most brokers' },
+        { value: '233 yrs', label: 'Market age', sub: 'US stock market running since 1792' },
+      ],
+    },
+    slotB: {
+      type: 'scenario',
+      setup: 'Apple has 15 billion shares outstanding. You buy 1 share at $185. Six months later, Apple\'s total company value increases by 20%. What is your 1 share now worth?',
+      options: [
+        { label: '$185 — you only get back what you paid', correct: false, explanation: 'Incorrect. As a partial owner, you benefit from the company\'s growth. When total value rises 20%, so does every share you hold.' },
+        { label: '$222 — up 20% along with the whole company', correct: true, explanation: 'Correct! $185 × 1.20 = $222. As a shareholder, your piece rises when the company\'s total value rises. This is how stock investors build wealth.' },
+        { label: '$370 — doubled because you bought at the right time', correct: false, explanation: 'Incorrect. Stock price = total company value ÷ shares outstanding. A 20% rise in company value means a 20% rise in each share — not a doubling.' },
+      ],
+    },
     didYouKnow:
       'The New York Stock Exchange opened in 1792 under a buttonwood tree on Wall Street — 24 brokers signed the first trading agreement.',
     nextTitle: 'What is the Stock Market?',
+    checkpointQuiz: [
+      {
+        q: 'When you buy one share of a company\'s stock, you become...',
+        options: ['A creditor lending money to the company', 'A partial owner of that company', 'An employee eligible for a salary', 'A bondholder with guaranteed returns'],
+        correct: 1,
+        explanation: 'Stocks represent ownership. Buy a share = own a piece. If the company grows, your piece grows too. If it shrinks, so does your investment — there are no guarantees.',
+      },
+      {
+        q: 'What primarily drives a stock\'s price during market hours?',
+        options: ['The CEO\'s decisions each morning', 'The government setting daily prices', 'Supply and demand between buyers and sellers', 'The company\'s board voting each day'],
+        correct: 2,
+        explanation: 'Every stock price is determined by the most recent trade between a willing buyer and seller. Millions of transactions per second — pure supply and demand in real time.',
+      },
+      {
+        q: 'Apple\'s stock ticker symbol is...',
+        options: ['APPL', 'APLE', 'APL', 'AAPL'],
+        correct: 3,
+        explanation: 'AAPL — four letters on NASDAQ. NYSE tickers are 1–3 letters. NASDAQ tickers are usually 4–5 letters. Knowing tickers cold is a core trader skill.',
+      },
+    ],
   },
   {
     id: 2,
@@ -105,9 +150,49 @@ export const lessons: Lesson[] = [
         definition: 'A basket of stocks used to measure the overall market. The S&P 500 tracks the 500 largest US companies.',
       },
     ],
+    slotA: {
+      type: 'comparison',
+      leftLabel: 'Without a Stock Market',
+      rightLabel: 'With a Stock Market',
+      rows: [
+        { left: 'Companies fund growth only from private investors or loans', right: 'Companies raise millions instantly by selling shares publicly' },
+        { left: 'Ordinary people cannot invest in private companies', right: 'Anyone with $1 can own a piece of Apple, Tesla, or Amazon' },
+        { left: 'No standard pricing — hard to know fair value', right: 'Transparent real-time prices for every public company' },
+        { left: 'Illiquid — difficult to sell your stake quickly', right: 'Highly liquid — sell your shares in seconds during market hours' },
+      ],
+    },
+    slotB: {
+      type: 'true-false',
+      heading: 'Market Mechanics — True or False?',
+      statements: [
+        { text: 'The NYSE and NASDAQ are the only two stock exchanges in the world.', answer: false, explanation: 'False. There are exchanges in 60+ countries — London, Tokyo, Hong Kong, and more. US markets are just the largest by total market cap.' },
+        { text: 'The price you see for a stock is the price of the most recent completed trade.', answer: true, explanation: 'True. Every price is the last price at which a buyer and seller agreed. It\'s a live auction happening millions of times per second.' },
+        { text: 'You can only buy stocks during regular 9:30 AM – 4:00 PM ET hours.', answer: false, explanation: 'False. Pre-market (4–9:30 AM) and after-hours (4–8 PM) trading exist, but with lower liquidity, wider spreads, and higher risk.' },
+      ],
+    },
     didYouKnow:
       'The first stock market was created in Amsterdam in 1602 for the Dutch East India Company — the world\'s first publicly traded company.',
     nextTitle: 'How Companies Go Public (IPO)',
+    checkpointQuiz: [
+      {
+        q: 'The first stock market in history was created in...',
+        options: ['New York, 1792', 'London, 1801', 'Amsterdam, 1602', 'Paris, 1724'],
+        correct: 2,
+        explanation: 'Amsterdam, 1602 — the Dutch East India Company needed to raise massive capital for trade expeditions and invented the concept of selling shares to the public. Markets haven\'t stopped since.',
+      },
+      {
+        q: 'Regular US stock market trading hours are...',
+        options: ['8:00 AM – 5:00 PM ET', '9:30 AM – 4:00 PM ET', '10:00 AM – 3:30 PM ET', '9:00 AM – 4:30 PM ET'],
+        correct: 1,
+        explanation: '9:30 AM to 4:00 PM Eastern Time, Monday through Friday. The opening bell at 9:30 AM is the most volatile minute of the trading day — everything is repriced at once.',
+      },
+      {
+        q: 'The S&P 500 is best described as a market...',
+        options: ['Single blue-chip stock', 'Government savings bond', 'Index — a basket of the 500 largest US company stocks', 'Cryptocurrency trading platform'],
+        correct: 2,
+        explanation: 'An index tracks a basket of stocks and measures overall market performance. The S&P 500 follows the 500 largest US companies by market cap — it\'s the benchmark everyone watches.',
+      },
+    ],
   },
   {
     id: 3,
@@ -137,9 +222,56 @@ export const lessons: Lesson[] = [
         definition: 'The legal document a company files before its IPO explaining its business, finances, and risks.',
       },
     ],
+    slotA: {
+      type: 'timeline',
+      heading: 'The IPO Process',
+      events: [
+        { label: 'Months 1–3: Hire Underwriters', body: 'The company hires investment banks to manage the IPO. They evaluate the business, conduct due diligence, and structure the offering.' },
+        { label: 'Months 3–6: File the S-1 Prospectus', body: 'A detailed public filing with the SEC containing all financials, risks, and business details. Required by law — investors read this before buying.' },
+        { label: 'Month 6: The Roadshow', body: 'Executives tour major cities presenting to institutional investors to drum up demand and gauge what price the market will bear.' },
+        { label: 'IPO Day: Price and List', body: 'Underwriters set the final price the night before. Shares open for public trading at 9:30 AM on the debut exchange. Chaos and opportunity.' },
+        { label: 'Post-IPO: Lock-up Expiry', body: 'Insiders are locked out from selling for 90–180 days. When the lock-up expires, insider selling often creates predictable selling pressure.' },
+      ],
+    },
+    slotB: {
+      type: 'pros-cons',
+      heading: 'Buying IPO Shares',
+      pros: [
+        'Potential to catch a major growth story early (Google, Amazon in their early days)',
+        'IPO day momentum can drive sharp short-term gains',
+        'Access to companies at their first public market valuation',
+      ],
+      cons: [
+        'Most IPOs are priced above fair value — hype premium built in at issuance',
+        '70% of IPOs trade below their debut price after one year',
+        'No track record as a public company — limited data to analyze',
+        'Lock-up expiry (90–180 days) creates predictable insider selling pressure',
+        'Retail investors rarely get IPO allocation — usually buy at the secondary market top',
+      ],
+    },
     didYouKnow:
       "Google's 2004 IPO used an unusual auction format — anyone could bid, not just big banks. The stock opened at $85. It now trades above $150 post-split.",
     nextTitle: 'NYSE vs. NASDAQ',
+    checkpointQuiz: [
+      {
+        q: 'IPO stands for...',
+        options: ['International Portfolio Offering', 'Initial Private Offering', 'Index Price Optimization', 'Initial Public Offering'],
+        correct: 3,
+        explanation: 'Initial Public Offering — the first time a private company sells shares to the general public. It\'s the moment a private company becomes a publicly traded one.',
+      },
+      {
+        q: 'The legal document filed with the SEC before an IPO is called a...',
+        options: ['Term Sheet', 'Prospectus (S-1 filing)', 'Balance Sheet', 'Market Charter'],
+        correct: 1,
+        explanation: 'The Prospectus (S-1 filing with the SEC) discloses all financial details, risks, and business information. It\'s required by law — and the most important document to read before investing in any IPO.',
+      },
+      {
+        q: 'Why do most IPOs drop below their debut price within one year?',
+        options: ['Companies falsify their financials', 'IPOs are priced above fair value at peak hype — reality sets in later', 'The SEC forces the price down after 6 months', 'Underwriters always set prices too low intentionally'],
+        correct: 1,
+        explanation: 'IPO pricing captures maximum hype. Underwriters price at what the market will bear, often above intrinsic value. When hype fades and lock-up periods expire, selling pressure pushes prices down.',
+      },
+    ],
   },
   {
     id: 4,
@@ -181,9 +313,38 @@ export const lessons: Lesson[] = [
         { left: 'Higher listing requirements', right: 'Lower listing requirements — popular with IPOs' },
       ],
     },
+    slotB: {
+      type: 'scenario',
+      setup: 'You\'re launching a high-growth software startup and it\'s time to IPO. Your company has $50M annual revenue, 200 employees, and a tech-savvy investor base. Which exchange makes more sense?',
+      options: [
+        { label: 'NYSE — it\'s the largest and most prestigious exchange', correct: false, explanation: 'NYSE favors established blue-chip companies with longer track records. A high-growth tech startup is unusual there. Stricter listing requirements and an industrial investor base make it a poor fit.' },
+        { label: 'NASDAQ — the natural home for tech companies', correct: true, explanation: 'Correct! NASDAQ is the default for technology. Apple, Google, Meta, Amazon, Microsoft — all on NASDAQ. Lower listing requirements and a tech-focused investor base make it the obvious choice.' },
+        { label: 'It doesn\'t matter — both exchanges are identical for investors', correct: false, explanation: 'They differ in trading infrastructure, listing requirements, typical industries, and investor base. Exchange choice sends a clear signal to the market about what kind of company you are.' },
+      ],
+    },
     didYouKnow:
       'The famous NYSE opening bell rings every trading day at 9:30 AM ET. Companies pay for the privilege of ringing it — it is a marketing event.',
     nextTitle: 'How to Read a Stock Quote',
+    checkpointQuiz: [
+      {
+        q: 'Which US stock exchange has a physical trading floor with human specialists?',
+        options: ['NASDAQ — it has the largest floor in New York', 'NYSE — located at 11 Wall Street', 'Both exchanges have physical floors', 'Neither — all US trading is fully electronic'],
+        correct: 1,
+        explanation: 'NYSE has a famous physical trading floor at 11 Wall Street with specialist firms that facilitate trading. NASDAQ is fully electronic — no floor, no humans matching trades.',
+      },
+      {
+        q: 'Apple, Alphabet (Google), and Meta all list their shares on...',
+        options: ['NYSE', 'London Stock Exchange', 'NASDAQ', 'Both NYSE and NASDAQ'],
+        correct: 2,
+        explanation: 'NASDAQ is the home of Big Tech. Apple (AAPL), Alphabet (GOOGL/GOOG), Meta (META), Microsoft (MSFT), and Amazon (AMZN) all trade on NASDAQ.',
+      },
+      {
+        q: 'A Market Maker is...',
+        options: ['The CEO of a stock exchange', 'A firm that always stands ready to buy or sell a stock, keeping the market liquid', 'A government regulator who sets stock prices', 'The person who rings the NYSE opening bell each day'],
+        correct: 1,
+        explanation: 'Market makers post continuous bid and ask quotes, ensuring you can always buy or sell. Without them, you might submit a buy order and find no seller at all. They profit from the bid-ask spread.',
+      },
+    ],
   },
   {
     id: 5,
@@ -391,6 +552,26 @@ export const lessons: Lesson[] = [
     didYouKnow:
       'The longest bull market in history ran from March 2009 to February 2020 — nearly 11 years, gaining over 400%. It ended in exactly 33 days when COVID hit.',
     nextTitle: 'What Drives Stock Prices?',
+    checkpointQuiz: [
+      {
+        q: 'A bear market is technically defined as a decline of what percentage or more?',
+        options: ['5% — any meaningful pullback', '10% — same as a correction', '20% — sustained decline from a recent high', '50% — only extreme crashes qualify'],
+        correct: 2,
+        explanation: 'A 20%+ decline from a recent high over a sustained period = bear market. A 10–20% decline is called a "correction." The distinction matters for adjusting your momentum strategy.',
+      },
+      {
+        q: 'Which was the fastest bear market in modern history?',
+        options: ['The 2008 Financial Crisis', 'The 2000 Dot-com crash', 'The COVID crash in March 2020', 'The 1987 Black Monday crash'],
+        correct: 2,
+        explanation: 'March 2020 — a 33% collapse in just 33 days. The S&P 500 then recovered fully within 5 months, making it also one of the fastest recoveries. Speed in both directions.',
+      },
+      {
+        q: 'Momentum traders can profit in a bear market primarily by...',
+        options: ['Buying and holding blue-chip dividend stocks', 'Short-selling stocks that are declining sharply', 'Switching entirely to government bonds', 'Ignoring the market until it fully recovers'],
+        correct: 1,
+        explanation: 'Short-selling lets you profit when stocks fall. In bear markets, momentum shifts from long to short setups. The skill is the same — find explosive moves — only the direction changes.',
+      },
+    ],
   },
   {
     id: 10,
@@ -770,6 +951,26 @@ export const lessons: Lesson[] = [
     didYouKnow:
       'Studies show that stocks gapping up more than 4% on above-average pre-market volume continue higher at the open more than 60% of the time — making gap-and-go one of the most reliable momentum strategies.',
     nextTitle: 'The Opening Bell: 9:30 AM ET',
+    checkpointQuiz: [
+      {
+        q: 'Pre-market gappers are typically filtered for stocks that are up at least what percentage before the open?',
+        options: ['1% — any meaningful move qualifies', '2% — the minimum gap level', '5% — signals real momentum behind a catalyst', '10% — only the most extreme movers'],
+        correct: 2,
+        explanation: '5%+ pre-market is the common filter. A 5% gap signals a material catalyst with real money behind it. Smaller moves often fill before or at the open — not worth the risk.',
+      },
+      {
+        q: 'Which type of pre-market catalyst drives the most reliable gap-and-go setups?',
+        options: ['CEO tweets about a new product launch', 'A minor analyst price target raise', 'Earnings beat or FDA drug approval — binary, institutional-forcing events', 'The stock hitting a technical chart resistance level'],
+        correct: 2,
+        explanation: 'Earnings beats and FDA approvals are binary events that force institutional investors to act — creating real volume and sustained momentum. Analyst tweaks and social media posts are noise that fills fast.',
+      },
+      {
+        q: 'Before 9:30 AM on a gap-and-go setup, the MOST important thing to complete is...',
+        options: ['Buy shares in pre-market to lock in the lowest entry price', 'Read every news article written about the company this week', 'Define your entry price, stop-loss level, and max share size', 'Set a price alert on your phone so you remember to buy'],
+        correct: 2,
+        explanation: 'Pre-market buying has wide spreads and slippage. The 9:30 AM open is too chaotic for real-time decisions. Your complete plan — entry, stop, size — must be set before the bell. You execute the plan; you don\'t create it live.',
+      },
+    ],
   },
   {
     id: 18,
@@ -1136,6 +1337,26 @@ export const lessons: Lesson[] = [
     dykStyle: 'default',
     didYouKnow: 'Level 2 data was proprietary — only market makers could see the full order book — until the SEC mandated public access in the 1990s. Before that, retail traders were literally blind to where supply and demand was stacked.',
     nextTitle: 'Halts & Circuit Breakers',
+    checkpointQuiz: [
+      {
+        q: 'What does Level 2 show that Level 1 does NOT?',
+        options: ['Historical price charts from last year', 'All outstanding bid and ask orders at every price level', 'Company earnings reports', 'Analyst ratings and price targets'],
+        correct: 1,
+        explanation: 'Level 1 shows only the best bid and best ask. Level 2 shows the entire order book — every buyer and seller at every price level. This reveals the true supply/demand picture.',
+      },
+      {
+        q: 'A "wall" on the Level 2 order book means...',
+        options: ['The stock is about to reverse', 'A massive order at one price level creating short-term support or resistance', 'The market is about to close', 'An institutional buy program has been triggered'],
+        correct: 1,
+        explanation: 'A wall is a large block of shares sitting at one price. Sellers at a wall create resistance — price struggles to move through until that supply is absorbed or removed.',
+      },
+      {
+        q: 'When you see the ask side of Level 2 thinning out (sellers stepping away), it typically signals...',
+        options: ['A sell-off is imminent', 'A breakout may be near — supply is drying up', 'The market is about to close for the day', 'Time to immediately short the stock'],
+        correct: 1,
+        explanation: 'When sellers step away (fewer and smaller ask orders), supply is being absorbed. With less supply overhead, even modest buying pressure can push price higher. Breakout watch mode.',
+      },
+    ],
   },
   {
     id: 26,
@@ -1755,6 +1976,26 @@ export const lessons: Lesson[] = [
     dykStyle: 'default',
     didYouKnow: 'Gerald Appel used MACD to trade his own money for decades after inventing it — one of the few indicator creators who was also a successful practitioner. Most indicators are created by academics. MACD was created by a trader.',
     nextTitle: 'Bull Flags',
+    checkpointQuiz: [
+      {
+        q: 'The MACD line is calculated as...',
+        options: ['200 EMA minus 50 EMA — the long-term trend filter', '12-period EMA minus 26-period EMA', '9-period EMA of the price alone', 'Current price minus VWAP'],
+        correct: 1,
+        explanation: '12 EMA minus 26 EMA. The 12 EMA is faster (more reactive), the 26 EMA is slower. Their difference measures the strength and direction of current momentum relative to recent history.',
+      },
+      {
+        q: 'A bullish MACD crossover signal occurs when...',
+        options: ['MACD drops below the Signal line', 'The histogram bars are visibly shrinking', 'MACD crosses ABOVE the Signal line', 'Price closes below the 200-day moving average'],
+        correct: 2,
+        explanation: 'MACD crossing ABOVE the Signal line = bullish crossover. The faster average overtakes the slower one, signaling accelerating upward momentum. Crossing below = bearish signal.',
+      },
+      {
+        q: 'MACD divergence (price at new high, MACD at a lower high) is warning you that...',
+        options: ['Strong momentum is likely to push the stock even higher', 'A new all-time breakout is imminent — add to position', 'Hidden weakness — buyers are losing power even as price grinds up', 'Time to double position size on the next pullback'],
+        correct: 2,
+        explanation: 'Divergence is a red flag. Price makes higher highs but MACD makes lower highs — buyers are getting weaker on each push. This often precedes a reversal. Reduce or exit, do not add.',
+      },
+    ],
   },
   {
     id: 39,
@@ -2271,6 +2512,26 @@ export const lessons: Lesson[] = [
   dykStyle: 'data',
   didYouKnow: 'According to research by Bulkowski, the head and shoulders top pattern has a failure rate of only about 4% once the neckline is broken — making it one of the most statistically reliable bearish reversal signals across all chart pattern categories.',
   nextTitle: 'Trading Volume on Charts',
+  checkpointQuiz: [
+    {
+      q: 'In a Head and Shoulders pattern, the reversal is CONFIRMED when...',
+      options: ['Price breaks above the left shoulder peak on volume', 'Volume increases on the right shoulder formation', 'Price breaks BELOW the neckline — ideally on elevated volume', 'The right shoulder reaches the exact same height as the left'],
+      correct: 2,
+      explanation: 'The neckline break is THE signal. Price must close below the neckline — and ideally on above-average volume — to confirm the reversal. Until then it\'s just a possible pattern, not a confirmed one.',
+    },
+    {
+      q: 'An Inverse Head and Shoulders (upside-down version) forms at...',
+      options: ['Market tops — signals a bearish trend continuation', 'Market bottoms — signals a bullish reversal', 'The midpoint of a strong uptrend as a continuation', 'Parabolic tops on high-volume momentum stocks'],
+      correct: 1,
+      explanation: 'The inverse H&S forms at market bottoms: two shallower troughs (shoulders) flanking a deeper central trough (head). Neckline break to the upside confirms the bullish reversal. Mirror image, opposite signal.',
+    },
+    {
+      q: 'During a properly formed Head and Shoulders top, volume should...',
+      options: ['Increase steadily from left shoulder through head to right shoulder', 'Stay completely flat — volume doesn\'t matter for this pattern', 'Decrease from left shoulder through head to right shoulder', 'Only be relevant during the neckline break, not the formation'],
+      correct: 2,
+      explanation: 'Volume should diminish as the pattern develops: highest on the left shoulder, moderate on the head, lowest on the right shoulder. Declining volume confirms weakening buying pressure — a key validation signal.',
+    },
+  ],
 },
 
 {
@@ -2713,6 +2974,26 @@ export const lessons: Lesson[] = [
   dykStyle: 'data',
   didYouKnow: 'Back-testing studies show that consistent 1% risk-per-trade position sizing, combined with a 2:1 average reward-to-risk ratio and a 50% win rate, produces a positive expected value of +0.5R per trade — meaning the system is profitable in the long run even if you only win half your trades.',
   nextTitle: 'Stop-Loss Mastery',
+  checkpointQuiz: [
+    {
+      q: 'Your max risk is $100. Entry price is $50.00, stop at $48.00. How many shares do you buy?',
+      options: ['100 shares — always buy round numbers', '50 shares — $100 ÷ $2 risk per share', '25 shares — being conservative', '200 shares — to maximize the opportunity'],
+      correct: 1,
+      explanation: 'Shares = Dollar Risk ÷ Risk Per Share = $100 ÷ ($50 − $48) = $100 ÷ $2 = 50 shares. If stopped out at $48: 50 × $2 = exactly $100 lost. No surprises. This is the formula.',
+    },
+    {
+      q: 'If you widen the distance between entry and stop (a larger stop), you should buy...',
+      options: ['More shares — a wider stop means higher conviction', 'The same number of shares — stop size is irrelevant to sizing', 'Fewer shares — dollar risk stays constant, wider stop means fewer shares', 'Stop using the formula entirely and just buy what feels right'],
+      correct: 2,
+      explanation: 'Dollar risk is the constant. Wider stop = more risk per share = fewer shares to keep total dollar risk the same. Tighter stop = less risk per share = more shares. The formula balances it automatically every time.',
+    },
+    {
+      q: 'What percentage of their account do professional momentum traders typically risk on a single trade?',
+      options: ['10–20% — big conviction requires big size', '5–10% — reasonable for experienced traders', '1–2% — preserves capital through any losing streak', '50%+ on their highest-conviction setups'],
+      correct: 2,
+      explanation: '1–2% per trade is the professional standard. At 1% risk, you can survive 50 consecutive losers and still have half your capital. That mental durability is what allows consistent, unemotional execution.',
+    },
+  ],
 },
 { id: 56, title: 'Stop-Loss Mastery', subtitle: 'Hard stops beat mental stops every single time', section: 'Section 4 · Momentum Basics', sectionColor: '#f97316', coreHeading: 'Why Your Stop-Loss Is Your Best Friend', coreBody: 'A stop-loss is the single most important tool in a momentum trader\'s arsenal. There are two kinds: mental stops (a price you tell yourself you\'ll exit at) and hard stops (an actual order sitting in the market). Mental stops fail almost every time. Your brain rationalizes, makes excuses, and freezes when the moment of truth arrives. Hard stops execute automatically — they remove emotion from the equation entirely. Where you place the stop matters just as much as having one. Place it just below a key technical level: the base of a consolidation, a prior support area, or the low of the setup candle. Never place a stop at an arbitrary percentage — "I\'ll stop out if it falls 5%" ignores where the chart actually says the trade is wrong. And one ironclad rule: never, ever move your stop away from your entry to give a trade "more room." That is not risk management — it is hoping. Once a stop is set, it only moves in one direction: toward your entry or beyond it as the trade works in your favor.', facts: [{ icon: '🛑', text: 'Mental stops are broken by emotion 90% of the time — hard stops execute no matter what you feel.' }, { icon: '📍', text: 'Place stops below a key technical level (support, setup low), not at an arbitrary % distance.' }, { icon: '🔒', text: 'A stop-loss only ever moves toward profit — moving it away from entry is called \'hoping,\' not trading.' }], vocab: [{ term: 'Hard Stop', definition: 'A live stop-loss order resting in the market that executes automatically if price reaches the trigger level.' }, { term: 'Mental Stop', definition: 'An imaginary exit level held only in the trader\'s mind — frequently abandoned under emotional pressure.' }, { term: 'Key Level', definition: 'A significant price area on the chart (support, base of consolidation, setup candle low) used to anchor a stop.' }], slotA: { type: 'alert-trio', items: [{ accent: '#ef4444', icon: '🧠', heading: 'Mental Stops Fail', body: 'When price hits your mental stop, your brain says \'it\'ll bounce\' and you hold. This is the most expensive mistake in trading.' }, { accent: '#f97316', icon: '📐', heading: 'Placement Is Everything', body: 'Place your stop just below the technical invalidation point — where the chart proves you wrong — not at a round-number percentage.' }, { accent: '#22c55e', icon: '✅', heading: 'Hard Stops Win', body: 'A hard stop executes while you sleep, while you\'re distracted, while you panic. It is the professional\'s non-negotiable.' }] }, slotB: { type: 'steps', heading: 'Setting a Perfect Stop-Loss', steps: [{ num: 1, title: 'Identify the Setup', body: 'Before entering, mark the exact technical level that makes the trade invalid — the low of the base, the prior support zone, or the setup candle low.' }, { num: 2, title: 'Place the Stop Below That Level', body: 'Set your hard stop 2–5 cents below the technical invalidation level. This gives a tiny buffer for noise without sacrificing meaningful risk.' }, { num: 3, title: 'Calculate Your Dollar Risk', body: 'Multiply the distance from entry to stop by share size. Confirm this equals 1R — no more than 1% of your account on this trade.' }, { num: 4, title: 'Never Touch It (Down)', body: 'Once the stop is set, the only allowed adjustment is upward as the trade moves in your favor. Moving it down is forbidden.' }] }, dykStyle: 'mistake', didYouKnow: 'Studies of retail trading accounts show that traders who skip hard stops lose an average of 3x more per losing trade than traders who set them. The \'it\'ll come back\' mindset is the #1 cause of catastrophic single-trade losses.', nextTitle: 'Profit Targets' },
 
@@ -2890,6 +3171,26 @@ export const lessons: Lesson[] = [
   dykStyle: 'default',
   didYouKnow: 'The average earnings-surprise move for small-cap stocks with more than 20% short interest is 15-40% — compared to just 4.6% for S&P 500 large-cap stocks with the same earnings beat. Float size and short interest amplify the catalyst effect dramatically.',
   nextTitle: 'The Pre-Market Gappers List',
+  checkpointQuiz: [
+    {
+      q: 'Which of these is a HIGH-IMPACT pre-market catalyst worth acting on?',
+      options: ['CEO scheduled to speak at an industry conference', 'Analyst raises price target from $42 to $45', 'FDA grants drug approval for a Phase 3 trial', 'Routine press release about a new executive hire'],
+      correct: 2,
+      explanation: 'FDA drug approvals are binary and transformational — they force institutional investors to completely revalue the stock. The others are noise that price typically ignores or quickly fades.',
+    },
+    {
+      q: 'The most actionable pre-market earnings and regulatory news typically hits between...',
+      options: ['4:00–6:00 AM Eastern', '6:30–8:00 AM Eastern — peak earnings and regulatory window', '9:00–9:30 AM Eastern', 'Only during regular trading hours'],
+      correct: 1,
+      explanation: '6:30–8:00 AM is prime time. Companies release earnings and regulatory decisions here to capture analyst attention. Most institutional overnight orders are placed during this window.',
+    },
+    {
+      q: 'Unverified social media rumors driving a pre-market gap should be treated as...',
+      options: ['High-conviction setups — the market prices in truth quickly', 'Strong signals — retail traders know early', 'High-risk noise that frequently reverses at or after the open', 'Opportunities to double your normal position size'],
+      correct: 2,
+      explanation: 'Unverified rumors drive price, then get fact-checked at the open. If the rumor doesn\'t confirm, the gap reverses hard and fast. Always verify the catalyst before sizing into a pre-market gap.',
+    },
+  ],
 },
 
 {
@@ -3317,6 +3618,26 @@ export const lessons: Lesson[] = [
   dykStyle: 'default',
   didYouKnow: 'The VIX hit an all-time intraday high of 82.69 on March 16, 2020, during the COVID-19 market crash. On that single session, the S&P 500 dropped 12% — the worst single-day decline since the 1987 Black Monday crash. Traders who ignored the VIX that week suffered catastrophic losses on both long and short positions.',
   nextTitle: 'Options Activity as a Signal',
+  checkpointQuiz: [
+    {
+      q: 'Which VIX range represents the ideal momentum trading environment?',
+      options: ['VIX below 10 — extreme calm and stability', 'VIX between 20 and 30 — elevated but manageable volatility', 'VIX above 40 — maximum fear means maximum opportunity', 'VIX doesn\'t affect momentum strategies at all'],
+      correct: 1,
+      explanation: 'VIX 20–30 is the momentum sweet spot. Enough volatility for explosive intraday moves without the full-panic conditions above 35 that cause wide spreads, violent stop runs, and correlated selling.',
+    },
+    {
+      q: 'When VIX is above 35, the professional move for momentum traders is typically to...',
+      options: ['Increase position sizes — volatility means bigger gains', 'Trade exactly as normal — ignore the VIX number', 'Reduce position sizes by 50%+ or step aside entirely', 'Switch to options only — spreads are tighter'],
+      correct: 2,
+      explanation: 'VIX >35 = danger zone. Bid-ask spreads widen, stops get run on noise, correlations spike to 1. Even technically perfect setups reverse violently. Many professionals reduce size dramatically or sit out entirely.',
+    },
+    {
+      q: 'The VIX measures...',
+      options: ['Actual past 30-day S&P 500 price movements', 'The number of stocks hitting 52-week highs today', 'The market\'s forward-looking expectation of volatility based on S&P 500 options prices', 'The Fed\'s interest rate policy direction'],
+      correct: 2,
+      explanation: 'VIX is implied (future-expected) volatility derived from S&P 500 options prices. It\'s forward-looking, not historical. Historical volatility (HV) measures the past. VIX measures what the market EXPECTS.',
+    },
+  ],
 },
 
 {
@@ -3749,6 +4070,26 @@ export const lessons: Lesson[] = [
   dykStyle: 'data',
   didYouKnow: 'Laurence Connors\' research on ORB strategies found positive expectancy of $0.23 per share across 20,000 simulated trades on top pre-market volume stocks.',
   nextTitle: 'VWAP at the Open',
+  checkpointQuiz: [
+    {
+      q: 'An Opening Range Breakout (ORB) strategy requires you to...',
+      options: ['Buy immediately at 9:30 AM before the range has a chance to form', 'Let price establish a clear high/low range, then enter on a volume-confirmed break', 'Short any stock that gaps up at the open regardless of direction', 'Only trade stocks priced below $10 per share'],
+      correct: 1,
+      explanation: 'The ORB is a patience strategy. You observe and define the opening range first, set price alerts, then enter ONLY when price breaks through on volume. No anticipating — wait for the confirmed break.',
+    },
+    {
+      q: 'On an ORB long trade (buying the upside breakout), your stop-loss goes at...',
+      options: ['Exactly 10% below your entry price', 'At the previous day\'s closing price', 'The ORB range LOW — the opposite range boundary', 'No stop is needed on a strong confirmed breakout'],
+      correct: 2,
+      explanation: 'Stop at the range low. If price falls back below the range low, the breakout has failed completely and the trade is invalidated. Every trade needs a stop — always place it at the structural level that proves you wrong.',
+    },
+    {
+      q: 'Research shows the 15-minute ORB produces a higher win rate than the 5-minute ORB because...',
+      options: ['Regulators require 15-minute windows for retail traders', 'A longer formation window filters out more early noise and false breakouts', 'All chart strategies automatically improve on longer timeframes', '5-minute candles aren\'t available on most trading platforms'],
+      correct: 1,
+      explanation: 'Longer formation windows filter noise. A 5-min range barely has time to establish true supply/demand — too many false breakouts trigger. 15–30 min ranges represent more committed buying and selling zones.',
+    },
+  ],
 },
 
 {
@@ -4185,6 +4526,26 @@ export const lessons: Lesson[] = [
   dykStyle: 'quote',
   didYouKnow: '"I kept a trading journal for 5 years before I became consistently profitable. The journal is where the learning actually happens — not in the trade itself." — Mark Minervini, US Investing Champion.',
   nextTitle: 'The Complete 9:30 AM Open Playbook',
+  checkpointQuiz: [
+    {
+      q: 'The primary purpose of keeping a trading journal is to...',
+      options: ['Document wins to share on social media', 'Satisfy broker regulatory requirements', 'Identify behavioral and setup patterns that compound into skill over time', 'Calculate capital gains taxes automatically'],
+      correct: 2,
+      explanation: 'The journal is where raw experience becomes skill. Without deliberate review, you just repeat the same patterns. Over time, your best setup, worst time of day, and most common mistake all emerge from the data.',
+    },
+    {
+      q: 'R-multiple tracking over 100+ trades tells you...',
+      options: ['Which specific stocks to trade tomorrow', 'Whether your edge is statistically real — positive average R means a genuine edge exists', 'Your broker\'s commission rate impact on your account', 'How many individual trades you\'ve taken this month'],
+      correct: 1,
+      explanation: 'Average R over many trades is the most objective edge measurement. If your average R is +0.4 over 200 trades, you have a provably profitable system. If it\'s −0.2, the system loses regardless of how it feels.',
+    },
+    {
+      q: 'When grading a trade A, B, or C in your journal, you should grade based on...',
+      options: ['Whether the trade was profitable — outcomes are what matter', 'How exciting and high-energy the setup looked pre-entry', 'Decision quality — did you follow your entry rules and honor your stop?', 'The size of the position relative to your normal sizing'],
+      correct: 2,
+      explanation: 'Grade the decision, not the outcome. A perfectly executed A-grade setup that lost money is still an A. A rule-breaking entry that happened to profit is still a C. Only grading process builds process.',
+    },
+  ],
 },
 
 {

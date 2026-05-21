@@ -4,6 +4,9 @@ import { motion } from 'framer-motion'
 import VocabCard from './VocabCard'
 import NextButton from './NextButton'
 import BackButton from './BackButton'
+import SlotARenderer from './SlotARenderer'
+import SlotBRenderer from './SlotBRenderer'
+import QuizCheckpoint from './QuizCheckpoint'
 import { Lesson, TOTAL_LESSONS } from '@/data/lessons'
 
 const container = {
@@ -85,6 +88,13 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
         </div>
       </motion.section>
 
+      {/* ── Slot A ── */}
+      {lesson.slotA && lesson.slotA.type !== 'facts' && (
+        <motion.div variants={item}>
+          <SlotARenderer widget={lesson.slotA} />
+        </motion.div>
+      )}
+
       {/* ── Vocab Cards ── */}
       <motion.section variants={item} className="flex flex-col gap-4">
         <h2 className="text-sm font-semibold text-muted uppercase tracking-widest">
@@ -104,6 +114,13 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
         </div>
       </motion.section>
 
+      {/* ── Slot B ── */}
+      {lesson.slotB && lesson.slotB.type !== 'vocab' && (
+        <motion.div variants={item}>
+          <SlotBRenderer widget={lesson.slotB} />
+        </motion.div>
+      )}
+
       {/* ── Did You Know ── */}
       <motion.section
         className="rounded-2xl border border-border bg-card px-6 py-5 flex gap-4 items-start"
@@ -118,7 +135,7 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
         </div>
       </motion.section>
 
-      {/* ── Navigation ── */}
+      {/* ── Navigation / Quiz ── */}
       <motion.div
         className="flex flex-col gap-3"
         initial={{ opacity: 0, y: 8 }}
@@ -126,8 +143,17 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
         transition={{ type: 'spring', duration: 0.32, bounce: 0, delay: 0.62 }}
       >
         {lesson.id > 1 && <BackButton lessonId={lesson.id} />}
-        {lesson.id < TOTAL_LESSONS && (
-          <NextButton lessonId={lesson.id} nextTitle={lesson.nextTitle} />
+        {lesson.checkpointQuiz ? (
+          <QuizCheckpoint
+            questions={lesson.checkpointQuiz}
+            lessonId={lesson.id}
+            nextTitle={lesson.nextTitle}
+            totalLessons={TOTAL_LESSONS}
+          />
+        ) : (
+          lesson.id < TOTAL_LESSONS && (
+            <NextButton lessonId={lesson.id} nextTitle={lesson.nextTitle} />
+          )
         )}
       </motion.div>
     </motion.main>
