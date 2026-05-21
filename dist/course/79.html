@@ -1,36 +1,10 @@
-import { writeFileSync, mkdirSync } from 'fs'
-import { join } from 'path'
-import { lessons, TOTAL_LESSONS, Lesson, SlotAWidget, SlotBWidget } from '../data/lessons'
-
-const dist = join(__dirname, '../dist')
-
-function buildBoard(): number[] {
-  const flat: number[] = []
-  for (let row = 0; row < 10; row++) {
-    const base = row * 10
-    const nums = Array.from({ length: 10 }, (_, i) => base + i + 1)
-    if (row % 2 === 1) nums.reverse()
-    flat.push(...nums)
-  }
-  return flat
-}
-
-const SECTIONS = [
-  { label: 'Stock Fundamentals', range: [1, 15],   color: '#10b981' },
-  { label: 'Market Mechanics',   range: [16, 30],  color: '#3b82f6' },
-  { label: 'Chart Reading',      range: [31, 50],  color: '#8b5cf6' },
-  { label: 'Momentum Basics',    range: [51, 70],  color: '#f97316' },
-  { label: 'Pre-Market Prep',    range: [71, 85],  color: '#eab308' },
-  { label: '9:30 AM Open',       range: [86, 100], color: '#ef4444' },
-]
-
-function sectionColor(id: number): string {
-  return SECTIONS.find((s) => id >= s.range[0] && id <= s.range[1])!.color
-}
-
-const availableIds = new Set(lessons.map((l) => l.id))
-
-const BASE_CSS = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 79: Setting Price Alerts</title>
+  <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -729,247 +703,86 @@ footer {
 
 /* ── Pizza SVG wrapper ── */
 .pizza-wrap { flex-shrink: 0; }
-`
-
-const TICKER_ITEMS = [
-  { sym: 'AAPL', price: '189.84', ch: '+1.2%', up: true },
-  { sym: 'TSLA', price: '248.42', ch: '+3.8%', up: true },
-  { sym: 'SPY',  price: '521.67', ch: '+0.4%', up: true },
-  { sym: 'NVDA', price: '875.39', ch: '+2.1%', up: true },
-  { sym: 'META', price: '502.12', ch: '-0.6%', up: false },
-  { sym: 'AMD',  price: '168.75', ch: '+1.9%', up: true },
-  { sym: 'GME',  price: '14.22',  ch: '-2.3%', up: false },
-  { sym: 'MSFT', price: '415.06', ch: '+0.8%', up: true },
-  { sym: 'QQQ',  price: '444.33', ch: '+0.5%', up: true },
-  { sym: 'AMZN', price: '185.90', ch: '+1.3%', up: true },
-]
-
-function buildTickerHTML(): string {
-  const items = [...TICKER_ITEMS, ...TICKER_ITEMS] // doubled for seamless loop
-  return items
-    .map(
-      (t) =>
-        `<span class="ticker-item"><span>${t.sym}</span><span class="${t.up ? 'up' : 'down'}">${t.ch}</span><span>${t.price}</span></span>`
-    )
-    .join('')
-}
-
-function tickerSection(): string {
-  return `
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track">${buildTickerHTML()}</div>
-</div>`
-}
-
-function head(title: string, depth: string = ''): string {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${escHtml(title)}</title>
-  <style>${BASE_CSS}</style>
+</style>
 </head>
-<body>`
-}
+<body>
 
-function escHtml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-}
-
-function pizzaSVG(): string {
-  const slices: string[] = []
-  for (let i = 0; i < 6; i++) {
-    const a1 = (i * 60 * Math.PI) / 180
-    const a2 = ((i + 1) * 60 * Math.PI) / 180
-    const r = 38, cx = 48, cy = 48
-    const x1 = cx + r * Math.cos(a1 - Math.PI / 2)
-    const y1 = cy + r * Math.sin(a1 - Math.PI / 2)
-    const x2 = cx + r * Math.cos(a2 - Math.PI / 2)
-    const y2 = cy + r * Math.sin(a2 - Math.PI / 2)
-    const fill = i === 0 ? '#00ff8820' : 'transparent'
-    const stroke = i === 0 ? '#00ff88' : '#2d2d3d'
-    const sw = i === 0 ? '1.5' : '1'
-    slices.push(`<path d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`)
-  }
-  return `<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="48" cy="48" r="40" fill="#1a1a24" stroke="#2d2d3d" stroke-width="1.5"/>
-  ${slices.join('\n  ')}
-  <text x="56" y="30" fill="#00ff88" font-size="7" font-family="monospace" font-weight="600" text-anchor="middle">YOU</text>
-</svg>`
-}
-
-function generateBoardPage(): string {
-  const board = buildBoard()
-  const availableCount = availableIds.size
-
-  const cells = board
-    .map((id) => {
-      const color = sectionColor(id)
-      const available = availableIds.has(id)
-      const isStart = id === 1
-      const num = String(id).padStart(2, '0')
-
-      const cellDiv = `<div class="cell" style="border-top-color:${color};border-color:${available ? color + '44' : '#2d2d3d'};background:${available ? color + '12' : '#1a1a2430'};">
-        <span class="cell-num" style="color:${available ? '#fff' : '#374151'};">${num}</span>
-        ${isStart ? '<span class="cell-start-label">START</span>' : ''}
-      </div>`
-
-      if (!available) return `<div>${cellDiv}</div>`
-
-      return `<a href="course/${id}.html" class="cell-link${isStart ? ' lesson-start' : ''}" aria-label="Go to lesson ${id}">${cellDiv}</a>`
-    })
-    .join('\n')
-
-  const legend = SECTIONS.map(
-    (s) =>
-      `<div class="legend-pill"><span class="legend-dot" style="background:${s.color};"></span><span class="legend-label">${s.label}</span><span class="legend-range">${s.range[0]}–${s.range[1]}</span></div>`
-  ).join('\n')
-
-  return `${head('Momentum Trading Course')}
-<header class="site-header">
-  <p class="site-header-eyebrow">Course Map</p>
-  <h1>Momentum Trading<br>Course</h1>
-  <p class="site-header-sub">100 lessons. One goal: trade the open like a pro.</p>
-</header>
-
-<nav class="legend-wrap" aria-label="Course sections">
-  ${legend}
-</nav>
-
-<main style="flex:1;padding:32px 12px;max-width:768px;width:100%;margin:0 auto;">
-  <div class="board-enter board-grid">
-    ${cells}
+<div class="progress-bar-wrap">
+  <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" style="width:79.0%;"></div>
   </div>
-  <p class="board-count">${availableCount} / ${TOTAL_LESSONS} lessons available · more coming soon</p>
-</main>
-
-<div class="cta-wrap">
-  <a href="course/1.html" class="btn-cta">Begin Lesson 1 <span>→</span></a>
+  <span class="progress-label">79&nbsp;/&nbsp;100</span>
 </div>
 
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track"><span class="ticker-item"><span>AAPL</span><span class="up">+1.2%</span><span>189.84</span></span><span class="ticker-item"><span>TSLA</span><span class="up">+3.8%</span><span>248.42</span></span><span class="ticker-item"><span>SPY</span><span class="up">+0.4%</span><span>521.67</span></span><span class="ticker-item"><span>NVDA</span><span class="up">+2.1%</span><span>875.39</span></span><span class="ticker-item"><span>META</span><span class="down">-0.6%</span><span>502.12</span></span><span class="ticker-item"><span>AMD</span><span class="up">+1.9%</span><span>168.75</span></span><span class="ticker-item"><span>GME</span><span class="down">-2.3%</span><span>14.22</span></span><span class="ticker-item"><span>MSFT</span><span class="up">+0.8%</span><span>415.06</span></span><span class="ticker-item"><span>QQQ</span><span class="up">+0.5%</span><span>444.33</span></span><span class="ticker-item"><span>AMZN</span><span class="up">+1.3%</span><span>185.90</span></span><span class="ticker-item"><span>AAPL</span><span class="up">+1.2%</span><span>189.84</span></span><span class="ticker-item"><span>TSLA</span><span class="up">+3.8%</span><span>248.42</span></span><span class="ticker-item"><span>SPY</span><span class="up">+0.4%</span><span>521.67</span></span><span class="ticker-item"><span>NVDA</span><span class="up">+2.1%</span><span>875.39</span></span><span class="ticker-item"><span>META</span><span class="down">-0.6%</span><span>502.12</span></span><span class="ticker-item"><span>AMD</span><span class="up">+1.9%</span><span>168.75</span></span><span class="ticker-item"><span>GME</span><span class="down">-2.3%</span><span>14.22</span></span><span class="ticker-item"><span>MSFT</span><span class="up">+0.8%</span><span>415.06</span></span><span class="ticker-item"><span>QQQ</span><span class="up">+0.5%</span><span>444.33</span></span><span class="ticker-item"><span>AMZN</span><span class="up">+1.3%</span><span>185.90</span></span></div>
+</div>
+
+<main class="lesson-main">
+  <!-- Hero -->
+  <section class="c1">
+    <div class="section-row">
+      <span class="section-dot section-dot-anim" style="background-color:#eab308;--sc:#eab308;"></span>
+      <p class="section-label">Section 5 · Pre-Market Prep</p>
+    </div>
+    <h1 class="hero-title">Setting Price Alerts</h1>
+    <p class="hero-subtitle">Alerts trade for you while you wait.</p>
+  </section>
+
+  <!-- Core Concept -->
+  <section class="c2">
+    <div class="gradient-border-card">
+      <div class="core-inner">
+        
+        <div class="core-text">
+          <h2>Never Miss a Trigger Again</h2>
+          <p>Price alerts are one of the most underutilized tools in a momentum trader's arsenal. Instead of staring at the screen for hours waiting for a stock to hit a key level, you set alerts at every critical price and let the software notify you. This frees your attention, reduces fatigue, and prevents the most common error: entering a position out of boredom or impatience rather than because a trigger was actually hit.
+
+Every watchlist stock should have at least three alerts set before the market opens. First, an entry alert set just above the pre-market high — this signals a potential breakout. Second, a stop alert set at your defined risk level — this is your exit if the trade goes against you. Third, a target alert at the first resistance level — this signals it's time to consider taking partial profits.
+
+Set alerts in both your broker platform AND your charting software. Two independent notification systems ensure that a software glitch in one doesn't cause you to miss a critical trigger. Many professional traders also set phone alerts as a third layer. The cost of a missed entry or exit in a fast-moving momentum stock can be hundreds or thousands of dollars — the 2 minutes it takes to set up alerts is the best ROI activity in your pre-market routine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c3"><div class="alert-trio-grid"><div class="alert-card" style="border-left-color:#eab308;"><span class="alert-icon">🔔</span><div><p class="alert-content-heading">Entry Alert — Yellow</p><p class="alert-content-body">Set 5 cents ABOVE the pre-market high. When triggered, the stock is attempting a breakout. Confirm volume is surging before entering — alert does not mean auto-buy.</p></div></div>
+<div class="alert-card" style="border-left-color:#ef4444;"><span class="alert-icon">🚨</span><div><p class="alert-content-heading">Stop Alert — Red</p><p class="alert-content-body">Set 2% below your planned entry price. When triggered, exit the position immediately — no second-guessing, no hoping. The alert IS the exit signal.</p></div></div>
+<div class="alert-card" style="border-left-color:#00ff88;"><span class="alert-icon">✅</span><div><p class="alert-content-heading">Target Alert — Green</p><p class="alert-content-body">Set at the first major resistance level above entry. When triggered, consider selling 50% of the position to lock in profit and let the rest ride with a raised stop.</p></div></div></div></section>
+
+  <section><p class="section-h2">4 Steps to Set Pre-Market Alerts</p><div class="steps-wrap"><div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">1</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Mark the Pre-Market High</p><p class="step-body">On your chart, identify the highest pre-market price. This is your primary breakout level — the point at which pre-market buyers are validated and new momentum buyers should enter.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">2</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Set Entry Alert 5 Cents Above</p><p class="step-body">Configure an audio alert 5 cents above the pre-market high in both your broker and charting platform. Use maximum volume so you hear it even if distracted.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">3</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Set Stop Alert Below Breakout</p><p class="step-body">Set a stop alert at your risk level — typically 2-3% below the pre-market high. This is the level at which the setup has failed and you must exit.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">4</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Set Partial Profit Alert at First Target</p><p class="step-body">Identify the first resistance level above the pre-market high (previous day high, round number, VWAP extension). Set a green alert there to signal partial profit-taking.</p></div></div></div></section>
+
+  <!-- Did You Know -->
+  <div class="dyk-card dyk-enter style-pro-tip">
+    <span class="dyk-icon">⚡</span>
+    <div>
+      <p class="dyk-label">Pro tip</p>
+      <p class="dyk-text">Set your price alerts in your broker AND your charting platform — two independent notification systems ensure you never miss a trigger. Many professional traders add a third layer: a mobile phone alert via their broker's app, so they're covered even during a bathroom break.</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-wrap nav-enter">
+    <a href="78.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 78</span></a>
+    <a href="80.html" class="btn-next">
+        <span class="btn-next-label">
+          <span class="btn-next-pre">Next lesson</span>
+          <span class="btn-next-title">Pre-Market Level 2</span>
+        </span>
+        <span class="btn-arrow">→</span>
+      </a>
+  </div>
+</main>
+
 <footer>
-  <p class="footer-text">Momentum Trading Course</p>
+  <p class="footer-text">Lesson 79 of 100 · Momentum Trading Course</p>
 </footer>
-</body>
-</html>`
-}
 
-function renderSlotA(lesson: Lesson): string {
-  const w = lesson.slotA
-  if (!w || w.type === 'facts') {
-    const factsHTML = lesson.facts
-      .map((f, i) => `<div class="fact-card f${i + 1}"><span class="fact-icon">${f.icon}</span><p class="fact-text">${escHtml(f.text)}</p></div>`)
-      .join('\n')
-    return `<section class="c3"><p class="section-h2">3 things to know</p><div class="facts-grid">${factsHTML}</div></section>`
-  }
-
-  if (w.type === 'stat-block') {
-    const cards = w.stats.map(s => `<div class="stat-card"><span class="stat-value">${escHtml(s.value)}</span><span class="stat-label">${escHtml(s.label)}</span>${s.sub ? `<span class="stat-sub">${escHtml(s.sub)}</span>` : ''}</div>`).join('\n')
-    return `<section class="c3"><div class="stat-block">${cards}</div></section>`
-  }
-
-  if (w.type === 'comparison') {
-    const rows = w.rows.map(r => `<div class="comp-row"><div class="comp-cell left">${escHtml(r.left)}</div><div class="comp-cell">${escHtml(r.right)}</div></div>`).join('\n')
-    return `<section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">${escHtml(w.leftLabel)}</div><div class="comp-hdr right">${escHtml(w.rightLabel)}</div></div>${rows}</div></section>`
-  }
-
-  if (w.type === 'timeline') {
-    const events = w.events.map(e => `<div class="timeline-event"><div class="timeline-left"><div class="timeline-dot"></div><div class="timeline-line"></div></div><div class="timeline-content"><p class="timeline-label">${escHtml(e.label)}</p><p class="timeline-body">${escHtml(e.body)}</p></div></div>`).join('\n')
-    return `<section class="c3"><p class="section-h2">${escHtml(w.heading)}</p><div class="timeline-wrap">${events}</div></section>`
-  }
-
-  if (w.type === 'alert-trio') {
-    const cards = w.items.map(i => `<div class="alert-card" style="border-left-color:${i.accent};"><span class="alert-icon">${i.icon}</span><div><p class="alert-content-heading">${escHtml(i.heading)}</p><p class="alert-content-body">${escHtml(i.body)}</p></div></div>`).join('\n')
-    return `<section class="c3"><div class="alert-trio-grid">${cards}</div></section>`
-  }
-
-  if (w.type === 'quote-hero') {
-    return `<section class="c3"><div class="quote-hero-wrap"><span class="quote-glyph">"</span><p class="quote-text">${escHtml(w.quote)}</p><p class="quote-attribution">— ${escHtml(w.attribution)}</p></div></section>`
-  }
-
-  if (w.type === 'leaderboard') {
-    const rows = w.items.map(i => `<div class="lb-row"><span class="lb-rank">#${i.rank}</span><div><p class="lb-label">${escHtml(i.label)}</p><p class="lb-sub">${escHtml(i.sub)}</p></div><div><div class="lb-bar-track"><div class="lb-bar-fill" style="width:${i.pct}%;background:${i.color};"></div></div></div></div>`).join('\n')
-    return `<section class="c3"><p class="section-h2">${escHtml(w.heading)}</p><div class="leaderboard-wrap">${rows}</div></section>`
-  }
-
-  if (w.type === 'checklist') {
-    const items = w.items.map((item, idx) => `<div class="check-item" id="ci-${idx}" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">${escHtml(item)}</span></div>`).join('\n')
-    return `<section class="c3"><p class="section-h2">${escHtml(w.heading)}</p><div class="checklist-wrap">${items}</div></section>`
-  }
-
-  if (w.type === 'before-after') {
-    const leftItems = w.leftItems.map(i => `<div class="ba-item">${escHtml(i)}</div>`).join('\n')
-    const rightItems = w.rightItems.map(i => `<div class="ba-item">${escHtml(i)}</div>`).join('\n')
-    return `<section class="c3"><div class="before-after-grid"><div class="ba-panel"><p class="ba-panel-header before">${escHtml(w.leftLabel)}</p><div class="ba-items">${leftItems}</div></div><div class="ba-panel"><p class="ba-panel-header after">${escHtml(w.rightLabel)}</p><div class="ba-items">${rightItems}</div></div></div></section>`
-  }
-
-  if (w.type === 'myth-busters') {
-    const cards = w.myths.map((m, i) => `<div class="myth-card-wrap cols-3" id="mba-${i}" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">${escHtml(m.myth)}</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">${escHtml(m.reality)}</p></div></div></div>`).join('\n')
-    return `<section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid">${cards}</div></section>`
-  }
-
-  return ''
-}
-
-function renderSlotB(lesson: Lesson): string {
-  const w = lesson.slotB
-  if (!w || w.type === 'vocab') {
-    const vocabHTML = lesson.vocab
-      .map((v, i) => `<div class="vocab-card-wrap v${i + 1}" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for ${escHtml(v.term)}"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">${escHtml(v.term)}</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">${escHtml(v.definition)}</p></div></div></div>`)
-      .join('\n')
-    return `<section><p class="section-h2">Key vocabulary — tap each card</p><div class="vocab-grid">${vocabHTML}</div></section>`
-  }
-
-  if (w.type === 'steps') {
-    const steps = w.steps.map(s => `<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">${s.num}</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">${escHtml(s.title)}</p><p class="step-body">${escHtml(s.body)}</p></div></div>`).join('\n')
-    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="steps-wrap">${steps}</div></section>`
-  }
-
-  if (w.type === 'diagram') {
-    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="diagram-wrap">${w.svgContent}${w.caption ? `<p class="diagram-caption">${escHtml(w.caption)}</p>` : ''}</div></section>`
-  }
-
-  if (w.type === 'scenario') {
-    const lid = lesson.id
-    const opts = w.options.map((o, i) => {
-      const isCorrect = o.correct ? 'true' : 'false'
-      return `<button class="scenario-btn" onclick="handleScenario(this,${lid},${i},${isCorrect})">${escHtml(o.label)}</button><div class="scenario-explain" id="sexp-${lid}-${i}">${escHtml(o.explanation)}</div>`
-    }).join('\n')
-    return `<section><div class="scenario-wrap"><p class="scenario-setup">${escHtml(w.setup)}</p><div class="scenario-options">${opts}</div></div></section>`
-  }
-
-  if (w.type === 'true-false') {
-    const lid = lesson.id
-    const items = w.statements.map((s, i) => {
-      const ans = s.answer ? 'true' : 'false'
-      return `<div class="tf-item" id="tf-${lid}-${i}"><p class="tf-statement">${escHtml(s.text)}</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,${lid},${i},'true','${ans}')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,${lid},${i},'false','${ans}')">False</button></div><p class="tf-explain" id="tfexp-${lid}-${i}">${escHtml(s.explanation)}</p></div>`
-    }).join('\n')
-    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="tf-wrap">${items}</div></section>`
-  }
-
-  if (w.type === 'myth-buster') {
-    const cards = w.myths.map((m, i) => `<div class="myth-card-wrap cols-2" id="mbb-${lesson.id}-${i}" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">${escHtml(m.myth)}</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">${escHtml(m.reality)}</p></div></div></div>`).join('\n')
-    return `<section><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid cols-2">${cards}</div></section>`
-  }
-
-  if (w.type === 'calculator') {
-    const lid = lesson.id
-    const prefix = w.resultPrefix ?? ''
-    const suffix = w.resultSuffix ?? ''
-    return `<section><div class="calc-wrap"><p class="section-h2">${escHtml(w.heading)}</p><div><p class="calc-label">${escHtml(w.inputLabel)}</p><input class="calc-input" id="calc-input-${lid}" type="number" value="${w.inputDefault}" min="${w.inputMin}" max="${w.inputMax}" step="${w.inputStep}" data-factor="${w.factor}" data-prefix="${prefix}" data-suffix="${suffix}" oninput="updateCalc(${lid})"></div><div class="calc-result"><span class="calc-result-label">${escHtml(w.resultLabel)}</span><span class="calc-result-value" id="calc-output-${lid}">${prefix}${(w.inputDefault * w.factor).toFixed(2)}${suffix}</span></div>${w.note ? `<p class="calc-note">${escHtml(w.note)}</p>` : ''}</div></section>`
-  }
-
-  if (w.type === 'pros-cons') {
-    const pros = w.pros.map(p => `<div class="pc-item">${escHtml(p)}</div>`).join('\n')
-    const cons = w.cons.map(c => `<div class="pc-item">${escHtml(c)}</div>`).join('\n')
-    return `<section><p class="section-h2">${escHtml(w.heading)}</p><div class="pros-cons-grid"><div class="pc-col pros"><p class="pc-header pros">✓ Pros</p><div class="pc-items">${pros}</div></div><div class="pc-col cons"><p class="pc-header cons">✗ Cons</p><div class="pc-items">${cons}</div></div></div></section>`
-  }
-
-  return ''
-}
-
-const INLINE_JS = `
 <script>
 function handleTF(btn, lid, idx, chosen, correct) {
   var item = document.getElementById('tf-' + lid + '-' + idx);
@@ -990,125 +803,6 @@ function updateCalc(lid) {
   var result = (v * parseFloat(inp.dataset.factor)).toFixed(2);
   out.textContent = (inp.dataset.prefix || '') + result + (inp.dataset.suffix || '');
 }
-</script>`
-
-function generateLessonPage(lessonId: number): string {
-  const lesson = lessons.find((l) => l.id === lessonId)!
-  const pct = ((lesson.id / TOTAL_LESSONS) * 100).toFixed(1)
-  const prevId = lesson.id - 1
-  const nextId = lesson.id + 1
-  const hasNext = availableIds.has(nextId)
-  const hasPrev = lesson.id > 1
-
-  const dykCfg = ({
-    'default':  { icon: '💡', label: 'Did you know?',     cls: '' },
-    'pro-tip':  { icon: '⚡', label: 'Pro tip',           cls: 'style-pro-tip' },
-    'mistake':  { icon: '⚠️', label: 'Common mistake',    cls: 'style-mistake' },
-    'data':     { icon: '📊', label: 'The data says',     cls: 'style-data' },
-    'quote':    { icon: '🗣️', label: 'Legendary trader',  cls: 'style-quote' },
-  } as const)[lesson.dykStyle ?? 'default']
-
-  const backBtn = hasPrev
-    ? `<a href="${prevId}.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson ${prevId}</span></a>`
-    : ''
-
-  const nextBtn = hasNext
-    ? `<a href="${nextId}.html" class="btn-next">
-        <span class="btn-next-label">
-          <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">${escHtml(lesson.nextTitle)}</span>
-        </span>
-        <span class="btn-arrow">→</span>
-      </a>`
-    : `<a href="../index.html" class="btn-next">
-        <span class="btn-next-label">
-          <span class="btn-next-pre">You finished!</span>
-          <span class="btn-next-title">Back to Course Map</span>
-        </span>
-        <span class="btn-arrow">→</span>
-      </a>`
-
-  const pizzaHTML = lesson.id === 1
-    ? `<div class="pizza-wrap">${pizzaSVG()}</div>`
-    : ''
-
-  return `${head(`Lesson ${lesson.id}: ${lesson.title}`)}
-
-<div class="progress-bar-wrap">
-  <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
-  <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:${pct}%;"></div>
-  </div>
-  <span class="progress-label">${lesson.id}&nbsp;/&nbsp;${TOTAL_LESSONS}</span>
-</div>
-
-${tickerSection()}
-
-<main class="lesson-main">
-  <!-- Hero -->
-  <section class="c1">
-    <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:${lesson.sectionColor};--sc:${lesson.sectionColor};"></span>
-      <p class="section-label">${escHtml(lesson.section)}</p>
-    </div>
-    <h1 class="hero-title">${escHtml(lesson.title)}</h1>
-    <p class="hero-subtitle">${escHtml(lesson.subtitle)}</p>
-  </section>
-
-  <!-- Core Concept -->
-  <section class="c2">
-    <div class="gradient-border-card">
-      <div class="core-inner">
-        ${pizzaHTML}
-        <div class="core-text">
-          <h2>${escHtml(lesson.coreHeading)}</h2>
-          <p>${escHtml(lesson.coreBody)}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  ${renderSlotA(lesson)}
-
-  ${renderSlotB(lesson)}
-
-  <!-- Did You Know -->
-  <div class="dyk-card dyk-enter ${dykCfg.cls}">
-    <span class="dyk-icon">${dykCfg.icon}</span>
-    <div>
-      <p class="dyk-label">${dykCfg.label}</p>
-      <p class="dyk-text">${escHtml(lesson.didYouKnow)}</p>
-    </div>
-  </div>
-
-  <!-- Navigation -->
-  <div class="nav-wrap nav-enter">
-    ${backBtn}
-    ${nextBtn}
-  </div>
-</main>
-
-<footer>
-  <p class="footer-text">Lesson ${lesson.id} of ${TOTAL_LESSONS} · Momentum Trading Course</p>
-</footer>
-${INLINE_JS}
+</script>
 </body>
-</html>`
-}
-
-// ── Generate files ──────────────────────────────────────────────────────────
-
-mkdirSync(dist, { recursive: true })
-
-// Board
-writeFileSync(join(dist, 'index.html'), generateBoardPage())
-console.log('✓ dist/index.html')
-
-// Lessons
-mkdirSync(join(dist, 'course'), { recursive: true })
-for (const lesson of lessons) {
-  writeFileSync(join(dist, 'course', `${lesson.id}.html`), generateLessonPage(lesson.id))
-  console.log(`✓ dist/course/${lesson.id}.html`)
-}
-
-console.log(`\n✅ Generated ${1 + lessons.length} files in dist/`)
+</html>
