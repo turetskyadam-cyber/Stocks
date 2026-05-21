@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 82: VIX and Market Conditions</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:82.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">82&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -724,11 +724,11 @@ footer {
   <!-- Hero -->
   <section class="c1">
     <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
-      <p class="section-label">Section 3 · Chart Reading</p>
+      <span class="section-dot section-dot-anim" style="background-color:#eab308;--sc:#eab308;"></span>
+      <p class="section-label">Section 5 · Pre-Market Prep</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">VIX and Market Conditions</h1>
+    <p class="hero-subtitle">Read the weather before you go fishing.</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,42 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>The Volatility Index as a Trading Weather Report</h2>
+          <p>The VIX (CBOE Volatility Index) measures the market's expectation of 30-day volatility in the S&amp;P 500, derived from options prices. Traders call it the &quot;fear gauge.&quot; Understanding the VIX before you trade is like checking the weather before going fishing — it tells you what conditions you're about to enter and how you should adjust your approach.
+
+VIX below 15 indicates a calm, low-volatility environment. Momentum stocks move less, breakouts are tepid, and position sizes can be maintained — but don't expect explosive gap-and-go action. VIX between 20 and 30 is the momentum sweet spot. Volatility is elevated enough to create meaningful intraday moves, but the market isn't in full panic mode. This is where the best risk/reward setups appear for momentum traders.
+
+VIX above 35 is the fear zone. Correlations spike to 1 (everything moves together), bid-ask spreads widen dramatically, stops get run violently, and even quality setups can reverse 30-50% before you can exit. Many professional traders reduce position sizes by 50% or more in VIX &gt;35 environments, or step aside entirely until conditions normalize. Never fight the VIX.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><div class="stat-block"><div class="stat-card"><span class="stat-value">&lt;15</span><span class="stat-label">Low Volatility — Reduce Expectations</span><span class="stat-sub">Calm market, tepid breakouts. Maintain size but expect smaller intraday ranges. Best for swing setups.</span></div>
+<div class="stat-card"><span class="stat-value">20-30</span><span class="stat-label">Momentum Sweet Spot — Trade Full Size</span><span class="stat-sub">Elevated volatility creates explosive intraday moves. Best environment for gap-and-go momentum strategies.</span></div>
+<div class="stat-card"><span class="stat-value">&gt;35</span><span class="stat-label">Fear Zone — Reduce Size or Sit Out</span><span class="stat-sub">Extreme fear. Bid-ask spreads wide, stops run violently, correlations spike. Cut size 50%+ or step aside.</span></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">VIX Knowledge Check</p><div class="tf-wrap"><div class="tf-item" id="tf-82-0"><p class="tf-statement">A high VIX always means great trading opportunities for momentum strategies.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,82,0,'true','false')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,82,0,'false','false')">False</button></div><p class="tf-explain" id="tfexp-82-0">False. While elevated VIX can increase intraday ranges, VIX above 35 creates dangerous conditions: wide spreads, violent stop runs, and correlated selling that overwhelms individual stock setups. Many pros reduce size significantly or sit out entirely in VIX &gt;35 environments.</p></div>
+<div class="tf-item" id="tf-82-1"><p class="tf-statement">VIX below 15 is the ideal environment for momentum day trading.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,82,1,'true','false')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,82,1,'false','false')">False</button></div><p class="tf-explain" id="tfexp-82-1">False. VIX below 15 signals low volatility — momentum stocks make smaller intraday moves, breakouts are less decisive, and it's harder to achieve large percentage gains. The momentum sweet spot is VIX 20-30, not sub-15.</p></div>
+<div class="tf-item" id="tf-82-2"><p class="tf-statement">VIX between 20 and 30 produces the best risk/reward for momentum trading.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,82,2,'true','true')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,82,2,'false','true')">False</button></div><p class="tf-explain" id="tfexp-82-2">True. The VIX 20-30 range represents elevated but manageable volatility — enough to produce meaningful intraday moves and explosive gaps, without the full-panic conditions that make momentum strategies unpredictable.</p></div>
+<div class="tf-item" id="tf-82-3"><p class="tf-statement">The VIX measures the actual past 30 days of S&amp;P 500 volatility.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,82,3,'true','false')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,82,3,'false','false')">False</button></div><p class="tf-explain" id="tfexp-82-3">False. The VIX measures IMPLIED (future expected) volatility derived from S&amp;P 500 options prices — it is a forward-looking measure, not a historical one. Historical volatility (HV) measures actual past price movements.</p></div></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter style-mistake">
-    <span class="dyk-icon">⚠️</span>
+  <div class="dyk-card dyk-enter ">
+    <span class="dyk-icon">💡</span>
     <div>
-      <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-label">Did you know?</p>
+      <p class="dyk-text">The VIX hit an all-time intraday high of 82.69 on March 16, 2020, during the COVID-19 market crash. On that single session, the S&amp;P 500 dropped 12% — the worst single-day decline since the 1987 Black Monday crash. Traders who ignored the VIX that week suffered catastrophic losses on both long and short positions.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../81/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 81</span></a>
+    <a href="../83/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">Options Activity as a Signal</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +780,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 82 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>

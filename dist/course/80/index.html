@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 80: Pre-Market Level 2</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:80.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">80&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -724,11 +724,11 @@ footer {
   <!-- Hero -->
   <section class="c1">
     <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
-      <p class="section-label">Section 3 · Chart Reading</p>
+      <span class="section-dot section-dot-anim" style="background-color:#eab308;--sc:#eab308;"></span>
+      <p class="section-label">Section 5 · Pre-Market Prep</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">Pre-Market Level 2</h1>
+    <p class="hero-subtitle">Pre-market Level 2 is a window into institutional intent.</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,66 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>Reading the Order Book Before the Bell</h2>
+          <p>Level 2 (L2) data shows the full order book — all buy bids and sell asks at every price level, with the size of each order. During regular trading hours, the Level 2 is packed with activity and large orders blend into the noise. But in pre-market trading, the book is thin — and that thinness makes large orders immediately visible and meaningful.
+
+A wall of 50,000 shares for sale at $5.00 in pre-market L2 is a significant resistance signal. Market makers and institutional sellers sometimes place large ask orders to suppress a breakout, collect shares at a low price, or test demand. When these walls are absorbed (bought through), the price often accelerates rapidly. When they hold, the price stalls or reverses.
+
+The most powerful pre-market L2 signal is when a large ask wall disappears in the final 10-15 minutes before the open. This can indicate that the seller has withdrawn — no longer interested in suppressing the price — creating a vacuum for the stock to rip at the bell. Conversely, watch for bids that suddenly disappear (bid pulling), which signals buyers losing confidence and often precedes a sharp pre-market reversal.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">BULLISH L2 SIGNALS</div><div class="comp-hdr right">DANGER SIGNS</div></div><div class="comp-row"><div class="comp-cell left">Large bids stacked below ask</div><div class="comp-cell">Large ask wall near breakout level</div></div>
+<div class="comp-row"><div class="comp-cell left">Thin ask side — easy to absorb</div><div class="comp-cell">Bids disappearing (bid pulling)</div></div>
+<div class="comp-row"><div class="comp-cell left">Spread narrowing over time</div><div class="comp-cell">Spread widening — liquidity drying up</div></div>
+<div class="comp-row"><div class="comp-cell left">Ask wall absorbed = acceleration</div><div class="comp-cell">Ask wall holding = stall or reversal</div></div>
+<div class="comp-row"><div class="comp-cell left">Volume building steadily at ask</div><div class="comp-cell">Volume spiking then collapsing</div></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">Pre-Market Level 2 Order Book</p><div class="diagram-wrap"><rect width="320" height="200" rx="8" fill="#0f0f14"/>
+<text x="160" y="18" text-anchor="middle" fill="#eab308" font-family="monospace" font-size="10" font-weight="bold">PRE-MARKET LEVEL 2</text>
+<text x="80" y="34" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="9" font-weight="bold">BID (BUY)</text>
+<text x="240" y="34" text-anchor="middle" fill="#ef4444" font-family="monospace" font-size="9" font-weight="bold">ASK (SELL)</text>
+<line x1="160" y1="26" x2="160" y2="192" stroke="#374151" stroke-width="1"/>
+<rect x="10" y="40" width="70" height="14" rx="2" fill="#052e16"/>
+<text x="45" y="51" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="8">4.91 × 12K</text>
+<rect x="10" y="57" width="80" height="14" rx="2" fill="#052e16"/>
+<text x="50" y="68" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="8">4.89 × 25K</text>
+<rect x="10" y="74" width="90" height="14" rx="2" fill="#052e16"/>
+<text x="55" y="85" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="8">4.87 × 38K</text>
+<rect x="10" y="91" width="60" height="14" rx="2" fill="#052e16"/>
+<text x="40" y="102" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="8">4.85 × 8K</text>
+<rect x="170" y="40" width="60" height="14" rx="2" fill="#2d0a0a"/>
+<text x="200" y="51" text-anchor="middle" fill="#ef4444" font-family="monospace" font-size="8">4.95 × 9K</text>
+<rect x="170" y="57" width="130" height="14" rx="2" fill="#4a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+<text x="235" y="68" text-anchor="middle" fill="#ef4444" font-family="monospace" font-size="8" font-weight="bold">5.00 × 52K ← WALL</text>
+<rect x="170" y="74" width="50" height="14" rx="2" fill="#2d0a0a"/>
+<text x="195" y="85" text-anchor="middle" fill="#ef4444" font-family="monospace" font-size="8">5.05 × 6K</text>
+<rect x="170" y="91" width="45" height="14" rx="2" fill="#2d0a0a"/>
+<text x="192" y="102" text-anchor="middle" fill="#ef4444" font-family="monospace" font-size="8">5.10 × 4K</text>
+<text x="160" y="125" text-anchor="middle" fill="#eab308" font-family="monospace" font-size="9" font-weight="bold">↑ 52K ask wall at $5.00 = key resistance</text>
+<text x="160" y="140" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="8">If wall is absorbed → price accelerates</text>
+<text x="160" y="155" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="8">If wall disappears → vacuum breakout</text>
+<text x="160" y="170" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="8">If wall holds → stall and reversal risk</text>
+<text x="160" y="188" text-anchor="middle" fill="#3b82f6" font-family="monospace" font-size="7">Watch final 10 min before open for wall removal</text><p class="diagram-caption">Pre-market L2 with a large 52K ask wall at $5.00. If this wall vanishes before the open, a hard breakout often follows.</p></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter style-mistake">
-    <span class="dyk-icon">⚠️</span>
+  <div class="dyk-card dyk-enter style-data">
+    <span class="dyk-icon">📊</span>
     <div>
-      <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-label">The data says</p>
+      <p class="dyk-text">Pre-market Level 2 ask walls that disappear in the final 10 minutes before the open often precede hard breakouts in the first 5 minutes of trading. The wall's disappearance signals the seller has withdrawn, creating a supply vacuum that can send price surging on opening volume.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../79/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 79</span></a>
+    <a href="../81/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">Sector Momentum</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +804,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 80 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>

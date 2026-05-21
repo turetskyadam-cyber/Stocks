@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 46: Double Top &amp; Double Bottom</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:46.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">46&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -727,8 +727,8 @@ footer {
       <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
       <p class="section-label">Section 3 · Chart Reading</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">Double Top &amp; Double Bottom</h1>
+    <p class="hero-subtitle">Two attempts at the same level — and a failed breakout</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,41 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>Resistance and Support Holding Twice</h2>
+          <p>The double top and double bottom are among the most common and reliable reversal patterns. A double top forms after an uptrend: price reaches a resistance level, pulls back, rallies a second time to approximately the same high, and fails again. The &quot;neckline&quot; is the support level at the bottom of the pullback between the two peaks. When price breaks below the neckline with conviction, the double top is confirmed and a bearish reversal is signaled. The distance from the peaks to the neckline equals the expected move downward from the neckline. A double bottom is the mirror image: two troughs at the same support level, with a neckline at the high between them. Breaking above the neckline confirms the bullish reversal. The key insight is that two failures at the same level demonstrate that buyers or sellers definitively lack the strength to break through.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">Double Top</div><div class="comp-hdr right">Double Bottom</div></div><div class="comp-row"><div class="comp-cell left">Forms at uptrend peak</div><div class="comp-cell">Forms at downtrend trough</div></div>
+<div class="comp-row"><div class="comp-cell left">Two peaks at resistance</div><div class="comp-cell">Two troughs at support</div></div>
+<div class="comp-row"><div class="comp-cell left">Neckline is the valley low</div><div class="comp-cell">Neckline is the peak high</div></div>
+<div class="comp-row"><div class="comp-cell left">Confirmed by break BELOW neckline</div><div class="comp-cell">Confirmed by break ABOVE neckline</div></div>
+<div class="comp-row"><div class="comp-cell left">Bearish reversal signal</div><div class="comp-cell">Bullish reversal signal</div></div>
+<div class="comp-row"><div class="comp-cell left">Target: neckline minus peak-to-neckline</div><div class="comp-cell">Target: neckline plus trough-to-neckline</div></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">Double Top / Double Bottom: True or False?</p><div class="tf-wrap"><div class="tf-item" id="tf-46-0"><p class="tf-statement">A double top is confirmed the moment the second peak forms at the same resistance level.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,46,0,'true','false')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,46,0,'false','false')">False</button></div><p class="tf-explain" id="tfexp-46-0">The pattern is only confirmed when price breaks BELOW the neckline (the low between the two peaks). Until then, price could still break out higher.</p></div>
+<div class="tf-item" id="tf-46-1"><p class="tf-statement">The two peaks in a double top must be at exactly the same price level.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,46,1,'true','false')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,46,1,'false','false')">False</button></div><p class="tf-explain" id="tfexp-46-1">The peaks need to be approximately equal — within a few percent — but do not need to be at an identical price. Minor variations are normal and acceptable.</p></div>
+<div class="tf-item" id="tf-46-2"><p class="tf-statement">Volume typically declines on the second peak of a double top compared to the first.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,46,2,'true','true')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,46,2,'false','true')">False</button></div><p class="tf-explain" id="tfexp-46-2">Lower volume on the second peak signals weakening buying conviction — buyers can't generate as much enthusiasm the second time, supporting the reversal thesis.</p></div>
+<div class="tf-item" id="tf-46-3"><p class="tf-statement">The measured move target after a neckline break equals the height from peaks to the neckline.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,46,3,'true','true')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,46,3,'false','true')">False</button></div><p class="tf-explain" id="tfexp-46-3">The measured move technique applies the pattern's height to the breakout point. For a double top: subtract that height from the neckline to get the downside target.</p></div></div></section>
 
   <!-- Did You Know -->
   <div class="dyk-card dyk-enter style-mistake">
     <span class="dyk-icon">⚠️</span>
     <div>
       <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-text">Common mistake: many traders enter a short position on the second peak of a double top before the neckline breaks. This is premature — without neckline confirmation, you're fighting a trend that hasn't officially reversed yet, and you'll be stopped out repeatedly.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../45/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 45</span></a>
+    <a href="../47/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">Head and Shoulders Pattern</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +779,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 46 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>

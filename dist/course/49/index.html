@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 49: Multi-Timeframe Analysis</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:49.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">49&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -727,8 +727,8 @@ footer {
       <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
       <p class="section-label">Section 3 · Chart Reading</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">Multi-Timeframe Analysis</h1>
+    <p class="hero-subtitle">The daily chart gives you bias — the 5-minute gives you entry</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,38 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>Always Know the Bigger Picture</h2>
+          <p>Multi-timeframe analysis (MTFA) is the practice of analyzing price action across multiple time horizons before placing a trade. The principle is simple: higher timeframes determine the direction of the dominant trend, and lower timeframes provide precise entry and exit timing. A momentum trader typically uses three timeframes: the daily chart for overall market bias and pattern identification, the 15-minute or hourly chart for intermediate-level structure and confirmation, and the 5-minute or 1-minute chart for precise entry timing. The golden rule: never trade against the daily chart. If the daily trend is down but you see a bullish setup on the 5-minute, you're fighting the primary trend — a low-probability trade. Conversely, when all three timeframes align (daily uptrend + 15-min consolidation + 5-min breakout), the probability skyrockets. This alignment is called &quot;timeframe confluence.&quot;</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><div class="alert-trio-grid"><div class="alert-card" style="border-left-color:#8b5cf6;"><span class="alert-icon">📅</span><div><p class="alert-content-heading">Daily Chart — The Boss</p><p class="alert-content-body">Sets the primary trend direction and identifies major patterns. Never take a trade that goes against what the daily chart is telling you. This is your foundation.</p></div></div>
+<div class="alert-card" style="border-left-color:#3b82f6;"><span class="alert-icon">📊</span><div><p class="alert-content-heading">15-Min Chart — The Context</p><p class="alert-content-body">Shows intermediate structure — consolidation zones, support/resistance levels, and whether today's price action is consistent with the daily trend.</p></div></div>
+<div class="alert-card" style="border-left-color:#00ff88;"><span class="alert-icon">⚡</span><div><p class="alert-content-heading">5-Min Chart — The Trigger</p><p class="alert-content-body">Used for precise entry timing. Look for a pattern or breakout on the 5-minute that aligns with the direction of both the daily and 15-minute charts.</p></div></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">Top-Down Analysis Process</p><div class="steps-wrap"><div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">1</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Start with the Daily Chart</p><p class="step-body">Determine the primary trend. Is the stock in an uptrend, downtrend, or sideways? Identify key support, resistance, and any major chart patterns forming.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">2</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Check the 15-Minute Chart</p><p class="step-body">Verify that today's price action is consistent with the daily trend. Look for intermediate consolidation or a setup forming within the larger trend context.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">3</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Find Entry on the 5-Minute</p><p class="step-body">Only now look for a specific entry trigger — a breakout, a pullback to a moving average, or a pattern completion that aligns with the two higher timeframes.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">4</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Confirm Alignment Before Entry</p><p class="step-body">Ask: does this 5-minute setup go WITH the 15-minute trend, which goes WITH the daily trend? If yes — execute. If any timeframe disagrees — pass.</p></div></div></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter style-mistake">
-    <span class="dyk-icon">⚠️</span>
+  <div class="dyk-card dyk-enter style-pro-tip">
+    <span class="dyk-icon">⚡</span>
     <div>
-      <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-label">Pro tip</p>
+      <p class="dyk-text">Pro tip: the phrase &quot;trade the timeframe you manage&quot; means your profit-and-loss psychology should match the chart you're trading. If you're watching every tick, you're on the 1-minute. If you check once a day, you're on the daily. Mismatches between your management style and your chart timeframe cause emotional decision-making.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../48/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 48</span></a>
+    <a href="../50/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">Chart Reading Recap</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +776,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 49 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>

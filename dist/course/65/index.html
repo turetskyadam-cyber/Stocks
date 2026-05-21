@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 65: Scanning for Momentum Stocks</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:65.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">65&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -724,11 +724,11 @@ footer {
   <!-- Hero -->
   <section class="c1">
     <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
-      <p class="section-label">Section 3 · Chart Reading</p>
+      <span class="section-dot section-dot-anim" style="background-color:#f97316;--sc:#f97316;"></span>
+      <p class="section-label">Section 4 · Momentum Basics</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">Scanning for Momentum Stocks</h1>
+    <p class="hero-subtitle">The right filters turn 8,000 stocks into your best 3 setups</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,45 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>Building a Pre-Market Scanner That Finds Real Momentum</h2>
+          <p>A momentum scanner is a tool that filters the entire universe of stocks down to a handful that meet your specific criteria right now. Without a scanner, finding momentum stocks is like searching for a needle in a haystack of 8,000 needles and hay. The goal of pre-market scanning is to arrive at the open with a watchlist of 3–5 stocks that have a specific catalyst, the right technical setup, and the liquidity to trade safely. The five most important filters for momentum scanning are: (1) Float under 20 million shares — small floats move more aggressively on volume. (2) Relative Volume over 3x normal — something is happening today that isn't normally happening. (3) Price between $2 and $20 — affordable for small accounts, still has volatility. (4) Gap up 5% or more — the market is already agreeing with your bullish thesis before the open. (5) A specific catalyst — news, FDA decision, earnings beat, partnership announcement. The top tools are Trade-Ideas (best real-time scanner), Finviz (free, great for pre-market research), and ThinkorSwim's built-in scanner (free with a TD Ameritrade account). Combine scanner results with chart analysis to build your daily watchlist.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><p class="section-h2">Momentum Stock Scanner Checklist</p><div class="checklist-wrap"><div class="check-item" id="ci-0" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Float under 20 million shares</span></div>
+<div class="check-item" id="ci-1" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Relative volume (RVOL) above 3x normal</span></div>
+<div class="check-item" id="ci-2" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Price between $2 and $20</span></div>
+<div class="check-item" id="ci-3" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Pre-market gap of 5% or more</span></div>
+<div class="check-item" id="ci-4" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Identifiable fundamental catalyst (news, FDA, earnings)</span></div>
+<div class="check-item" id="ci-5" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Clean technical setup visible on 5-minute chart</span></div>
+<div class="check-item" id="ci-6" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Average daily volume at least 500,000 shares normally</span></div>
+<div class="check-item" id="ci-7" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">No earnings report in the next 24 hours (unless that IS the catalyst)</span></div>
+<div class="check-item" id="ci-8" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Sector has tailwind today (hot sector context)</span></div>
+<div class="check-item" id="ci-9" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Level 2 shows buying interest, not just thin air</span></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">Building Your Daily Watchlist</p><div class="steps-wrap"><div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">1</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Run Pre-Market Scanner at 8:00–9:00 AM</p><p class="step-body">Before the market opens, run your scanner with all five core filters. Output should be 5–15 candidates. Note the catalyst for each.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">2</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Research Each Candidate</p><p class="step-body">For each scanner result, find the news headline. Is it a genuine catalyst (FDA, earnings, partnership) or just price action noise? Genuine catalysts trade better.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">3</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Chart Analysis</p><p class="step-body">Pull up the daily and 5-minute chart for each candidate. Is there a clean technical setup — a consolidation, a breakout level, a clear stop? If not, remove it from the list.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">4</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Build Your Final Watchlist</p><p class="step-body">Narrow to your 3–5 best stocks. Write the entry level, stop level, and target for each before the open. You are now prepared, not reactive.</p></div></div></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter style-mistake">
-    <span class="dyk-icon">⚠️</span>
+  <div class="dyk-card dyk-enter style-pro-tip">
+    <span class="dyk-icon">⚡</span>
     <div>
-      <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-label">Pro tip</p>
+      <p class="dyk-text">Trade-Ideas' AI-powered scanner (called &quot;Holly&quot;) runs over 70 simultaneous trading algorithms and historically back-tests each alert before sending it. Traders who use AI-assisted scanning report spending 40% less time on stock selection and 40% more time on execution quality — which is where actual money is made.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../64/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 64</span></a>
+    <a href="../66/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">Paper Trading</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +783,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 65 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>

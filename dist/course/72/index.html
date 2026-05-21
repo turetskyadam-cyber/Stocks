@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 72: Checking Futures and Global Markets</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:72.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">72&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -724,11 +724,11 @@ footer {
   <!-- Hero -->
   <section class="c1">
     <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
-      <p class="section-label">Section 3 · Chart Reading</p>
+      <span class="section-dot section-dot-anim" style="background-color:#eab308;--sc:#eab308;"></span>
+      <p class="section-label">Section 5 · Pre-Market Prep</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">Checking Futures and Global Markets</h1>
+    <p class="hero-subtitle">Futures are the market's alarm clock.</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,71 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>Reading the Global Market Overnight</h2>
+          <p>Before US markets open at 9:30 AM Eastern, equity futures have been trading around the clock. /ES (S&amp;P 500 E-mini), /NQ (Nasdaq 100 E-mini), and /YM (Dow Jones E-mini) are the three most-watched futures contracts. They act as a live vote on where the US market will open — and often, where it will trade for the first 30-60 minutes.
+
+But futures don't operate in a vacuum. Global markets have already been open for hours. Tokyo opens at 8 PM Eastern, London opens at 3 AM Eastern, and Frankfurt runs in parallel with London. If the Nikkei dropped 2% overnight and the DAX is sliding, US equity futures will reflect that — and your momentum setups may face a macro headwind regardless of their individual catalysts.
+
+The key rule: never ignore a -0.5% or greater futures move when entering a long momentum trade. You're swimming against a tide. Conversely, a strong +0.5% or better futures environment acts as rocket fuel for breakout trades in the first 30 minutes.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><div class="stat-block"><div class="stat-card"><span class="stat-value">/ES</span><span class="stat-label">S&amp;P 500 E-Mini Futures</span><span class="stat-sub">Each 1% move = ~$2,250 per contract. Most liquid futures market in the world.</span></div>
+<div class="stat-card"><span class="stat-value">/NQ</span><span class="stat-label">Nasdaq 100 E-Mini Futures</span><span class="stat-sub">Each 1% move = ~$4,000 per contract. Dominated by mega-cap tech stocks.</span></div>
+<div class="stat-card"><span class="stat-value">/YM</span><span class="stat-label">Dow Jones E-Mini Futures</span><span class="stat-sub">Each 1% move = ~$1,500 per contract. 30-stock index, less tech-heavy.</span></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">Global Market Session Clock</p><div class="diagram-wrap"><rect width="320" height="200" rx="8" fill="#0f0f14"/>
+<text x="160" y="22" text-anchor="middle" fill="#eab308" font-family="monospace" font-size="11" font-weight="bold">GLOBAL MARKET SESSIONS (Eastern Time)</text>
+<rect x="12" y="34" width="60" height="28" rx="4" fill="#1a1a2e" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="42" y="47" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="8">TOKYO</text>
+<text x="42" y="58" text-anchor="middle" fill="#3b82f6" font-family="monospace" font-size="7">8PM-2AM</text>
+<rect x="82" y="34" width="60" height="28" rx="4" fill="#1a1a2e" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="112" y="47" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="8">LONDON</text>
+<text x="112" y="58" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="7">3AM-12PM</text>
+<rect x="152" y="34" width="70" height="28" rx="4" fill="#1a1a2e" stroke="#eab308" stroke-width="1.5"/>
+<text x="187" y="47" text-anchor="middle" fill="#eab308" font-family="monospace" font-size="8">US PRE-MKT</text>
+<text x="187" y="58" text-anchor="middle" fill="#eab308" font-family="monospace" font-size="7">4AM-9:30AM</text>
+<rect x="232" y="34" width="76" height="28" rx="4" fill="#1a1a2e" stroke="#00ff88" stroke-width="2"/>
+<text x="270" y="47" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="8">US OPEN</text>
+<text x="270" y="58" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="7">9:30AM-4PM</text>
+<line x1="72" y1="48" x2="82" y2="48" stroke="#9ca3af" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="142" y1="48" x2="152" y2="48" stroke="#9ca3af" stroke-width="1"/>
+<line x1="222" y1="48" x2="232" y2="48" stroke="#9ca3af" stroke-width="1"/>
+<text x="160" y="88" text-anchor="middle" fill="#fff" font-family="monospace" font-size="9" font-weight="bold">KEY FUTURES SIGNALS</text>
+<rect x="12" y="96" width="90" height="36" rx="4" fill="#052e16"/>
+<text x="57" y="109" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="8" font-weight="bold">BULLISH</text>
+<text x="57" y="121" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="7">/ES +0.5% or more</text>
+<text x="57" y="131" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="7">before open</text>
+<rect x="115" y="96" width="90" height="36" rx="4" fill="#1c1917"/>
+<text x="160" y="109" text-anchor="middle" fill="#eab308" font-family="monospace" font-size="8" font-weight="bold">NEUTRAL</text>
+<text x="160" y="121" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="7">-0.5% to +0.5%</text>
+<text x="160" y="131" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="7">stock-specific</text>
+<rect x="218" y="96" width="90" height="36" rx="4" fill="#2d0a0a"/>
+<text x="263" y="109" text-anchor="middle" fill="#ef4444" font-family="monospace" font-size="8" font-weight="bold">BEARISH</text>
+<text x="263" y="121" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="7">/ES -0.5% or more</text>
+<text x="263" y="131" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="7">reduce longs</text>
+<text x="160" y="158" text-anchor="middle" fill="#9ca3af" font-family="monospace" font-size="8">Futures + Global Markets = Pre-Market Tone</text>
+<text x="160" y="172" text-anchor="middle" fill="#3b82f6" font-family="monospace" font-size="8">Check /ES, Nikkei, DAX before scanning stocks</text>
+<text x="160" y="186" text-anchor="middle" fill="#eab308" font-family="monospace" font-size="8">Never ignore macro direction on momentum trades</text><p class="diagram-caption">Global sessions feed into US pre-market futures — check /ES before scanning individual stocks.</p></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter style-mistake">
-    <span class="dyk-icon">⚠️</span>
+  <div class="dyk-card dyk-enter style-data">
+    <span class="dyk-icon">📊</span>
     <div>
-      <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-label">The data says</p>
+      <p class="dyk-text">On days when S&amp;P 500 futures (/ES) are up more than 0.5% before the US open, the first 30 minutes of trading are bullish roughly 68% of the time. This tailwind dramatically increases the probability of gap-and-go setups following through on high-quality catalysts.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../71/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 71</span></a>
+    <a href="../73/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">Reading Pre-Market News</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +809,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 72 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>

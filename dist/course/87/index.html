@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 87: Reading the First Candle</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:87.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">87&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -724,11 +724,11 @@ footer {
   <!-- Hero -->
   <section class="c1">
     <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
-      <p class="section-label">Section 3 · Chart Reading</p>
+      <span class="section-dot section-dot-anim" style="background-color:#ef4444;--sc:#ef4444;"></span>
+      <p class="section-label">Section 6 · 9:30 AM Open</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">Reading the First Candle</h1>
+    <p class="hero-subtitle">One minute that tells you everything about the day's opening battle</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,57 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>One minute. Everything is in it.</h2>
+          <p>The first candle — 9:30 to 9:31 — captures the opening battle between buyers and sellers in its purest form. A large green body closing near the high means buyers won from second one: aggressive, in control, and willing to pay up. A red body or long upper wick means sellers showed up immediately. The first candle sets the tone. Read it before you do anything else.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">Bullish First Candle</div><div class="comp-hdr right">Bearish First Candle</div></div><div class="comp-row"><div class="comp-cell left">Large green body</div><div class="comp-cell">Red body or long upper wick</div></div>
+<div class="comp-row"><div class="comp-cell left">Close near the high</div><div class="comp-cell">Close near the low</div></div>
+<div class="comp-row"><div class="comp-cell left">High volume (2x+ average)</div><div class="comp-cell">Volume less than pre-market pace</div></div>
+<div class="comp-row"><div class="comp-cell left">Minimal or no upper wick</div><div class="comp-cell">Failed breakout — spike then drop</div></div>
+<div class="comp-row"><div class="comp-cell left">Pre-market gap holding</div><div class="comp-cell">Gap filling immediately on open</div></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">Four First-Candle Types</p><div class="diagram-wrap"><rect width="320" height="200" fill="#0f0f14" rx="8"/>
+<text x="40" y="18" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Strong Bull</text>
+<rect x="34" y="30" width="12" height="90" fill="#22c55e" rx="2"/>
+<line x1="40" y1="25" x2="40" y2="30" stroke="#22c55e" stroke-width="2"/>
+<line x1="40" y1="120" x2="40" y2="128" stroke="#22c55e" stroke-width="2"/>
+<text x="100" y="18" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Bull Reject</text>
+<rect x="94" y="70" width="12" height="50" fill="#22c55e" rx="2"/>
+<line x1="100" y1="25" x2="100" y2="70" stroke="#22c55e" stroke-width="2"/>
+<line x1="100" y1="120" x2="100" y2="130" stroke="#22c55e" stroke-width="2"/>
+<text x="180" y="18" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Bear Reversal</text>
+<rect x="174" y="55" width="12" height="65" fill="#ef4444" rx="2"/>
+<line x1="180" y1="30" x2="180" y2="55" stroke="#ef4444" stroke-width="2"/>
+<line x1="180" y1="120" x2="180" y2="135" stroke="#ef4444" stroke-width="2"/>
+<text x="260" y="18" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Doji</text>
+<rect x="254" y="72" width="12" height="6" fill="#94a3b8" rx="1"/>
+<line x1="260" y1="35" x2="260" y2="72" stroke="#94a3b8" stroke-width="2"/>
+<line x1="260" y1="78" x2="260" y2="130" stroke="#94a3b8" stroke-width="2"/>
+<text x="40" y="155" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Buyers won</text>
+<text x="100" y="155" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Sellers at top</text>
+<text x="180" y="155" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Sellers won</text>
+<text x="260" y="155" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">No winner</text><p class="diagram-caption">Body size and wick length reveal who controlled the first minute</p></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter style-mistake">
-    <span class="dyk-icon">⚠️</span>
+  <div class="dyk-card dyk-enter style-pro-tip">
+    <span class="dyk-icon">⚡</span>
     <div>
-      <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-label">Pro tip</p>
+      <p class="dyk-text">If the second candle breaks the first candle's high, this &quot;first candle high breakout&quot; is one of the cleanest momentum signals of the entire day.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../86/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 86</span></a>
+    <a href="../88/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">The Opening Range (9:30–9:45)</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +795,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 87 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>

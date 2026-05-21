@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 40: Breakouts</title>
+  <title>Lesson 92: VWAP at the Open</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:40.0%;"></div>
+    <div class="progress-bar-fill" style="width:92.0%;"></div>
   </div>
-  <span class="progress-label">40&nbsp;/&nbsp;100</span>
+  <span class="progress-label">92&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -724,11 +724,11 @@ footer {
   <!-- Hero -->
   <section class="c1">
     <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
-      <p class="section-label">Section 3 · Chart Reading</p>
+      <span class="section-dot section-dot-anim" style="background-color:#ef4444;--sc:#ef4444;"></span>
+      <p class="section-label">Section 6 · 9:30 AM Open</p>
     </div>
-    <h1 class="hero-title">Breakouts</h1>
-    <p class="hero-subtitle">The moment supply becomes demand — and price accelerates.</p>
+    <h1 class="hero-title">VWAP at the Open</h1>
+    <p class="hero-subtitle">Where fair value lives — everything else is premium or discount</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,52 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>A breakout is where supply becomes demand — instantly.</h2>
-          <p>Price above a key resistance level with volume. Supply at that level exhausted. Demand floods in. Not every breakout holds — volume and a confirmed candle close are what separate real breakouts from fakeouts.</p>
+          <h2>VWAP is where fair value lives — everything else is premium or discount.</h2>
+          <p>VWAP — the Volume-Weighted Average Price — resets every morning at 9:30 and builds throughout the day. It represents the true average price paid weighted by volume. Opening above VWAP and holding it is bullish: institutions are buying above fair value showing conviction. A break below VWAP on a long position is an early warning exit signal. Reclaiming VWAP after a dip is a re-entry signal.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">Tap to reveal the reality</p><div class="myth-grid"><div class="myth-card-wrap cols-3" id="mba-0" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">Breakouts above 52-week highs are risky because the stock has already moved too much.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Studies show stocks making 52-week highs on high volume are statistically MORE likely to continue higher. Momentum, not mean reversion, dominates short-term.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-1" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">You can buy any breakout as long as volume is high.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">Volume confirms the breakout but does not guarantee continuation. The catalyst, sector strength, and quality of the base all matter equally.</p></div></div></div>
-<div class="myth-card-wrap cols-3" id="mba-2" onclick="this.classList.toggle('flipped')"><div class="myth-card-inner"><div class="myth-face myth-front"><p class="myth-badge-red">✗ Myth</p><p class="myth-text">False breakouts are rare and easy to avoid.</p></div><div class="myth-face myth-back"><p class="myth-badge-green">✓ Reality</p><p class="myth-text">False breakouts happen on roughly 30–40% of apparent breakouts. The filter: price must close above the level — not just touch it.</p></div></div></div></div></section>
+  <section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">Above VWAP (Bullish)</div><div class="comp-hdr right">Below VWAP (Bearish)</div></div><div class="comp-row"><div class="comp-cell left">Buyers in control</div><div class="comp-cell">Sellers in control</div></div>
+<div class="comp-row"><div class="comp-cell left">Long bias on all setups</div><div class="comp-cell">Short bias — avoid longs</div></div>
+<div class="comp-row"><div class="comp-cell left">VWAP acts as support</div><div class="comp-cell">VWAP acts as resistance</div></div>
+<div class="comp-row"><div class="comp-cell left">Add on dips to VWAP</div><div class="comp-cell">Cover shorts near VWAP</div></div>
+<div class="comp-row"><div class="comp-cell left">Institutions accumulating</div><div class="comp-cell">Institutions distributing</div></div></div></section>
 
-  <section><div class="scenario-wrap"><p class="scenario-setup">RXMD consolidates between $8.00–$8.40 for 20 minutes on low volume. A 50,000-share print hits at the ask. Price jumps to $8.45, breaking resistance. Level 2 shows asks clearing fast. What is your move?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,40,0,false)">Market order immediately — do not miss the move</button><div class="scenario-explain" id="sexp-40-0">Market order = uncontrolled slippage and no confirmation. Wait for the candle close first.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,1,true)">Limit buy at $8.42, wait for the 5-minute candle to close above $8.40</button><div class="scenario-explain" id="sexp-40-1">Correct. The limit controls slippage and the candle close confirms the breakout is real.</div>
-<button class="scenario-btn" onclick="handleScenario(this,40,2,false)">Wait for a pullback to $8.40 before buying</button><div class="scenario-explain" id="sexp-40-2">Valid thought — but strong breakouts often do not return to the level. You risk missing the trade entirely.</div></div></div></section>
+  <section><p class="section-h2">VWAP as Intraday Guide</p><div class="diagram-wrap"><rect width="320" height="200" fill="#0f0f14" rx="8"/>
+<text x="16" y="20" fill="#64748b" font-size="9" font-family="monospace">9:30</text>
+<text x="130" y="20" fill="#64748b" font-size="9" font-family="monospace">10:00</text>
+<text x="240" y="20" fill="#64748b" font-size="9" font-family="monospace">10:30</text>
+<path d="M20,60 Q80,55 120,80 Q150,95 160,110 Q190,90 220,85 Q260,80 295,75" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+<path d="M20,55 Q60,45 100,65 Q130,80 145,100 Q160,115 175,105 Q210,88 240,78 Q270,70 295,68" stroke="#22c55e" stroke-width="2" fill="none"/>
+<text x="100" y="44" fill="#3b82f6" font-size="9" font-family="monospace">VWAP</text>
+<text x="50" y="40" fill="#22c55e" font-size="9" font-family="monospace">Price</text>
+<line x1="155" y1="25" x2="155" y2="175" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="100" y="135" fill="#ef4444" font-size="8" font-family="monospace">Break below</text>
+<text x="100" y="147" fill="#ef4444" font-size="8" font-family="monospace">= caution</text>
+<line x1="175" y1="25" x2="175" y2="175" stroke="#22c55e" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="178" y="135" fill="#22c55e" font-size="8" font-family="monospace">Reclaim</text>
+<text x="178" y="147" fill="#22c55e" font-size="8" font-family="monospace">= re-entry</text>
+<text x="220" y="60" fill="#3b82f6" font-size="8" font-family="monospace">VWAP as</text>
+<text x="220" y="72" fill="#3b82f6" font-size="8" font-family="monospace">support</text><p class="diagram-caption">Price breaks below VWAP at 10 AM — reclaims at 10:30 as re-entry signal</p></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter style-mistake">
-    <span class="dyk-icon">⚠️</span>
+  <div class="dyk-card dyk-enter style-pro-tip">
+    <span class="dyk-icon">⚡</span>
     <div>
-      <p class="dyk-label">Common mistake</p>
-      <p class="dyk-text">The most common breakout mistake is buying the first touch of a level rather than the confirmed break. A stock &quot;testing&quot; $50 resistance is not the same as &quot;breaking&quot; $50 on volume. The difference is a candle close above the level with expanding volume.</p>
+      <p class="dyk-label">Pro tip</p>
+      <p class="dyk-text">Institutions use VWAP as an execution benchmark — their buy orders create natural support at VWAP during institutional accumulation phases.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../39/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 39</span></a>
-    <a href="../41/index.html" class="btn-next">
+    <a href="../91/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 91</span></a>
+    <a href="../93/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">What is Momentum Trading?</span>
+          <span class="btn-next-title">Level 2 and T&amp;S at the Open</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +790,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 40 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 92 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>
