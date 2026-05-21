@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0f0f14;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ticker tape continuous scroll */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  animation: ticker-scroll 28s linear infinite;
+}
+
+/* Staggered card entrance */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-stagger-1 { animation: card-in 320ms var(--ease-out) 80ms both; }
+.card-stagger-2 { animation: card-in 320ms var(--ease-out) 140ms both; }
+.card-stagger-3 { animation: card-in 320ms var(--ease-out) 200ms both; }
+
+/* Fact cards stagger */
+.fact-stagger-1 { animation: card-in 320ms var(--ease-out) 300ms both; }
+.fact-stagger-2 { animation: card-in 320ms var(--ease-out) 360ms both; }
+.fact-stagger-3 { animation: card-in 320ms var(--ease-out) 420ms both; }
+
+/* Did you know entrance */
+.dyk-enter { animation: card-in 320ms var(--ease-out) 520ms both; }
+
+/* Next button entrance */
+.next-btn-enter { animation: card-in 320ms var(--ease-out) 600ms both; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track,
+  .card-stagger-1,
+  .card-stagger-2,
+  .card-stagger-3,
+  .fact-stagger-1,
+  .fact-stagger-2,
+  .fact-stagger-3,
+  .dyk-enter,
+  .next-btn-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
