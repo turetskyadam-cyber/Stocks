@@ -338,6 +338,326 @@ export const lessons: Lesson[] = [
       'In 2021, GameStop (GME) went from $17 to $483 in two weeks driven almost entirely by retail traders on Reddit. Demand overwhelmed supply. That is momentum trading in its purest form.',
     nextTitle: 'What is Market Timing?',
   },
+  {
+    id: 11,
+    title: 'Supply & Demand in the Market',
+    subtitle: 'The single force that moves every stock price, every second.',
+    section: 'Section 1 · Stock Fundamentals',
+    sectionColor: '#10b981',
+    coreHeading: 'More buyers than sellers = price goes up.',
+    coreBody:
+      'Every price movement is supply and demand in action. When a company announces great earnings, demand spikes — buyers flood in faster than sellers can keep up, so price rises. When bad news hits, supply overwhelms demand — sellers dump shares and price falls. Understanding this is the foundation of every trade you will ever make.',
+    facts: [
+      { icon: '⚖️', text: 'Price is always finding the level where buyers and sellers agree to trade.' },
+      { icon: '📣', text: 'News, earnings, and rumors all instantly shift the supply/demand balance.' },
+      { icon: '🔁', text: 'Momentum traders profit by getting in early when demand is just starting to surge.' },
+    ],
+    vocab: [
+      {
+        term: 'Bid',
+        definition: 'The highest price a buyer is currently willing to pay for a stock.',
+      },
+      {
+        term: 'Ask',
+        definition: 'The lowest price a seller is currently willing to accept for a stock.',
+      },
+      {
+        term: 'Spread',
+        definition: 'The gap between the bid and ask price. The tighter the spread, the more liquid the stock.',
+      },
+    ],
+    didYouKnow:
+      "During the 2021 meme stock frenzy, GameStop's bid-ask spread briefly hit $10 wide — meaning buyers and sellers were $10 per share apart on a stock worth ~$200. Pure chaos.",
+    nextTitle: 'What is a Broker?',
+  },
+  {
+    id: 12,
+    title: 'What is a Broker?',
+    subtitle: 'The middleman between you and the stock market.',
+    section: 'Section 1 · Stock Fundamentals',
+    sectionColor: '#10b981',
+    coreHeading: 'A broker is your gateway to the market.',
+    coreBody:
+      'You cannot walk onto the NYSE floor and buy stocks yourself. You need a broker — a licensed firm that executes trades on your behalf. Today most brokers are apps on your phone. You deposit money, place an order, and the broker routes it to the exchange in milliseconds. Most retail brokers now charge $0 commission.',
+    facts: [
+      { icon: '📱', text: 'Popular brokers: TD Ameritrade, Webull, Interactive Brokers, Robinhood.' },
+      { icon: '🆓', text: 'Commission-free trading became standard after Robinhood launched in 2013.' },
+      { icon: '⚡', text: 'Momentum traders need a broker with fast executions — milliseconds matter.' },
+    ],
+    vocab: [
+      {
+        term: 'Broker',
+        definition: 'A licensed firm or platform that executes buy and sell orders on your behalf.',
+      },
+      {
+        term: 'Commission',
+        definition: 'A fee charged per trade. Most retail brokers now charge $0, making them free to use.',
+      },
+      {
+        term: 'Account',
+        definition: 'Your brokerage account holds your cash and securities. Cash accounts and margin accounts are the two main types.',
+      },
+    ],
+    didYouKnow:
+      'Before 1975, US stock commissions were fixed by law. Trading 100 shares cost the same at every broker. Deregulation sparked a price war that eventually led to $0 commissions today.',
+    nextTitle: 'Types of Orders: Market, Limit & Stop',
+  },
+  {
+    id: 13,
+    title: 'Types of Orders: Market, Limit & Stop',
+    subtitle: 'The three orders every trader must know before placing a single trade.',
+    section: 'Section 1 · Stock Fundamentals',
+    sectionColor: '#10b981',
+    coreHeading: 'Three tools, three different jobs.',
+    coreBody:
+      'A market order fills immediately at whatever the current price is — fast but imprecise. A limit order fills only at your specified price or better — precise but may not fill. A stop order triggers a market order once price hits a level — used to cut losses automatically. Knowing which to use and when separates disciplined traders from gamblers.',
+    facts: [
+      { icon: '🏃', text: 'Market orders guarantee execution but not price — avoid them on illiquid stocks.' },
+      { icon: '🎯', text: 'Limit orders give you price control but risk missing the trade entirely.' },
+      { icon: '🛑', text: 'Stop-loss orders are the most important risk management tool a trader has.' },
+    ],
+    vocab: [
+      {
+        term: 'Market Order',
+        definition: 'Buy or sell immediately at the best available price. Fast — but you get whatever price the market gives.',
+      },
+      {
+        term: 'Limit Order',
+        definition: 'Buy or sell only at your specified price or better. You control the price, but the order may not fill.',
+      },
+      {
+        term: 'Stop Order',
+        definition: 'Becomes a market order once price reaches a trigger level. Used to automatically exit a losing trade.',
+      },
+    ],
+    didYouKnow:
+      "On May 6, 2010 — the 'Flash Crash' — market orders sent during the chaos filled at pennies. Stocks worth $40 executed at $0.01. Market orders on volatile stocks are dangerous.",
+    nextTitle: 'Bid, Ask & the Spread',
+  },
+  {
+    id: 14,
+    title: 'Bid, Ask & the Spread',
+    subtitle: 'The hidden cost of every trade — and why it matters more than commission.',
+    section: 'Section 1 · Stock Fundamentals',
+    sectionColor: '#10b981',
+    coreHeading: 'The spread is the market\'s toll booth.',
+    coreBody:
+      'Every stock has two prices: the bid (what buyers will pay) and the ask (what sellers want). The spread is the gap between them. When you buy at the ask and immediately sell at the bid, you lose the spread. On liquid stocks like AAPL, the spread is $0.01. On thin small caps, it can be $0.50 or more — a hidden cost that matters enormously for momentum traders.',
+    facts: [
+      { icon: '💸', text: 'A $0.50 spread on a 1,000-share trade costs you $500 before the stock even moves.' },
+      { icon: '🔬', text: 'AAPL and SPY often trade with a $0.01 spread — extremely liquid.' },
+      { icon: '⚠️', text: 'Wide spreads signal low liquidity — harder to enter and exit cleanly.' },
+    ],
+    vocab: [
+      {
+        term: 'Bid',
+        definition: 'The highest price a buyer is willing to pay right now. You sell at (or near) the bid.',
+      },
+      {
+        term: 'Ask',
+        definition: 'The lowest price a seller will accept right now. You buy at (or near) the ask.',
+      },
+      {
+        term: 'Spread',
+        definition: 'Ask minus bid. This is the immediate cost of entering a trade — even before commission.',
+      },
+    ],
+    didYouKnow:
+      "Before 2001, US stocks were quoted in 1/8 increments ($0.125 minimum spread). Decimalization crushed spreads to $0.01 on major stocks, saving retail traders billions annually.",
+    nextTitle: 'What is Volume?',
+  },
+  {
+    id: 15,
+    title: 'What is Volume?',
+    subtitle: 'The number that tells you how much conviction is behind a price move.',
+    section: 'Section 1 · Stock Fundamentals',
+    sectionColor: '#10b981',
+    coreHeading: 'Price tells you what. Volume tells you how much people care.',
+    coreBody:
+      'Volume is the total number of shares traded during a period. A stock jumping 10% on 10x normal volume is a real move — institutions are involved. The same move on low volume might be a fake-out with no follow-through. For momentum traders, volume is the fuel. No volume = no momentum. High volume = the crowd is here.',
+    facts: [
+      { icon: '📊', text: 'Average daily volume (ADV) is the benchmark — compare today\'s volume to the average.' },
+      { icon: '🔥', text: 'Relative volume (RVOL) of 5x or higher is a strong momentum signal.' },
+      { icon: '😴', text: 'Low-volume moves often reverse quickly — the move has no conviction behind it.' },
+    ],
+    vocab: [
+      {
+        term: 'Volume',
+        definition: 'The total number of shares traded in a given time period (day, hour, minute).',
+      },
+      {
+        term: 'ADV',
+        definition: 'Average Daily Volume — the typical number of shares traded per day over the past 30 days.',
+      },
+      {
+        term: 'RVOL',
+        definition: 'Relative Volume — today\'s volume divided by ADV. RVOL of 3 means 3x normal trading activity.',
+      },
+    ],
+    didYouKnow:
+      "On the day of GameStop's biggest move (Jan 27, 2021), GME traded 93 million shares — roughly 40 times its average daily volume. That's what extreme momentum looks like.",
+    nextTitle: 'Market Hours: Pre-Market, Regular & After-Hours',
+  },
+  {
+    id: 16,
+    title: 'Market Hours: Pre-Market, Regular & After-Hours',
+    subtitle: 'The market never truly sleeps — but the best action happens at specific times.',
+    section: 'Section 2 · Market Mechanics',
+    sectionColor: '#3b82f6',
+    coreHeading: 'Three sessions, three different beasts.',
+    coreBody:
+      'The regular session runs 9:30 AM – 4:00 PM ET — this is when most volume and price action happens. Pre-market trading starts as early as 4:00 AM ET and runs until 9:30 AM. After-hours trading runs 4:00 PM – 8:00 PM ET. Both extended sessions have thin volume, wide spreads, and exaggerated moves. Momentum traders use pre-market to find their targets — and the open is when they strike.',
+    facts: [
+      { icon: '🌅', text: 'Pre-market: 4:00 AM – 9:30 AM ET. Earnings releases often drop here.' },
+      { icon: '⚡', text: 'Regular session: 9:30 AM – 4:00 PM ET. 90% of volume happens here.' },
+      { icon: '🌙', text: 'After-hours: 4:00 PM – 8:00 PM ET. Moves here often reverse at the open.' },
+    ],
+    vocab: [
+      {
+        term: 'Pre-Market',
+        definition: 'Trading that occurs before 9:30 AM ET. Low volume, wide spreads, but critical for spotting momentum setups.',
+      },
+      {
+        term: 'Regular Session',
+        definition: 'The main trading window — 9:30 AM to 4:00 PM ET, Monday through Friday.',
+      },
+      {
+        term: 'After-Hours',
+        definition: 'Trading after 4:00 PM ET. Earnings often move stocks here, but liquidity is thin.',
+      },
+    ],
+    didYouKnow:
+      "NYSE and NASDAQ are closed on 9 federal holidays per year. But futures markets (S&P 500 futures, for example) trade nearly 24 hours a day, 6 days a week.",
+    nextTitle: 'Why Pre-Market Matters for Momentum Traders',
+  },
+  {
+    id: 17,
+    title: 'Why Pre-Market Matters for Momentum Traders',
+    subtitle: 'The hour before the open is where the day\'s best trades are born.',
+    section: 'Section 2 · Market Mechanics',
+    sectionColor: '#3b82f6',
+    coreHeading: 'The pre-market is your morning brief.',
+    coreBody:
+      'Before 9:30 AM, institutional traders, algorithms, and retail traders react to overnight news. Stocks that gap up significantly on heavy pre-market volume often continue higher at the open — this is the gap-and-go setup. Momentum traders scan the pre-market gappers list every morning, identify the top 2–3 stocks with a real catalyst, and have a plan before the bell rings.',
+    facts: [
+      { icon: '🔍', text: 'Top pre-market gappers are stocks up 5%+ before the open with real volume.' },
+      { icon: '📰', text: 'Earnings, FDA results, and merger news are the most powerful pre-market catalysts.' },
+      { icon: '⏰', text: 'Most momentum traders start their pre-market scan between 8:00 and 9:00 AM ET.' },
+    ],
+    vocab: [
+      {
+        term: 'Gapper',
+        definition: 'A stock that opens significantly higher or lower than it closed the prior day due to overnight news.',
+      },
+      {
+        term: 'Gap Up',
+        definition: 'When a stock opens above its previous close. Strong gap ups with volume often continue higher.',
+      },
+      {
+        term: 'Catalyst',
+        definition: 'The specific event causing the gap — earnings beat, FDA approval, short squeeze, analyst upgrade.',
+      },
+    ],
+    didYouKnow:
+      'Studies show that stocks gapping up more than 4% on above-average pre-market volume continue higher at the open more than 60% of the time — making gap-and-go one of the most reliable momentum strategies.',
+    nextTitle: 'The Opening Bell: 9:30 AM ET',
+  },
+  {
+    id: 18,
+    title: 'The Opening Bell: 9:30 AM ET',
+    subtitle: 'The most volatile, most important minute of the entire trading day.',
+    section: 'Section 2 · Market Mechanics',
+    sectionColor: '#3b82f6',
+    coreHeading: 'The first candle sets the tone for the whole day.',
+    coreBody:
+      'At exactly 9:30 AM ET the market opens and all the overnight orders, emotions, and anticipation are unleashed at once. The first 5–15 minutes are the most chaotic — spreads are wide, volume is extreme, and prices move fast. Experienced momentum traders look for stocks making new highs in the first minutes of trading. That early strength often signals a trend that can run for hours.',
+    facts: [
+      { icon: '🔔', text: 'The NYSE opening bell has rung every trading day since 1903.' },
+      { icon: '💥', text: 'More volume trades in the first 30 minutes than any other 30-minute window of the day.' },
+      { icon: '📐', text: 'The "opening range" (first 5–15 min high/low) is a key reference point all day.' },
+    ],
+    vocab: [
+      {
+        term: 'Opening Range',
+        definition: 'The high and low established in the first 5–15 minutes after the open. A breakout above this is a key signal.',
+      },
+      {
+        term: 'First Candle',
+        definition: 'The 1-minute or 5-minute candlestick from 9:30–9:31 (or 9:35). Sets the initial tone.',
+      },
+      {
+        term: 'HOD',
+        definition: 'High of Day — the highest price the stock has traded at since the open. Breaking HOD is a momentum signal.',
+      },
+    ],
+    didYouKnow:
+      'The phrase "sell in May and go away" exists because summer months historically have lower volume and less volatility at the open — momentum strategies work best in high-volume market conditions.',
+    nextTitle: 'What is a Catalyst?',
+  },
+  {
+    id: 19,
+    title: 'What is a Catalyst?',
+    subtitle: 'The spark that ignites a momentum move — without it, there is no trade.',
+    section: 'Section 2 · Market Mechanics',
+    sectionColor: '#3b82f6',
+    coreHeading: 'No catalyst, no trade.',
+    coreBody:
+      'A catalyst is the specific event that causes a sudden change in supply and demand. Without a catalyst, a stock moving 10% is suspicious and likely to reverse. With a strong catalyst — a surprise earnings beat, an FDA drug approval, a short squeeze — that same move has conviction and can run much further. Momentum traders always ask: "What is the catalyst?" before entering any trade.',
+    facts: [
+      { icon: '💊', text: 'FDA drug approvals can send biotech stocks up 50–200% in a single session.' },
+      { icon: '📈', text: 'Earnings beats with strong guidance are the most common catalyst for large-cap gappers.' },
+      { icon: '🧨', text: 'Shorts covering (buying to close positions) can turbocharge an already-moving stock.' },
+    ],
+    vocab: [
+      {
+        term: 'Catalyst',
+        definition: 'A specific event that triggers a sharp change in a stock\'s supply/demand balance and price.',
+      },
+      {
+        term: 'FDA Approval',
+        definition: 'When the FDA approves a drug for sale. One of the most powerful single-day catalysts in the market.',
+      },
+      {
+        term: 'Short Squeeze',
+        definition: 'When a heavily shorted stock rises, forcing short sellers to buy back shares — accelerating the move.',
+      },
+    ],
+    didYouKnow:
+      "Moderna's stock rose 30% on a single day in May 2020 when it released early COVID vaccine data. That's a catalyst-driven momentum trade — news so significant that supply disappeared.",
+    nextTitle: 'Earnings Reports & Their Impact',
+  },
+  {
+    id: 20,
+    title: 'Earnings Reports & Their Impact',
+    subtitle: 'Four times a year, every public company reveals how it actually did.',
+    section: 'Section 2 · Market Mechanics',
+    sectionColor: '#3b82f6',
+    coreHeading: 'Earnings are the biggest scheduled catalyst on the calendar.',
+    coreBody:
+      'Every quarter, public companies report their revenue, profit, and guidance for the future. If results beat expectations, the stock usually gaps up. If they miss, it gaps down. The size of the move depends on how big the surprise is and how much the market expected it. Momentum traders watch the earnings calendar closely — the best gap-and-go setups often happen the morning after an earnings beat.',
+    facts: [
+      { icon: '📅', text: 'Earnings season runs for about 3 weeks after each quarter ends — January, April, July, October.' },
+      { icon: '🎯', text: '"Beating estimates" means reporting higher revenue or EPS than Wall Street analysts predicted.' },
+      { icon: '📉', text: 'Even strong earnings can cause a stock to drop if guidance (future outlook) disappoints.' },
+    ],
+    vocab: [
+      {
+        term: 'EPS',
+        definition: 'Earnings Per Share — the company\'s profit divided by its number of shares. The most watched earnings number.',
+      },
+      {
+        term: 'Guidance',
+        definition: 'The company\'s own forecast for the next quarter. Often matters more than the actual results.',
+      },
+      {
+        term: 'Whisper Number',
+        definition: 'The unofficial earnings expectation among traders — often higher than analyst estimates.',
+      },
+    ],
+    didYouKnow:
+      "Meta (Facebook) lost $232 billion in market cap in a single day — February 3, 2022 — after missing earnings estimates. The largest single-day market cap loss in US history.",
+    nextTitle: 'News & Stock Reactions',
+  },
 ]
 
 export function getLessonById(id: number): Lesson | undefined {
