@@ -44,6 +44,10 @@ export default function SlotBRenderer({ widget }: { widget: SlotBWidget }) {
             )
           case 'pros-cons':
             return <ProsCons heading={widget.heading} pros={widget.pros} cons={widget.cons} />
+          case 'checklist':
+            return <SlotBChecklist heading={widget.heading} items={widget.items} />
+          case 'before-after':
+            return <SlotBBeforeAfter leftLabel={widget.leftLabel} rightLabel={widget.rightLabel} leftItems={widget.leftItems} rightItems={widget.rightItems} />
           default:
             return null
         }
@@ -465,6 +469,76 @@ function ProsCons({ heading, pros, cons }: { heading: string; pros: string[]; co
             ))}
           </ul>
         </div>
+      </div>
+    </div>
+  )
+}
+
+/* ── SlotBChecklist (interactive, same as SlotA Checklist) ── */
+function SlotBChecklist({ heading, items }: { heading: string; items: string[] }) {
+  const [checked, setChecked] = useState<boolean[]>(items.map(() => false))
+  const toggle = (i: number) =>
+    setChecked((prev) => prev.map((v, j) => (j === i ? !v : v)))
+  const done = checked.filter(Boolean).length
+
+  return (
+    <div>
+      <p className="text-sm font-semibold text-[#6b7280] uppercase tracking-widest mb-4">{heading}</p>
+      {items.map((item, i) => (
+        <motion.button
+          key={i}
+          className={`w-full flex items-center gap-3 p-3 rounded-lg border cursor-pointer select-none text-left mb-2 transition-colors ${
+            checked[i] ? 'border-[#00ff88]/30 bg-[#00ff88]/5' : 'border-[#2d2d3d] bg-[#1a1a24]'
+          }`}
+          onClick={() => toggle(i)}
+          whileTap={{ scale: 0.98 }}
+        >
+          <div
+            className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
+              checked[i] ? 'border-[#00ff88] bg-[#00ff88]' : 'border-[#2d2d3d]'
+            }`}
+          >
+            {checked[i] && (
+              <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                <path d="M1 4L3.5 6.5L9 1" stroke="#0f0f14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </div>
+          <span className={`text-sm leading-relaxed ${checked[i] ? 'line-through text-[#6b7280]' : 'text-white'}`}>
+            {item}
+          </span>
+        </motion.button>
+      ))}
+      <p className="text-xs text-[#6b7280] font-mono mt-2">{done} / {items.length} completed</p>
+    </div>
+  )
+}
+
+/* ── SlotBBeforeAfter ── */
+function SlotBBeforeAfter({ leftLabel, rightLabel, leftItems, rightItems }: { leftLabel: string; rightLabel: string; leftItems: string[]; rightItems: string[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-[#2d2d3d]">
+      <div className="p-4 sm:border-r border-b sm:border-b-0 border-[#2d2d3d]">
+        <p className="font-mono text-xs uppercase tracking-wider text-[#ef4444] mb-3">{leftLabel}</p>
+        <ul className="flex flex-col gap-2">
+          {leftItems.map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-white">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#ef4444] shrink-0" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="p-4">
+        <p className="font-mono text-xs uppercase tracking-wider text-[#00ff88] mb-3">{rightLabel}</p>
+        <ul className="flex flex-col gap-2">
+          {rightItems.map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-white">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00ff88] shrink-0" />
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )

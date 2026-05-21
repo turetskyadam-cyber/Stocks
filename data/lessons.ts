@@ -24,6 +24,8 @@ export type SlotBWidget =
   | { type: 'myth-buster'; myths: { myth: string; reality: string }[] }
   | { type: 'calculator'; heading: string; inputLabel: string; inputDefault: number; inputMin: number; inputMax: number; inputStep: number; factor: number; resultLabel: string; resultPrefix?: string; resultSuffix?: string; note?: string }
   | { type: 'pros-cons'; heading: string; pros: string[]; cons: string[] }
+  | { type: 'checklist'; heading: string; items: string[] }
+  | { type: 'before-after'; leftLabel: string; rightLabel: string; leftItems: string[]; rightItems: string[] }
 
 export type DykStyle = 'default' | 'pro-tip' | 'mistake' | 'data' | 'quote'
 
