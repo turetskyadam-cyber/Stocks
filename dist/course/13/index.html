@@ -744,19 +744,21 @@ footer {
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">3 things to know</p><div class="facts-grid"><div class="fact-card f1"><span class="fact-icon">🏃</span><p class="fact-text">Market orders guarantee execution but not price — avoid them on illiquid stocks.</p></div>
-<div class="fact-card f2"><span class="fact-icon">🎯</span><p class="fact-text">Limit orders give you price control but risk missing the trade entirely.</p></div>
-<div class="fact-card f3"><span class="fact-icon">🛑</span><p class="fact-text">Stop-loss orders are the most important risk management tool a trader has.</p></div></div></section>
+  <section class="c3"><div class="alert-trio-grid"><div class="alert-card" style="border-left-color:#3b82f6;"><span class="alert-icon">🏃</span><div><p class="alert-content-heading">Market Order</p><p class="alert-content-body">Fills immediately at the best available price. Fast but imprecise — on a thin stock, you may fill $0.50+ away from the quote.</p></div></div>
+<div class="alert-card" style="border-left-color:#00ff88;"><span class="alert-icon">🎯</span><div><p class="alert-content-heading">Limit Order</p><p class="alert-content-body">Fills only at your specified price or better. You control the entry cost but risk missing the trade if price moves away.</p></div></div>
+<div class="alert-card" style="border-left-color:#ef4444;"><span class="alert-icon">🛑</span><div><p class="alert-content-heading">Stop Order</p><p class="alert-content-body">Triggers a market order when price hits your stop level. Your primary risk management tool — it exits a losing trade automatically.</p></div></div></div></section>
 
-  <section><p class="section-h2">Key vocabulary — tap each card</p><div class="vocab-grid"><div class="vocab-card-wrap v1" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Market Order"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Market Order</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">Buy or sell immediately at the best available price. Fast — but you get whatever price the market gives.</p></div></div></div>
-<div class="vocab-card-wrap v2" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Limit Order"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Limit Order</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">Buy or sell only at your specified price or better. You control the price, but the order may not fill.</p></div></div></div>
-<div class="vocab-card-wrap v3" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Stop Order"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Stop Order</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">Becomes a market order once price reaches a trigger level. Used to automatically exit a losing trade.</p></div></div></div></div></section>
+  <section><p class="section-h2">How to use a stop-loss correctly</p><div class="steps-wrap"><div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">1</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Enter with a limit order</p><p class="step-body">Place your buy at your planned entry price. Limit orders control slippage at the open.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">2</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Set your stop-loss immediately</p><p class="step-body">Before the trade even moves, decide where you are wrong and set your stop there.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">3</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Size based on stop distance</p><p class="step-body">Position size = (Max $ risk) ÷ (Entry − Stop). Never risk more than your plan allows.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">4</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Let the stop work</p><p class="step-body">If your stop level hits, the order triggers automatically. No emotion. No hesitation.</p></div></div>
+<div class="step-item"><div class="step-left"><div class="step-num-circle"><span class="step-num-text">5</span></div><div class="step-conn"></div></div><div class="step-content"><p class="step-title">Trail as the trade works</p><p class="step-body">As price rises, move your stop up to lock in gains. Never move it further away from entry.</p></div></div></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter ">
-    <span class="dyk-icon">💡</span>
+  <div class="dyk-card dyk-enter style-mistake">
+    <span class="dyk-icon">⚠️</span>
     <div>
-      <p class="dyk-label">Did you know?</p>
+      <p class="dyk-label">Common mistake</p>
       <p class="dyk-text">On May 6, 2010 — the 'Flash Crash' — market orders sent during the chaos filled at pennies. Stocks worth $40 executed at $0.01. Market orders on volatile stocks are dangerous.</p>
     </div>
   </div>

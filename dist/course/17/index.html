@@ -744,19 +744,22 @@ footer {
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">3 things to know</p><div class="facts-grid"><div class="fact-card f1"><span class="fact-icon">🔍</span><p class="fact-text">Top pre-market gappers are stocks up 5%+ before the open with real volume.</p></div>
-<div class="fact-card f2"><span class="fact-icon">📰</span><p class="fact-text">Earnings, FDA results, and merger news are the most powerful pre-market catalysts.</p></div>
-<div class="fact-card f3"><span class="fact-icon">⏰</span><p class="fact-text">Most momentum traders start their pre-market scan between 8:00 and 9:00 AM ET.</p></div></div></section>
+  <section class="c3"><p class="section-h2">Pre-market routine — complete before 9:25 AM</p><div class="checklist-wrap"><div class="check-item" id="ci-0" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Run gappers scan — filter for stocks up 5%+ with real catalyst</span></div>
+<div class="check-item" id="ci-1" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Verify the catalyst is material (earnings, FDA, news — not just a rumor)</span></div>
+<div class="check-item" id="ci-2" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Check pre-market volume — at least 100K shares traded</span></div>
+<div class="check-item" id="ci-3" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Identify key price levels from yesterday's chart</span></div>
+<div class="check-item" id="ci-4" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Define your entry, stop-loss, and max share size</span></div>
+<div class="check-item" id="ci-5" onclick="this.classList.toggle('checked')"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Have your order typed and ready — no improvising at the open</span></div></div></section>
 
-  <section><p class="section-h2">Key vocabulary — tap each card</p><div class="vocab-grid"><div class="vocab-card-wrap v1" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Gapper"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Gapper</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">A stock that opens significantly higher or lower than it closed the prior day due to overnight news.</p></div></div></div>
-<div class="vocab-card-wrap v2" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Gap Up"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Gap Up</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">When a stock opens above its previous close. Strong gap ups with volume often continue higher.</p></div></div></div>
-<div class="vocab-card-wrap v3" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Catalyst"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Catalyst</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">The specific event causing the gap — earnings beat, FDA approval, short squeeze, analyst upgrade.</p></div></div></div></div></section>
+  <section><div class="scenario-wrap"><p class="scenario-setup">It is 8:30 AM. BNTX is up 18% pre-market on a surprise FDA approval. Volume is already 5× average. You have $10,000 to risk. What is the MOST important thing to do before 9:30 AM?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,17,0,false)">Set a price alert so you remember to buy at the open</button><div class="scenario-explain" id="sexp-17-0">A price alert is reactive — it tells you when price hits a level but gives you no plan. You need entry, stop, and size defined before the bell.</div>
+<button class="scenario-btn" onclick="handleScenario(this,17,1,true)">Define your entry price, stop-loss level, and max share size before the bell</button><div class="scenario-explain" id="sexp-17-1">Correct. The open is too chaotic to make decisions in real time. Your plan must be complete before 9:30 AM — execution only at the bell.</div>
+<button class="scenario-btn" onclick="handleScenario(this,17,2,false)">Buy shares immediately in pre-market to get the best price</button><div class="scenario-explain" id="sexp-17-2">Pre-market has wide spreads and extreme slippage on gappers. You could pay $1–$2 more per share than the 9:30 AM open price. Wait for the regular session.</div></div></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter ">
-    <span class="dyk-icon">💡</span>
+  <div class="dyk-card dyk-enter style-pro-tip">
+    <span class="dyk-icon">⚡</span>
     <div>
-      <p class="dyk-label">Did you know?</p>
+      <p class="dyk-label">Pro tip</p>
       <p class="dyk-text">Studies show that stocks gapping up more than 4% on above-average pre-market volume continue higher at the open more than 60% of the time — making gap-and-go one of the most reliable momentum strategies.</p>
     </div>
   </div>

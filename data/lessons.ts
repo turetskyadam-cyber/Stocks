@@ -169,6 +169,18 @@ export const lessons: Lesson[] = [
         definition: 'A firm that always stands ready to buy or sell a stock, keeping the market liquid.',
       },
     ],
+    slotA: {
+      type: 'comparison',
+      leftLabel: 'NYSE',
+      rightLabel: 'NASDAQ',
+      rows: [
+        { left: 'Founded 1792 — oldest US exchange', right: 'Founded 1971 — first electronic exchange' },
+        { left: 'Physical floor + human specialists', right: 'Fully electronic — no trading floor' },
+        { left: 'Blue-chip industrials (Coke, Exxon)', right: 'Tech giants (Apple, Google, Meta)' },
+        { left: 'Largest by market cap ($25T+)', right: 'Second largest by market cap ($20T+)' },
+        { left: 'Higher listing requirements', right: 'Lower listing requirements — popular with IPOs' },
+      ],
+    },
     didYouKnow:
       'The famous NYSE opening bell rings every trading day at 9:30 AM ET. Companies pay for the privilege of ringing it — it is a marketing event.',
     nextTitle: 'How to Read a Stock Quote',
@@ -265,6 +277,30 @@ export const lessons: Lesson[] = [
         definition: 'The total number of shares a company has issued, including those held by insiders.',
       },
     ],
+    slotA: {
+      type: 'stat-block',
+      stats: [
+        { value: '<$2B', label: 'Small cap', sub: 'biggest % movers for momentum traders' },
+        { value: '$2–10B', label: 'Mid cap', sub: 'balance of growth and stability' },
+        { value: '$10B+', label: 'Large cap', sub: 'slow-moving — institutional names' },
+      ],
+    },
+    slotB: {
+      type: 'pros-cons',
+      heading: 'Small cap vs large cap for momentum trading',
+      pros: [
+        'Massive % gains possible in a single session',
+        'Less institutional coverage = more inefficiency to exploit',
+        'Catalyst-driven moves are sharper and faster',
+        'Lower price per share = more shares for same dollar risk',
+      ],
+      cons: [
+        'Wide spreads = higher cost to enter and exit',
+        'Thin liquidity = slippage on large share sizes',
+        'Can crash as fast as it rises — risk is high',
+        'Harder to find reliable data and analyst coverage',
+      ],
+    },
     didYouKnow:
       "A stock's price per share tells you almost nothing about its size. A $5 stock can be worth more than a $500 stock if it has more shares outstanding.",
     nextTitle: 'Sectors & Industries',
@@ -329,6 +365,29 @@ export const lessons: Lesson[] = [
         definition: 'A milder pullback of 10–20%. Not a full bear market, but enough to shake weak hands out.',
       },
     ],
+    slotA: {
+      type: 'comparison',
+      leftLabel: 'Bull Market',
+      rightLabel: 'Bear Market',
+      rows: [
+        { left: '20%+ rise from a recent low', right: '20%+ decline from a recent high' },
+        { left: 'Avg duration: ~5 years', right: 'Avg duration: ~10 months' },
+        { left: 'Avg gain: +150%+', right: 'Avg loss: -35%' },
+        { left: 'Momentum longs dominate', right: 'Short-selling opportunities emerge' },
+        { left: 'Easy — just ride the wave', right: 'Brutal — requires discipline and hedging' },
+      ],
+    },
+    slotB: {
+      type: 'true-false',
+      heading: 'True or false?',
+      statements: [
+        { text: 'The average bear market lasts longer than the average bull market.', answer: false, explanation: 'Bears average ~10 months. Bulls average ~5 years. Bears are shorter but feel longer because losses hurt more than gains feel good.' },
+        { text: 'A "correction" is defined as a 20% or more decline from a recent high.', answer: false, explanation: 'A correction is a 10–20% decline. A 20%+ decline is a full bear market. Corrections are common — bear markets are rarer.' },
+        { text: 'Momentum traders can profit in both bull and bear markets.', answer: true, explanation: 'Long momentum in bull markets, short momentum in bear markets. The strategies differ but the skill — finding explosive moves — is the same.' },
+        { text: 'The fastest bear market ever was March 2020 — a 33% crash in 33 days.', answer: true, explanation: 'The COVID crash was the fastest bear market in history. The S&P 500 recovered fully within 5 months.' },
+      ],
+    },
+    dykStyle: 'data',
     didYouKnow:
       'The longest bull market in history ran from March 2009 to February 2020 — nearly 11 years, gaining over 400%. It ended in exactly 33 days when COVID hit.',
     nextTitle: 'What Drives Stock Prices?',
@@ -393,6 +452,36 @@ export const lessons: Lesson[] = [
         definition: 'The gap between the bid and ask price. The tighter the spread, the more liquid the stock.',
       },
     ],
+    slotA: {
+      type: 'before-after',
+      leftLabel: 'Before catalyst',
+      rightLabel: 'After catalyst',
+      leftItems: [
+        'Stock flat at $20 for 3 days',
+        'Volume: 200K shares/day (avg)',
+        'Balanced buyers and sellers',
+        'Spread: $0.02',
+        'No news, no catalyst',
+      ],
+      rightItems: [
+        'FDA approval announced 8 AM',
+        'Pre-market volume: 2M shares (10×)',
+        'Buyers overwhelm sellers 10:1',
+        'Price gaps to $28 (+40%)',
+        'Spread widens to $0.25 at open',
+      ],
+    },
+    slotB: {
+      type: 'steps',
+      heading: 'The supply/demand cycle in real time',
+      steps: [
+        { num: 1, title: 'Catalyst hits', body: 'News creates an imbalance. Buyers flood in faster than sellers can provide shares.' },
+        { num: 2, title: 'Price rises', body: 'Sellers raise their asks. The bid chases upward. Every new trade prints at a higher price.' },
+        { num: 3, title: 'Momentum builds', body: 'Rising price attracts more buyers. Volume accelerates. RVOL spikes above 5×.' },
+        { num: 4, title: 'Supply dries up', body: 'Sellers have filled their orders. Asks thin out above — a potential gap forms.' },
+        { num: 5, title: 'Equilibrium restores', body: 'New supply meets demand at the new higher level. Price stabilizes. Volume declines.' },
+      ],
+    },
     didYouKnow:
       "During the 2021 meme stock frenzy, GameStop's bid-ask spread briefly hit $10 wide — meaning buyers and sellers were $10 per share apart on a stock worth ~$200. Pure chaos.",
     nextTitle: 'What is a Broker?',
@@ -457,6 +546,26 @@ export const lessons: Lesson[] = [
         definition: 'Becomes a market order once price reaches a trigger level. Used to automatically exit a losing trade.',
       },
     ],
+    slotA: {
+      type: 'alert-trio',
+      items: [
+        { accent: '#3b82f6', icon: '🏃', heading: 'Market Order', body: 'Fills immediately at the best available price. Fast but imprecise — on a thin stock, you may fill $0.50+ away from the quote.' },
+        { accent: '#00ff88', icon: '🎯', heading: 'Limit Order', body: 'Fills only at your specified price or better. You control the entry cost but risk missing the trade if price moves away.' },
+        { accent: '#ef4444', icon: '🛑', heading: 'Stop Order', body: 'Triggers a market order when price hits your stop level. Your primary risk management tool — it exits a losing trade automatically.' },
+      ],
+    },
+    slotB: {
+      type: 'steps',
+      heading: 'How to use a stop-loss correctly',
+      steps: [
+        { num: 1, title: 'Enter with a limit order', body: 'Place your buy at your planned entry price. Limit orders control slippage at the open.' },
+        { num: 2, title: 'Set your stop-loss immediately', body: 'Before the trade even moves, decide where you are wrong and set your stop there.' },
+        { num: 3, title: 'Size based on stop distance', body: 'Position size = (Max $ risk) ÷ (Entry − Stop). Never risk more than your plan allows.' },
+        { num: 4, title: 'Let the stop work', body: 'If your stop level hits, the order triggers automatically. No emotion. No hesitation.' },
+        { num: 5, title: 'Trail as the trade works', body: 'As price rises, move your stop up to lock in gains. Never move it further away from entry.' },
+      ],
+    },
+    dykStyle: 'mistake',
     didYouKnow:
       "On May 6, 2010 — the 'Flash Crash' — market orders sent during the chaos filled at pennies. Stocks worth $40 executed at $0.01. Market orders on volatile stocks are dangerous.",
     nextTitle: 'Bid, Ask & the Spread',
@@ -489,6 +598,37 @@ export const lessons: Lesson[] = [
         definition: 'Ask minus bid. This is the immediate cost of entering a trade — even before commission.',
       },
     ],
+    slotA: {
+      type: 'stat-block',
+      stats: [
+        { value: '$0.01', label: 'Spread on AAPL / SPY', sub: 'liquid large-cap — nearly invisible cost' },
+        { value: '$0.50+', label: 'Spread on thin small-caps', sub: 'volatile momentum stocks at the open' },
+        { value: '$500', label: 'Hidden cost', sub: '1,000 shares × $0.50 spread, before commissions' },
+      ],
+    },
+    slotB: {
+      type: 'diagram',
+      heading: 'Bid vs Ask — the spread visualized',
+      svgContent: `<svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="180" fill="#0f0f14" rx="8"/>
+  <rect x="20" y="40" width="110" height="90" rx="8" fill="#00ff8812" stroke="#00ff8840" stroke-width="1"/>
+  <rect x="190" y="40" width="110" height="90" rx="8" fill="#ef444412" stroke="#ef444440" stroke-width="1"/>
+  <text x="75" y="30" fill="#00ff88" font-size="11" font-family="monospace" text-anchor="middle" font-weight="600">BID</text>
+  <text x="245" y="30" fill="#ef4444" font-size="11" font-family="monospace" text-anchor="middle" font-weight="600">ASK</text>
+  <text x="75" y="72" fill="#00ff88" font-size="22" font-family="monospace" text-anchor="middle" font-weight="700">$24.85</text>
+  <text x="75" y="92" fill="#9ca3af" font-size="11" font-family="monospace" text-anchor="middle">buyers pay here</text>
+  <text x="75" y="110" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">you SELL at bid</text>
+  <text x="245" y="72" fill="#ef4444" font-size="22" font-family="monospace" text-anchor="middle" font-weight="700">$24.86</text>
+  <text x="245" y="92" fill="#9ca3af" font-size="11" font-family="monospace" text-anchor="middle">sellers want here</text>
+  <text x="245" y="110" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">you BUY at ask</text>
+  <line x1="130" y1="85" x2="190" y2="85" stroke="#2d2d3d" stroke-width="1"/>
+  <text x="160" y="79" fill="#eab308" font-size="10" font-family="monospace" text-anchor="middle">$0.01</text>
+  <text x="160" y="92" fill="#eab308" font-size="9" font-family="monospace" text-anchor="middle">SPREAD</text>
+  <text x="160" y="150" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">Buy at ask → sell at bid = instant loss of spread</text>
+  <text x="160" y="166" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">Stock must move UP before you break even</text>
+</svg>`,
+      caption: 'You always buy at the ask (higher) and sell at the bid (lower).',
+    },
     didYouKnow:
       "Before 2001, US stocks were quoted in 1/8 increments ($0.125 minimum spread). Decimalization crushed spreads to $0.01 on major stocks, saving retail traders billions annually.",
     nextTitle: 'What is Volume?',
@@ -521,6 +661,26 @@ export const lessons: Lesson[] = [
         definition: 'Relative Volume — today\'s volume divided by ADV. RVOL of 3 means 3x normal trading activity.',
       },
     ],
+    slotA: {
+      type: 'leaderboard',
+      heading: 'Relative volume (RVOL) signal strength',
+      items: [
+        { rank: 1, label: 'RVOL 10×+', sub: 'Extreme momentum — institutional involvement certain', pct: 95, color: '#00ff88' },
+        { rank: 2, label: 'RVOL 3–5×', sub: 'Strong momentum — worth a close look', pct: 65, color: '#3b82f6' },
+        { rank: 3, label: 'RVOL 1.5–2×', sub: 'Mildly elevated — confirm with price action', pct: 35, color: '#f97316' },
+        { rank: 4, label: 'RVOL < 1×', sub: 'Below average — no momentum, likely to fade', pct: 10, color: '#ef4444' },
+      ],
+    },
+    slotB: {
+      type: 'scenario',
+      setup: 'RXMD is up 45% today. At 10:00 AM you check volume — it has already traded 8× its average daily volume with 3 hours of trading left. What does this most likely tell you?',
+      options: [
+        { label: 'The move is over — high volume always signals the top', correct: false, explanation: 'High volume alone does not mean the top. Volume confirms participation. A top requires other signals: loss of momentum, reversal candle, T&S drying up.' },
+        { label: 'Institutional buyers are participating — the move has real backing', correct: true, explanation: 'Correct. 8× RVOL means far more than retail traders are involved. Institutions are executing large orders — this gives the move credibility.' },
+        { label: 'The stock is being manipulated — normal stocks do not have 8× volume', correct: false, explanation: 'Extreme RVOL is completely normal on strong catalysts. GME traded 40× normal volume during its squeeze. Volume reflects interest, not manipulation.' },
+      ],
+    },
+    dykStyle: 'data',
     didYouKnow:
       "On the day of GameStop's biggest move (Jan 27, 2021), GME traded 93 million shares — roughly 40 times its average daily volume. That's what extreme momentum looks like.",
     nextTitle: 'Market Hours: Pre-Market, Regular & After-Hours',
@@ -585,6 +745,28 @@ export const lessons: Lesson[] = [
         definition: 'The specific event causing the gap — earnings beat, FDA approval, short squeeze, analyst upgrade.',
       },
     ],
+    slotA: {
+      type: 'checklist',
+      heading: 'Pre-market routine — complete before 9:25 AM',
+      items: [
+        'Run gappers scan — filter for stocks up 5%+ with real catalyst',
+        'Verify the catalyst is material (earnings, FDA, news — not just a rumor)',
+        'Check pre-market volume — at least 100K shares traded',
+        'Identify key price levels from yesterday\'s chart',
+        'Define your entry, stop-loss, and max share size',
+        'Have your order typed and ready — no improvising at the open',
+      ],
+    },
+    slotB: {
+      type: 'scenario',
+      setup: 'It is 8:30 AM. BNTX is up 18% pre-market on a surprise FDA approval. Volume is already 5× average. You have $10,000 to risk. What is the MOST important thing to do before 9:30 AM?',
+      options: [
+        { label: 'Set a price alert so you remember to buy at the open', correct: false, explanation: 'A price alert is reactive — it tells you when price hits a level but gives you no plan. You need entry, stop, and size defined before the bell.' },
+        { label: 'Define your entry price, stop-loss level, and max share size before the bell', correct: true, explanation: 'Correct. The open is too chaotic to make decisions in real time. Your plan must be complete before 9:30 AM — execution only at the bell.' },
+        { label: 'Buy shares immediately in pre-market to get the best price', correct: false, explanation: 'Pre-market has wide spreads and extreme slippage on gappers. You could pay $1–$2 more per share than the 9:30 AM open price. Wait for the regular session.' },
+      ],
+    },
+    dykStyle: 'pro-tip',
     didYouKnow:
       'Studies show that stocks gapping up more than 4% on above-average pre-market volume continue higher at the open more than 60% of the time — making gap-and-go one of the most reliable momentum strategies.',
     nextTitle: 'The Opening Bell: 9:30 AM ET',
@@ -649,6 +831,21 @@ export const lessons: Lesson[] = [
         definition: 'When a heavily shorted stock rises, forcing short sellers to buy back shares — accelerating the move.',
       },
     ],
+    slotA: {
+      type: 'alert-trio',
+      items: [
+        { accent: '#00ff88', icon: '💊', heading: 'FDA Drug Approval', body: 'Sends biotech stocks up 50–200% in a session. The most powerful single-day catalyst in the market — binary outcome, maximum volatility.' },
+        { accent: '#3b82f6', icon: '📈', heading: 'Earnings Beat + Guidance Raise', body: 'When results AND the future outlook exceed expectations, institutions pile in. The most common catalyst for large-cap momentum gaps.' },
+        { accent: '#f97316', icon: '🧨', heading: 'Short Squeeze Trigger', body: 'High short interest + positive catalyst = feedback loop. Shorts covering amplifies every uptick — the move becomes self-reinforcing.' },
+      ],
+    },
+    slotB: {
+      type: 'myth-buster',
+      myths: [
+        { myth: 'You need to predict the catalyst before it happens to profit from it.', reality: 'Momentum traders react to catalysts — they do not predict them. The second wave (after the algo reaction) is where retail edge lives. Speed of reaction, not prediction.' },
+        { myth: 'Any news is a good catalyst for a momentum trade.', reality: 'The catalyst must be material — something that genuinely changes the outlook. Small news on low volume creates fake moves that reverse fast. Ask: does this change the fundamental story?' },
+      ],
+    },
     didYouKnow:
       "Moderna's stock rose 30% on a single day in May 2020 when it released early COVID vaccine data. That's a catalyst-driven momentum trade — news so significant that supply disappeared.",
     nextTitle: 'Earnings Reports & Their Impact',
@@ -681,6 +878,29 @@ export const lessons: Lesson[] = [
         definition: 'The unofficial earnings expectation among traders — often higher than analyst estimates.',
       },
     ],
+    slotA: {
+      type: 'comparison',
+      leftLabel: 'Earnings Beat',
+      rightLabel: 'Earnings Miss',
+      rows: [
+        { left: 'EPS above analyst estimates', right: 'EPS below analyst estimates' },
+        { left: 'Gap up 5–30% typical', right: 'Gap down 5–30% typical' },
+        { left: 'Momentum long setup', right: 'Short or fade setup' },
+        { left: 'Institutions accumulating', right: 'Institutions distributing' },
+        { left: 'Guidance raise amplifies the move', right: 'Guidance cut makes it worse' },
+      ],
+    },
+    slotB: {
+      type: 'true-false',
+      heading: 'True or false?',
+      statements: [
+        { text: 'A company can beat earnings estimates and still have its stock drop.', answer: true, explanation: 'If forward guidance (the future outlook) disappoints, the stock can gap down even on a beat. The market prices the future, not the past.' },
+        { text: 'Earnings are released four times per year — once per quarter.', answer: true, explanation: 'Every public company reports quarterly. Earnings seasons cluster in January, April, July, and October.' },
+        { text: 'The "whisper number" is the official analyst consensus estimate.', answer: false, explanation: 'The whisper number is the unofficial street expectation — often higher than analyst consensus. Beat the whisper and you get a bigger move.' },
+        { text: 'After-hours earnings moves always hold when the regular session opens.', answer: false, explanation: 'Many after-hours moves partially or fully reverse at the open, especially on weak volume. Always wait to see how the market opens.' },
+      ],
+    },
+    dykStyle: 'data',
     didYouKnow:
       "Meta (Facebook) lost $232 billion in market cap in a single day — February 3, 2022 — after missing earnings estimates. The largest single-day market cap loss in US history.",
     nextTitle: 'News & Stock Reactions',

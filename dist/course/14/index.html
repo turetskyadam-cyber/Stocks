@@ -744,13 +744,28 @@ footer {
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">3 things to know</p><div class="facts-grid"><div class="fact-card f1"><span class="fact-icon">💸</span><p class="fact-text">A $0.50 spread on a 1,000-share trade costs you $500 before the stock even moves.</p></div>
-<div class="fact-card f2"><span class="fact-icon">🔬</span><p class="fact-text">AAPL and SPY often trade with a $0.01 spread — extremely liquid.</p></div>
-<div class="fact-card f3"><span class="fact-icon">⚠️</span><p class="fact-text">Wide spreads signal low liquidity — harder to enter and exit cleanly.</p></div></div></section>
+  <section class="c3"><div class="stat-block"><div class="stat-card"><span class="stat-value">$0.01</span><span class="stat-label">Spread on AAPL / SPY</span><span class="stat-sub">liquid large-cap — nearly invisible cost</span></div>
+<div class="stat-card"><span class="stat-value">$0.50+</span><span class="stat-label">Spread on thin small-caps</span><span class="stat-sub">volatile momentum stocks at the open</span></div>
+<div class="stat-card"><span class="stat-value">$500</span><span class="stat-label">Hidden cost</span><span class="stat-sub">1,000 shares × $0.50 spread, before commissions</span></div></div></section>
 
-  <section><p class="section-h2">Key vocabulary — tap each card</p><div class="vocab-grid"><div class="vocab-card-wrap v1" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Bid"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Bid</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">The highest price a buyer is willing to pay right now. You sell at (or near) the bid.</p></div></div></div>
-<div class="vocab-card-wrap v2" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Ask"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Ask</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">The lowest price a seller will accept right now. You buy at (or near) the ask.</p></div></div></div>
-<div class="vocab-card-wrap v3" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Spread"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Spread</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">Ask minus bid. This is the immediate cost of entering a trade — even before commission.</p></div></div></div></div></section>
+  <section><p class="section-h2">Bid vs Ask — the spread visualized</p><div class="diagram-wrap"><svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="180" fill="#0f0f14" rx="8"/>
+  <rect x="20" y="40" width="110" height="90" rx="8" fill="#00ff8812" stroke="#00ff8840" stroke-width="1"/>
+  <rect x="190" y="40" width="110" height="90" rx="8" fill="#ef444412" stroke="#ef444440" stroke-width="1"/>
+  <text x="75" y="30" fill="#00ff88" font-size="11" font-family="monospace" text-anchor="middle" font-weight="600">BID</text>
+  <text x="245" y="30" fill="#ef4444" font-size="11" font-family="monospace" text-anchor="middle" font-weight="600">ASK</text>
+  <text x="75" y="72" fill="#00ff88" font-size="22" font-family="monospace" text-anchor="middle" font-weight="700">$24.85</text>
+  <text x="75" y="92" fill="#9ca3af" font-size="11" font-family="monospace" text-anchor="middle">buyers pay here</text>
+  <text x="75" y="110" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">you SELL at bid</text>
+  <text x="245" y="72" fill="#ef4444" font-size="22" font-family="monospace" text-anchor="middle" font-weight="700">$24.86</text>
+  <text x="245" y="92" fill="#9ca3af" font-size="11" font-family="monospace" text-anchor="middle">sellers want here</text>
+  <text x="245" y="110" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">you BUY at ask</text>
+  <line x1="130" y1="85" x2="190" y2="85" stroke="#2d2d3d" stroke-width="1"/>
+  <text x="160" y="79" fill="#eab308" font-size="10" font-family="monospace" text-anchor="middle">$0.01</text>
+  <text x="160" y="92" fill="#eab308" font-size="9" font-family="monospace" text-anchor="middle">SPREAD</text>
+  <text x="160" y="150" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">Buy at ask → sell at bid = instant loss of spread</text>
+  <text x="160" y="166" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">Stock must move UP before you break even</text>
+</svg><p class="diagram-caption">You always buy at the ask (higher) and sell at the bid (lower).</p></div></section>
 
   <!-- Did You Know -->
   <div class="dyk-card dyk-enter ">

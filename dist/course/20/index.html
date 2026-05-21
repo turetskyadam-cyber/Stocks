@@ -744,19 +744,22 @@ footer {
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">3 things to know</p><div class="facts-grid"><div class="fact-card f1"><span class="fact-icon">📅</span><p class="fact-text">Earnings season runs for about 3 weeks after each quarter ends — January, April, July, October.</p></div>
-<div class="fact-card f2"><span class="fact-icon">🎯</span><p class="fact-text">&quot;Beating estimates&quot; means reporting higher revenue or EPS than Wall Street analysts predicted.</p></div>
-<div class="fact-card f3"><span class="fact-icon">📉</span><p class="fact-text">Even strong earnings can cause a stock to drop if guidance (future outlook) disappoints.</p></div></div></section>
+  <section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">Earnings Beat</div><div class="comp-hdr right">Earnings Miss</div></div><div class="comp-row"><div class="comp-cell left">EPS above analyst estimates</div><div class="comp-cell">EPS below analyst estimates</div></div>
+<div class="comp-row"><div class="comp-cell left">Gap up 5–30% typical</div><div class="comp-cell">Gap down 5–30% typical</div></div>
+<div class="comp-row"><div class="comp-cell left">Momentum long setup</div><div class="comp-cell">Short or fade setup</div></div>
+<div class="comp-row"><div class="comp-cell left">Institutions accumulating</div><div class="comp-cell">Institutions distributing</div></div>
+<div class="comp-row"><div class="comp-cell left">Guidance raise amplifies the move</div><div class="comp-cell">Guidance cut makes it worse</div></div></div></section>
 
-  <section><p class="section-h2">Key vocabulary — tap each card</p><div class="vocab-grid"><div class="vocab-card-wrap v1" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for EPS"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">EPS</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">Earnings Per Share — the company's profit divided by its number of shares. The most watched earnings number.</p></div></div></div>
-<div class="vocab-card-wrap v2" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Guidance"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Guidance</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">The company's own forecast for the next quarter. Often matters more than the actual results.</p></div></div></div>
-<div class="vocab-card-wrap v3" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Whisper Number"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Whisper Number</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">The unofficial earnings expectation among traders — often higher than analyst estimates.</p></div></div></div></div></section>
+  <section><p class="section-h2">True or false?</p><div class="tf-wrap"><div class="tf-item" id="tf-20-0"><p class="tf-statement">A company can beat earnings estimates and still have its stock drop.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,20,0,'true','true')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,20,0,'false','true')">False</button></div><p class="tf-explain" id="tfexp-20-0">If forward guidance (the future outlook) disappoints, the stock can gap down even on a beat. The market prices the future, not the past.</p></div>
+<div class="tf-item" id="tf-20-1"><p class="tf-statement">Earnings are released four times per year — once per quarter.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,20,1,'true','true')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,20,1,'false','true')">False</button></div><p class="tf-explain" id="tfexp-20-1">Every public company reports quarterly. Earnings seasons cluster in January, April, July, and October.</p></div>
+<div class="tf-item" id="tf-20-2"><p class="tf-statement">The &quot;whisper number&quot; is the official analyst consensus estimate.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,20,2,'true','false')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,20,2,'false','false')">False</button></div><p class="tf-explain" id="tfexp-20-2">The whisper number is the unofficial street expectation — often higher than analyst consensus. Beat the whisper and you get a bigger move.</p></div>
+<div class="tf-item" id="tf-20-3"><p class="tf-statement">After-hours earnings moves always hold when the regular session opens.</p><div class="tf-buttons"><button class="tf-btn" data-answer="true" onclick="handleTF(this,20,3,'true','false')" >True</button><button class="tf-btn" data-answer="false" onclick="handleTF(this,20,3,'false','false')">False</button></div><p class="tf-explain" id="tfexp-20-3">Many after-hours moves partially or fully reverse at the open, especially on weak volume. Always wait to see how the market opens.</p></div></div></section>
 
   <!-- Did You Know -->
-  <div class="dyk-card dyk-enter ">
-    <span class="dyk-icon">💡</span>
+  <div class="dyk-card dyk-enter style-data">
+    <span class="dyk-icon">📊</span>
     <div>
-      <p class="dyk-label">Did you know?</p>
+      <p class="dyk-label">The data says</p>
       <p class="dyk-text">Meta (Facebook) lost $232 billion in market cap in a single day — February 3, 2022 — after missing earnings estimates. The largest single-day market cap loss in US history.</p>
     </div>
   </div>
