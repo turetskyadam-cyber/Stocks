@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && cd out && zip -r ../deploy.zip ."
+    "export": "next build && node scripts/fix-brackets.js && rm -f deploy.zip && cd out && zip -r ../deploy.zip ."
   },
   "dependencies": {
     "framer-motion": "^11.3.0",
