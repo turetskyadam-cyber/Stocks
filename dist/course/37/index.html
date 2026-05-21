@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 2: What is the Stock Market?</title>
+  <title>Lesson 37: RSI</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -710,9 +710,9 @@ footer {
 <div class="progress-bar-wrap">
   <a href="../../index.html" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;text-decoration:none;white-space:nowrap;">← Map</a>
   <div class="progress-bar-track">
-    <div class="progress-bar-fill" style="width:2.0%;"></div>
+    <div class="progress-bar-fill" style="width:37.0%;"></div>
   </div>
-  <span class="progress-label">2&nbsp;/&nbsp;100</span>
+  <span class="progress-label">37&nbsp;/&nbsp;100</span>
 </div>
 
 
@@ -724,11 +724,11 @@ footer {
   <!-- Hero -->
   <section class="c1">
     <div class="section-row">
-      <span class="section-dot section-dot-anim" style="background-color:#10b981;--sc:#10b981;"></span>
-      <p class="section-label">Section 1 · Stock Fundamentals</p>
+      <span class="section-dot section-dot-anim" style="background-color:#8b5cf6;--sc:#8b5cf6;"></span>
+      <p class="section-label">Section 3 · Chart Reading</p>
     </div>
-    <h1 class="hero-title">What is the Stock Market?</h1>
-    <p class="hero-subtitle">The place where buyers and sellers come together to trade stocks.</p>
+    <h1 class="hero-title">RSI</h1>
+    <p class="hero-subtitle">The oscillator that measures how fast price is moving — on a 0–100 scale.</p>
   </section>
 
   <!-- Core Concept -->
@@ -737,37 +737,39 @@ footer {
       <div class="core-inner">
         
         <div class="core-text">
-          <h2>Think of a farmers market — for companies.</h2>
-          <p>The stock market is not one building. It is a network of exchanges, computers, and traders all connected. Every second, millions of buy and sell orders flow in. The price you see is simply the last price someone agreed to pay.</p>
+          <h2>RSI measures the speed and size of recent price moves on a 0–100 scale.</h2>
+          <p>Above 70 = overbought (may pause). Below 30 = oversold (may bounce). Divergence = weakening trend warning. RSI is a tool, not a guarantee — always confirm with price action.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="c3"><p class="section-h2">3 things to know</p><div class="facts-grid"><div class="fact-card f1"><span class="fact-icon">📡</span><p class="fact-text">The US stock market processes over 10 billion shares on a normal trading day.</p></div>
-<div class="fact-card f2"><span class="fact-icon">🕙</span><p class="fact-text">Regular trading hours are 9:30 AM – 4:00 PM ET, Monday through Friday.</p></div>
-<div class="fact-card f3"><span class="fact-icon">🌍</span><p class="fact-text">There are stock markets in over 60 countries around the world.</p></div></div></section>
+  <section class="c3"><div class="comparison-wrap"><div class="comparison-header"><div class="comp-hdr left">Overbought RSI &gt;70</div><div class="comp-hdr right">Oversold RSI &lt;30</div></div><div class="comp-row"><div class="comp-cell left">Stock moved up very fast</div><div class="comp-cell">Stock moved down very fast</div></div>
+<div class="comp-row"><div class="comp-cell left">Buyers may be exhausted</div><div class="comp-cell">Sellers may be exhausted</div></div>
+<div class="comp-row"><div class="comp-cell left">Not a sell signal alone</div><div class="comp-cell">Not a buy signal alone</div></div>
+<div class="comp-row"><div class="comp-cell left">Confirm with volume/price</div><div class="comp-cell">Confirm with volume/price</div></div>
+<div class="comp-row"><div class="comp-cell left">Can stay &gt;70 for days in strong trend</div><div class="comp-cell">Can stay &lt;30 in strong downtrend</div></div></div></section>
 
-  <section><p class="section-h2">Key vocabulary — tap each card</p><div class="vocab-grid"><div class="vocab-card-wrap v1" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Market"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Market</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">Any system where buyers and sellers trade an asset — stocks, bonds, even baseball cards.</p></div></div></div>
-<div class="vocab-card-wrap v2" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Liquidity"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Liquidity</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">How easily you can buy or sell something without moving the price. High liquidity = instant fills.</p></div></div></div>
-<div class="vocab-card-wrap v3" onclick="this.classList.toggle('flipped')" role="button" aria-label="Flip card for Index"><div class="vocab-card-inner"><div class="vocab-face vocab-front"><p class="vocab-term">Index</p><p class="vocab-hint">tap to reveal</p></div><div class="vocab-face vocab-back"><div class="shimmer"></div><p class="vocab-def">A basket of stocks used to measure the overall market. The S&amp;P 500 tracks the 500 largest US companies.</p></div></div></div></div></section>
+  <section><div class="scenario-wrap"><p class="scenario-setup">A stock has a strong earnings catalyst and moved from $10 to $18 in two days. RSI is at 78. Level 2 shows thin sellers above and T&amp;S shows large green prints still flowing. Do you buy, wait, or avoid?</p><div class="scenario-options"><button class="scenario-btn" onclick="handleScenario(this,37,0,false)">Buy immediately — strong momentum always continues</button><div class="scenario-explain" id="sexp-37-0">RSI &gt;70 without confirmation is chasing a potentially extended move. The setup may be good but the risk/reward is not ideal here.</div>
+<button class="scenario-btn" onclick="handleScenario(this,37,1,true)">Wait for RSI to pull back below 60 and bounce — then buy</button><div class="scenario-explain" id="sexp-37-1">Letting RSI reset and bounce gives a better risk/reward entry with less extension risk. This is the disciplined approach.</div>
+<button class="scenario-btn" onclick="handleScenario(this,37,2,false)">Short the stock — RSI &gt;70 guarantees a reversal</button><div class="scenario-explain" id="sexp-37-2">RSI can stay above 70 for days in a strong trend. Shorting into momentum is extremely high-risk.</div></div></div></section>
 
   <!-- Did You Know -->
   <div class="dyk-card dyk-enter ">
     <span class="dyk-icon">💡</span>
     <div>
       <p class="dyk-label">Did you know?</p>
-      <p class="dyk-text">The first stock market was created in Amsterdam in 1602 for the Dutch East India Company — the world's first publicly traded company.</p>
+      <p class="dyk-text">GME's RSI hit 99 in January 2021 — statistically the highest possible reading. RSI at 99 did not stop the stock from going even higher for two more days before the historic crash.</p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-wrap nav-enter">
-    <a href="../1/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 1</span></a>
-    <a href="../3/index.html" class="btn-next">
+    <a href="../36/index.html" class="btn-back"><span class="btn-arrow">←</span><span>Lesson 36</span></a>
+    <a href="../38/index.html" class="btn-next">
         <span class="btn-next-label">
           <span class="btn-next-pre">Next lesson</span>
-          <span class="btn-next-title">How Companies Go Public (IPO)</span>
+          <span class="btn-next-title">MACD</span>
         </span>
         <span class="btn-arrow">→</span>
       </a>
@@ -775,7 +777,7 @@ footer {
 </main>
 
 <footer>
-  <p class="footer-text">Lesson 2 of 100 · Momentum Trading Course</p>
+  <p class="footer-text">Lesson 37 of 100 · Momentum Trading Course</p>
 </footer>
 
 <script>
