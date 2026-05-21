@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Momentum Trading Course</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-io:  cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #0f0f14;
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.mono { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+.muted { color: #9ca3af; }
+.accent { color: #00ff88; }
+.text-white { color: #fff; }
+
+/* ── Ticker tape ── */
+.ticker-wrap {
+  overflow: hidden;
+  background: #1a1a24;
+  border-bottom: 1px solid #2d2d3d;
+  border-top: 1px solid #2d2d3d;
+  padding: 6px 0;
+}
+.ticker-track {
+  display: flex;
+  gap: 32px;
+  white-space: nowrap;
+  animation: ticker-scroll 28s linear infinite;
+}
+.ticker-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ticker-item .up   { color: #00ff88; }
+.ticker-item .down { color: #ef4444; }
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Progress bar ── */
+.progress-bar-wrap {
+  background: #1a1a24;
+  border-bottom: 1px solid #2d2d3d;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.progress-bar-track {
+  flex: 1;
+  height: 4px;
+  background: #2d2d3d;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: #00ff88;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.progress-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+/* ── Board ── */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+}
+
+@media (min-width: 480px) { .board-grid { gap: 6px; } }
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid #2d2d3d;
+  border-top-width: 2px;
+}
+
+@media (min-width: 480px) { .cell { border-radius: 8px; } }
+
+.cell-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (min-width: 480px) { .cell-num { font-size: 12px; } }
+
+.cell-start-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 6px;
+  color: #00ff88;
+  margin-top: 2px;
+  letter-spacing: 0.1em;
+}
+
+@media (min-width: 480px) { .cell-start-label { font-size: 8px; } }
+
+.cell-link {
+  display: block;
+  transition: transform 150ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .cell-link:hover { transform: scale(1.10); z-index: 10; position: relative; }
+}
+.cell-link:active { transform: scale(0.97); }
+
+/* lesson-start pulse */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+  50%       { box-shadow: 0 0 14px 3px rgba(0, 255, 136, 0.35); }
+}
+.lesson-start { animation: pulse-glow 2.2s ease-in-out infinite; }
+
+/* ── Board entrance ── */
+@keyframes board-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.board-enter { animation: board-in 400ms var(--ease-out) 100ms both; }
+
+/* ── Card stagger ── */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.c1 { animation: card-in 320ms var(--ease-out) 80ms both; }
+.c2 { animation: card-in 320ms var(--ease-out) 140ms both; }
+.c3 { animation: card-in 320ms var(--ease-out) 200ms both; }
+.f1 { animation: card-in 320ms var(--ease-out) 280ms both; }
+.f2 { animation: card-in 320ms var(--ease-out) 340ms both; }
+.f3 { animation: card-in 320ms var(--ease-out) 400ms both; }
+.v1 { animation: card-in 320ms var(--ease-out) 420ms both; }
+.v2 { animation: card-in 320ms var(--ease-out) 480ms both; }
+.v3 { animation: card-in 320ms var(--ease-out) 540ms both; }
+.dyk-enter { animation: card-in 320ms var(--ease-out) 560ms both; }
+.nav-enter  { animation: card-in 320ms var(--ease-out) 620ms both; }
+
+/* ── Lesson page layout ── */
+.lesson-main {
+  flex: 1;
+  width: 100%;
+  max-width: 672px;
+  margin: 0 auto;
+  padding: 40px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ── Section dot ── */
+.section-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50%       { box-shadow: 0 0 6px 2px var(--sc); }
+}
+.section-dot-anim { animation: dot-pulse 2.5s ease-in-out infinite; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ── Hero ── */
+.hero-title {
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  margin-top: 10px;
+}
+.hero-subtitle {
+  font-size: 18px;
+  color: #9ca3af;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+/* ── Gradient border card ── */
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes border-spin {
+  to { --gradient-angle: 360deg; }
+}
+.gradient-border-card {
+  background: conic-gradient(
+    from var(--gradient-angle),
+    #2d2d3d 0%, rgba(0,255,136,0.22) 35%, #2d2d3d 65%
+  );
+  animation: border-spin 12s linear infinite;
+  border-radius: 16px;
+  padding: 1px;
+}
+
+.core-inner {
+  background: #1a1a24;
+  border-radius: 15px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 540px) {
+  .core-inner { flex-direction: row; align-items: flex-start; }
+}
+
+.core-text h2 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.core-text p {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.7;
+}
+
+/* ── Fact cards ── */
+.facts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 540px) { .facts-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.fact-card {
+  background: #1a1a24;
+  border: 1px solid #2d2d3d;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fact-icon { font-size: 22px; }
+.fact-text { font-size: 14px; color: #fff; line-height: 1.55; }
+
+/* ── Vocab cards ── */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 540px) { .vocab-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.vocab-card-wrap {
+  perspective: 800px;
+  height: 120px;
+  cursor: pointer;
+}
+.vocab-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+.vocab-card-wrap.flipped .vocab-card-inner {
+  transform: rotateY(180deg);
+}
+.vocab-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+}
+.vocab-front {
+  background: #1a1a24;
+  border: 1px solid #2d2d3d;
+}
+.vocab-back {
+  background: #1a1a24;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  transform: rotateY(180deg);
+  overflow: hidden;
+}
+.vocab-term {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.vocab-hint {
+  font-size: 11px;
+  color: #9ca3af;
+  font-family: 'JetBrains Mono', monospace;
+}
+.vocab-def {
+  font-size: 13px;
+  color: #fff;
+  line-height: 1.55;
+}
+
+/* shimmer on back face */
+@keyframes shimmer-slide {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,255,136,0.07) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer-slide 3s linear infinite;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* ── Did You Know ── */
+.dyk-card {
+  background: #1a1a24;
+  border: 1px solid #2d2d3d;
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.dyk-icon { font-size: 22px; flex-shrink: 0; }
+.dyk-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #00ff88;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+}
+.dyk-text { font-size: 14px; color: #fff; line-height: 1.65; }
+
+/* ── Nav buttons ── */
+.nav-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #00ff88;
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  transition: transform 150ms var(--ease-out), box-shadow 150ms;
+  position: relative;
+  overflow: hidden;
+}
+.btn-next-label { display: flex; flex-direction: column; gap: 2px; }
+.btn-next-pre { font-size: 11px; font-weight: 500; opacity: 0.7; }
+.btn-next-title { font-size: 14px; }
+.btn-arrow { font-size: 18px; line-height: 1; transition: transform 200ms var(--ease-out); }
+
+@media (hover: hover) {
+  .btn-next:hover { transform: scale(1.02); box-shadow: 0 4px 20px rgba(0,255,136,0.25); }
+  .btn-next:hover .btn-arrow { transform: translateX(5px); }
+  .btn-back:hover .btn-arrow { transform: translateX(-5px); }
+}
+.btn-next:active { transform: scale(0.97); }
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a24;
+  color: #9ca3af;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid #2d2d3d;
+  transition: transform 150ms var(--ease-out), color 150ms, border-color 150ms;
+}
+@media (hover: hover) {
+  .btn-back:hover { color: #fff; border-color: #4d4d5d; transform: scale(1.01); }
+}
+.btn-back:active { transform: scale(0.97); }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid #2d2d3d;
+  padding: 16px;
+  text-align: center;
+}
+.footer-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* ── Section legend pills ── */
+.legend-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #2d2d3d;
+}
+.legend-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #1a1a24;
+  border: 1px solid #2d2d3d;
+  border-radius: 100px;
+  padding: 4px 12px;
+}
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.legend-label { font-size: 12px; color: #fff; }
+.legend-range { font-size: 12px; color: #9ca3af; }
+
+/* ── CTA ── */
+.cta-wrap { padding: 8px 16px 56px; text-align: center; }
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #00ff88;
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px 32px;
+  border-radius: 12px;
+  transition: transform 150ms var(--ease-out);
+}
+@media (hover: hover) { .btn-cta:hover { transform: scale(1.05); } }
+.btn-cta:active { transform: scale(0.97); }
+
+/* ── Board count label ── */
+.board-count {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 20px;
+}
+
+/* ── Header ── */
+.site-header {
+  text-align: center;
+  padding: 48px 16px 32px;
+  border-bottom: 1px solid #2d2d3d;
+}
+.site-header-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #00ff88;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 16px;
+}
+.site-header h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.site-header-sub {
+  color: #9ca3af;
+  margin-top: 12px;
+  font-size: 15px;
+  max-width: 280px;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track, .gradient-border-card, .shimmer,
+  .section-dot-anim, .lesson-start, .board-enter,
+  .c1,.c2,.c3,.f1,.f2,.f3,.v1,.v2,.v3,.dyk-enter,.nav-enter,
+  .vocab-card-inner { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Section heading ── */
+.section-h2 {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 14px;
+}
+
+/* ── Pizza SVG wrapper ── */
+.pizza-wrap { flex-shrink: 0; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <p class="site-header-eyebrow">Course Map</p>
+  <h1>Momentum Trading<br>Course</h1>
+  <p class="site-header-sub">100 lessons. One goal: trade the open like a pro.</p>
+</header>
+
+<nav class="legend-wrap" aria-label="Course sections">
+  <div class="legend-pill"><span class="legend-dot" style="background:#10b981;"></span><span class="legend-label">Stock Fundamentals</span><span class="legend-range">1–15</span></div>
+<div class="legend-pill"><span class="legend-dot" style="background:#3b82f6;"></span><span class="legend-label">Market Mechanics</span><span class="legend-range">16–30</span></div>
+<div class="legend-pill"><span class="legend-dot" style="background:#8b5cf6;"></span><span class="legend-label">Chart Reading</span><span class="legend-range">31–50</span></div>
+<div class="legend-pill"><span class="legend-dot" style="background:#f97316;"></span><span class="legend-label">Momentum Basics</span><span class="legend-range">51–70</span></div>
+<div class="legend-pill"><span class="legend-dot" style="background:#eab308;"></span><span class="legend-label">Pre-Market Prep</span><span class="legend-range">71–85</span></div>
+<div class="legend-pill"><span class="legend-dot" style="background:#ef4444;"></span><span class="legend-label">9:30 AM Open</span><span class="legend-range">86–100</span></div>
+</nav>
+
+<main style="flex:1;padding:32px 12px;max-width:768px;width:100%;margin:0 auto;">
+  <div class="board-enter board-grid">
+    <a href="/course/1/index.html" class="cell-link lesson-start" aria-label="Go to lesson 1"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">01</span>
+        <span class="cell-start-label">START</span>
+      </div></a>
+<a href="../course/2/index.html" class="cell-link" aria-label="Go to lesson 2"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">02</span>
+        
+      </div></a>
+<a href="../course/3/index.html" class="cell-link" aria-label="Go to lesson 3"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">03</span>
+        
+      </div></a>
+<a href="../course/4/index.html" class="cell-link" aria-label="Go to lesson 4"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">04</span>
+        
+      </div></a>
+<a href="../course/5/index.html" class="cell-link" aria-label="Go to lesson 5"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">05</span>
+        
+      </div></a>
+<a href="../course/6/index.html" class="cell-link" aria-label="Go to lesson 6"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">06</span>
+        
+      </div></a>
+<a href="../course/7/index.html" class="cell-link" aria-label="Go to lesson 7"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">07</span>
+        
+      </div></a>
+<a href="../course/8/index.html" class="cell-link" aria-label="Go to lesson 8"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">08</span>
+        
+      </div></a>
+<a href="../course/9/index.html" class="cell-link" aria-label="Go to lesson 9"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">09</span>
+        
+      </div></a>
+<a href="../course/10/index.html" class="cell-link" aria-label="Go to lesson 10"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">10</span>
+        
+      </div></a>
+<a href="../course/20/index.html" class="cell-link" aria-label="Go to lesson 20"><div class="cell" style="border-top-color:#3b82f6;border-color:#3b82f644;background:#3b82f612;">
+        <span class="cell-num" style="color:#fff;">20</span>
+        
+      </div></a>
+<a href="../course/19/index.html" class="cell-link" aria-label="Go to lesson 19"><div class="cell" style="border-top-color:#3b82f6;border-color:#3b82f644;background:#3b82f612;">
+        <span class="cell-num" style="color:#fff;">19</span>
+        
+      </div></a>
+<a href="../course/18/index.html" class="cell-link" aria-label="Go to lesson 18"><div class="cell" style="border-top-color:#3b82f6;border-color:#3b82f644;background:#3b82f612;">
+        <span class="cell-num" style="color:#fff;">18</span>
+        
+      </div></a>
+<a href="../course/17/index.html" class="cell-link" aria-label="Go to lesson 17"><div class="cell" style="border-top-color:#3b82f6;border-color:#3b82f644;background:#3b82f612;">
+        <span class="cell-num" style="color:#fff;">17</span>
+        
+      </div></a>
+<a href="../course/16/index.html" class="cell-link" aria-label="Go to lesson 16"><div class="cell" style="border-top-color:#3b82f6;border-color:#3b82f644;background:#3b82f612;">
+        <span class="cell-num" style="color:#fff;">16</span>
+        
+      </div></a>
+<a href="../course/15/index.html" class="cell-link" aria-label="Go to lesson 15"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">15</span>
+        
+      </div></a>
+<a href="../course/14/index.html" class="cell-link" aria-label="Go to lesson 14"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">14</span>
+        
+      </div></a>
+<a href="../course/13/index.html" class="cell-link" aria-label="Go to lesson 13"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">13</span>
+        
+      </div></a>
+<a href="../course/12/index.html" class="cell-link" aria-label="Go to lesson 12"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">12</span>
+        
+      </div></a>
+<a href="../course/11/index.html" class="cell-link" aria-label="Go to lesson 11"><div class="cell" style="border-top-color:#10b981;border-color:#10b98144;background:#10b98112;">
+        <span class="cell-num" style="color:#fff;">11</span>
+        
+      </div></a>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">21</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">22</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">23</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">24</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">25</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">26</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">27</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">28</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">29</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#3b82f6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">30</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">40</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">39</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">38</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">37</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">36</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">35</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">34</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">33</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">32</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">31</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">41</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">42</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">43</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">44</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">45</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">46</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">47</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">48</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">49</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#8b5cf6;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">50</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">60</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">59</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">58</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">57</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">56</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">55</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">54</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">53</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">52</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">51</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">61</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">62</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">63</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">64</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">65</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">66</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">67</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">68</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">69</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#f97316;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">70</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">80</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">79</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">78</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">77</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">76</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">75</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">74</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">73</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">72</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">71</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">81</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">82</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">83</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">84</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#eab308;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">85</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">86</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">87</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">88</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">89</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">90</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">100</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">99</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">98</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">97</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">96</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">95</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">94</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">93</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">92</span>
+        
+      </div></div>
+<div><div class="cell" style="border-top-color:#ef4444;border-color:#2d2d3d;background:#1a1a2430;">
+        <span class="cell-num" style="color:#374151;">91</span>
+        
+      </div></div>
+  </div>
+  <p class="board-count">20 / 100 lessons available · more coming soon</p>
+</main>
+
+<div class="cta-wrap">
+  <a href="course/1/index.html" class="btn-cta">Begin Lesson 1 <span>→</span></a>
+</div>
+
+<footer>
+  <p class="footer-text">Momentum Trading Course</p>
+</footer>
+</body>
+</html>
