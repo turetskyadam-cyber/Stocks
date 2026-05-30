@@ -33,6 +33,8 @@ export const FALLBACK_GAINERS: Gainer[] = [
   { symbol: 'AMZN', name: 'Amazon.com, Inc.', price: '185.90', change: '+1.30%', pct: 1.3, changeAbs: '+2.40', dayLow: 183.0, dayHigh: 186.7, last: 185.9, volume: '28.3M' },
   { symbol: 'META', name: 'Meta Platforms', price: '502.12', change: '+0.60%', pct: 0.6, changeAbs: '+3.00', dayLow: 497.5, dayHigh: 504.0, last: 502.12, volume: '14.1M' },
   { symbol: 'GOOGL', name: 'Alphabet Inc.', price: '174.11', change: '+0.90%', pct: 0.9, changeAbs: '+1.55', dayLow: 172.0, dayHigh: 175.0, last: 174.11, volume: '21.5M' },
+  { symbol: 'NFLX', name: 'Netflix, Inc.', price: '628.40', change: '+1.10%', pct: 1.1, changeAbs: '+6.80', dayLow: 620.0, dayHigh: 631.0, last: 628.4, volume: '8.9M' },
+  { symbol: 'SPY', name: 'SPDR S&P 500 ETF', price: '521.67', change: '+0.40%', pct: 0.4, changeAbs: '+2.05', dayLow: 518.0, dayHigh: 522.5, last: 521.67, volume: '61.0M' },
 ]
 
 const HOSTS = ['query1.finance.yahoo.com', 'query2.finance.yahoo.com']

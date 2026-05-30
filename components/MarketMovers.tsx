@@ -5,7 +5,8 @@ import { motion } from 'framer-motion'
 import { FALLBACK_GAINERS, type Gainer } from '@/lib/gainers'
 
 const REFRESH_MS = 30_000
-const TOP_CARDS = 8
+const COLLAPSED_CARDS = 4
+const EXPANDED_CARDS = 10
 
 /* Smoothly animate a number toward `target` whenever it changes — gives the
    panel its "live, ticking" feel on every refresh. */
@@ -45,6 +46,7 @@ export default function MarketMovers() {
   const [items, setItems] = useState<Gainer[]>(FALLBACK_GAINERS)
   const [updated, setUpdated] = useState<Date | null>(null)
   const [live, setLive] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     let active = true
@@ -72,7 +74,9 @@ export default function MarketMovers() {
 
   const maxPct = Math.max(...items.map((g) => g.pct), 0.0001)
   const marquee = [...items, ...items]
-  const cards = items.slice(0, TOP_CARDS)
+  const visibleCount = expanded ? EXPANDED_CARDS : COLLAPSED_CARDS
+  const cards = items.slice(0, visibleCount)
+  const canExpand = items.length > COLLAPSED_CARDS
 
   return (
     <section className="w-full border-b border-border bg-gradient-to-b from-accent/[0.04] to-transparent">
@@ -85,17 +89,14 @@ export default function MarketMovers() {
           </span>
           <h2 className="text-sm sm:text-base font-bold text-white">Top Gainers Today</h2>
         </div>
-        <div className="text-right">
-          <p className="font-mono text-[10px] text-muted leading-tight">Yahoo Finance</p>
-          <motion.p
-            key={updated?.getTime() ?? 'init'}
-            initial={{ opacity: 0.3 }}
-            animate={{ opacity: 1 }}
-            className="font-mono text-[10px] text-muted leading-tight"
-          >
-            {updated ? `updated ${timeLabel(updated)}` : 'connecting…'}
-          </motion.p>
-        </div>
+        <motion.p
+          key={updated?.getTime() ?? 'init'}
+          initial={{ opacity: 0.3 }}
+          animate={{ opacity: 1 }}
+          className="font-mono text-[10px] text-muted leading-tight text-right"
+        >
+          {updated ? `updated ${timeLabel(updated)}` : 'connecting…'}
+        </motion.p>
       </div>
 
       {/* ── Scrolling marquee strip (movement) ── */}
@@ -113,11 +114,50 @@ export default function MarketMovers() {
       </div>
 
       {/* ── Animated gainer cards ── */}
-      <div className="max-w-5xl mx-auto px-4 py-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+      <div className="max-w-5xl mx-auto px-4 pt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
         {cards.map((g, i) => (
-          <MoverCard key={g.symbol} g={g} rank={i + 1} maxPct={maxPct} delay={i * 0.05} />
+          <MoverCard
+            key={g.symbol}
+            g={g}
+            rank={i + 1}
+            maxPct={maxPct}
+            delay={(i % COLLAPSED_CARDS) * 0.05}
+          />
         ))}
       </div>
+
+      {/* ── Green drop-down toggle ── */}
+      {canExpand && (
+        <div className="flex justify-center pt-2 pb-3">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            aria-expanded={expanded}
+            className="group inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-accent transition-colors hover:bg-accent/20 active:scale-[0.97]"
+          >
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider">
+              {expanded ? 'Show less' : `Show top ${Math.min(EXPANDED_CARDS, items.length)}`}
+            </span>
+            <motion.svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              animate={{ rotate: expanded ? 180 : 0 }}
+              transition={{ type: 'spring', duration: 0.4, bounce: 0.3 }}
+              className="drop-shadow-[0_0_4px_rgba(0,255,136,0.6)]"
+            >
+              <path
+                d="M6 9l6 6 6-6"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
+          </button>
+        </div>
+      )}
     </section>
   )
 }
