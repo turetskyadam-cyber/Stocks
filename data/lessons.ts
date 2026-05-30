@@ -25,6 +25,10 @@ export type SlotBWidget =
   | { type: 'calculator'; heading: string; inputLabel: string; inputDefault: number; inputMin: number; inputMax: number; inputStep: number; factor: number; resultLabel: string; resultPrefix?: string; resultSuffix?: string; note?: string }
   | { type: 'pros-cons'; heading: string; pros: string[]; cons: string[] }
 
+// Either slot may hold any widget type — the renderers dispatch on `type`, so
+// the A/B split is not enforced by position.
+export type SlotWidget = SlotAWidget | SlotBWidget
+
 export type DykStyle = 'default' | 'pro-tip' | 'mistake' | 'data' | 'quote'
 
 export interface Lesson {
@@ -37,8 +41,8 @@ export interface Lesson {
   coreBody: string
   facts: { icon: string; text: string }[]
   vocab: VocabItem[]
-  slotA?: SlotAWidget
-  slotB?: SlotBWidget
+  slotA?: SlotWidget
+  slotB?: SlotWidget
   dykStyle?: DykStyle
   didYouKnow: string
   nextTitle: string
