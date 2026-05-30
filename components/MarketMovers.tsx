@@ -179,11 +179,17 @@ function MoverCard({
   const pos = rangePct(g)
 
   return (
-    <motion.div
+    <motion.a
+      href={`https://finance.yahoo.com/quote/${encodeURIComponent(g.symbol)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={`Open ${g.symbol} on Yahoo Finance`}
+      aria-label={`${g.name} (${g.symbol}), up ${g.change} — open full quote on Yahoo Finance`}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -3 }}
       transition={{ type: 'spring', duration: 0.5, bounce: 0.15, delay }}
-      className="relative overflow-hidden rounded-xl border border-border bg-card p-3 flex flex-col gap-2"
+      className="group relative block overflow-hidden rounded-xl border border-border bg-card p-3 flex flex-col gap-2 cursor-pointer transition-colors hover:border-accent/60 focus-visible:border-accent focus-visible:outline-none"
     >
       {/* glow that scales with the size of the move */}
       <div
@@ -204,8 +210,19 @@ function MoverCard({
           </div>
           <p className="text-[10px] text-muted truncate max-w-[110px]">{g.name}</p>
         </div>
-        <span className="font-mono text-sm font-bold text-accent whitespace-nowrap">
+        <span className="flex items-center gap-1 font-mono text-sm font-bold text-accent whitespace-nowrap">
           +{pct.toFixed(2)}%
+          {/* opens full quote on Yahoo — reserved space so layout never shifts */}
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden
+            className="opacity-40 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+          >
+            <path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </span>
       </div>
 
@@ -244,6 +261,6 @@ function MoverCard({
           />
         </div>
       </div>
-    </motion.div>
+    </motion.a>
   )
 }
