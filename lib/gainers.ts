@@ -2,7 +2,8 @@
  * Top gainers data for the lesson ticker tape and the homepage live panel.
  *
  * Source page:  https://finance.yahoo.com/markets/stocks/gainers/
- * Backing API:  Yahoo's predefined "day_gainers" screener.
+ * Backing API:  Yahoo's predefined "day_gainers" screener (snapshot) + the
+ *               "spark" endpoint (one batched call) for intraday sparklines.
  *
  * `fetchTopGainers()` runs on the server (Next.js / Vercel), so there are no
  * CORS issues. Responses are cached for 60s via Next's fetch revalidation so we
@@ -20,21 +21,64 @@ export interface Gainer {
   dayLow: number // intraday low
   dayHigh: number // intraday high
   last: number // raw last price (for day-range position)
+  prevClose: number // previous close (sparkline baseline)
   volume: string // formatted, e.g. "38.2M"
+  exchange: string // e.g. "NYSE" / "NasdaqGS"
+  marketState: string // PRE | REGULAR | POST | POSTPOST | CLOSED
+  spark: number[] // intraday close series for the sparkline
+}
+
+// Build a gently rising synthetic intraday series for the offline fallback.
+function fauxSpark(prev: number, last: number, n = 24): number[] {
+  return Array.from({ length: n }, (_, i) => {
+    const t = i / (n - 1)
+    const wobble = Math.sin(i * 1.3) * (last - prev) * 0.12
+    return +(prev + (last - prev) * t + wobble).toFixed(2)
+  })
+}
+
+function fb(
+  symbol: string,
+  name: string,
+  last: number,
+  pct: number,
+  low: number,
+  high: number,
+  volume: string,
+  exchange = 'NASDAQ'
+): Gainer {
+  const prev = last / (1 + pct / 100)
+  const chg = last - prev
+  return {
+    symbol,
+    name,
+    price: last.toFixed(2),
+    change: `+${pct.toFixed(2)}%`,
+    pct,
+    changeAbs: `+${chg.toFixed(2)}`,
+    dayLow: low,
+    dayHigh: high,
+    last,
+    prevClose: prev,
+    volume,
+    exchange,
+    marketState: 'REGULAR',
+    spark: fauxSpark(prev, last),
+  }
 }
 
 /** Last-resort values if Yahoo can't be reached. */
 export const FALLBACK_GAINERS: Gainer[] = [
-  { symbol: 'AAPL', name: 'Apple Inc.', price: '189.84', change: '+1.20%', pct: 1.2, changeAbs: '+2.25', dayLow: 187.1, dayHigh: 190.4, last: 189.84, volume: '52.1M' },
-  { symbol: 'TSLA', name: 'Tesla, Inc.', price: '248.42', change: '+3.80%', pct: 3.8, changeAbs: '+9.10', dayLow: 240.0, dayHigh: 250.1, last: 248.42, volume: '98.4M' },
-  { symbol: 'NVDA', name: 'NVIDIA Corp.', price: '875.39', change: '+2.10%', pct: 2.1, changeAbs: '+18.00', dayLow: 858.0, dayHigh: 880.2, last: 875.39, volume: '41.2M' },
-  { symbol: 'AMD', name: 'Adv. Micro Devices', price: '168.75', change: '+1.90%', pct: 1.9, changeAbs: '+3.15', dayLow: 165.2, dayHigh: 170.0, last: 168.75, volume: '36.7M' },
-  { symbol: 'MSFT', name: 'Microsoft Corp.', price: '415.06', change: '+0.80%', pct: 0.8, changeAbs: '+3.30', dayLow: 411.0, dayHigh: 416.5, last: 415.06, volume: '19.8M' },
-  { symbol: 'AMZN', name: 'Amazon.com, Inc.', price: '185.90', change: '+1.30%', pct: 1.3, changeAbs: '+2.40', dayLow: 183.0, dayHigh: 186.7, last: 185.9, volume: '28.3M' },
-  { symbol: 'META', name: 'Meta Platforms', price: '502.12', change: '+0.60%', pct: 0.6, changeAbs: '+3.00', dayLow: 497.5, dayHigh: 504.0, last: 502.12, volume: '14.1M' },
-  { symbol: 'GOOGL', name: 'Alphabet Inc.', price: '174.11', change: '+0.90%', pct: 0.9, changeAbs: '+1.55', dayLow: 172.0, dayHigh: 175.0, last: 174.11, volume: '21.5M' },
-  { symbol: 'NFLX', name: 'Netflix, Inc.', price: '628.40', change: '+1.10%', pct: 1.1, changeAbs: '+6.80', dayLow: 620.0, dayHigh: 631.0, last: 628.4, volume: '8.9M' },
-  { symbol: 'SPY', name: 'SPDR S&P 500 ETF', price: '521.67', change: '+0.40%', pct: 0.4, changeAbs: '+2.05', dayLow: 518.0, dayHigh: 522.5, last: 521.67, volume: '61.0M' },
+  fb('TSLA', 'Tesla, Inc.', 248.42, 3.8, 240.0, 250.1, '98.4M'),
+  fb('NVDA', 'NVIDIA Corp.', 875.39, 2.1, 858.0, 880.2, '41.2M'),
+  fb('AMD', 'Adv. Micro Devices', 168.75, 1.9, 165.2, 170.0, '36.7M'),
+  fb('AMZN', 'Amazon.com, Inc.', 185.9, 1.3, 183.0, 186.7, '28.3M'),
+  fb('AAPL', 'Apple Inc.', 189.84, 1.2, 187.1, 190.4, '52.1M'),
+  fb('NFLX', 'Netflix, Inc.', 628.4, 1.1, 620.0, 631.0, '8.9M'),
+  fb('GOOGL', 'Alphabet Inc.', 174.11, 0.9, 172.0, 175.0, '21.5M'),
+  fb('MSFT', 'Microsoft Corp.', 415.06, 0.8, 411.0, 416.5, '19.8M'),
+  fb('META', 'Meta Platforms', 502.12, 0.6, 497.5, 504.0, '14.1M'),
+  fb('SPY', 'SPDR S&P 500 ETF', 521.67, 0.4, 518.0, 522.5, '61.0M'),
 ]
 
 const HOSTS = ['query1.finance.yahoo.com', 'query2.finance.yahoo.com']
@@ -59,8 +103,38 @@ function fmtVol(n: number | null): string {
   return String(n)
 }
 
+/** One batched call: intraday close series for every symbol at once. */
+async function fetchSparks(symbols: string[]): Promise<Record<string, number[]>> {
+  if (!symbols.length) return {}
+  const qs = encodeURIComponent(symbols.join(','))
+  for (const host of HOSTS) {
+    const url = `https://${host}/v8/finance/spark?symbols=${qs}&range=1d&interval=5m`
+    try {
+      const res = await fetch(url, {
+        headers: { 'User-Agent': UA, Accept: 'application/json' },
+        next: { revalidate: 60 },
+      })
+      if (!res.ok) continue
+      const json: any = await res.json()
+      const out: Record<string, number[]> = {}
+      for (const sym of symbols) {
+        const closes: unknown = json?.[sym]?.close
+        if (Array.isArray(closes)) {
+          const series = closes.filter((c): c is number => typeof c === 'number')
+          if (series.length > 1) out[sym] = series
+        }
+      }
+      if (Object.keys(out).length) return out
+    } catch {
+      // try next host
+    }
+  }
+  return {}
+}
+
 /**
- * Fetch the day's top gainers from Yahoo Finance. Server-only.
+ * Fetch the day's top gainers from Yahoo Finance, with intraday sparklines.
+ * Server-only.
  * @param count how many gainers to request (default 10)
  */
 export async function fetchTopGainers(count = 10): Promise<Gainer[]> {
@@ -69,7 +143,6 @@ export async function fetchTopGainers(count = 10): Promise<Gainer[]> {
     try {
       const res = await fetch(url, {
         headers: { 'User-Agent': UA, Accept: 'application/json' },
-        // Cache on the server; refresh at most once a minute.
         next: { revalidate: 60 },
       })
       if (!res.ok) continue
@@ -86,6 +159,7 @@ export async function fetchTopGainers(count = 10): Promise<Gainer[]> {
         const chg = num(q?.regularMarketChange)
         const low = num(q?.regularMarketDayLow) ?? price
         const high = num(q?.regularMarketDayHigh) ?? price
+        const prev = num(q?.regularMarketPreviousClose) ?? price
         items.push({
           symbol,
           name: q?.shortName || q?.longName || symbol,
@@ -96,10 +170,21 @@ export async function fetchTopGainers(count = 10): Promise<Gainer[]> {
           dayLow: low,
           dayHigh: high,
           last: price,
+          prevClose: prev,
           volume: fmtVol(num(q?.regularMarketVolume)),
+          exchange: q?.fullExchangeName || q?.exchange || '',
+          marketState: q?.marketState || 'REGULAR',
+          spark: [],
         })
       }
-      if (items.length) return items
+      if (!items.length) continue
+
+      // Enrich with intraday sparklines (best-effort; never blocks the data).
+      const sparks = await fetchSparks(items.map((i) => i.symbol))
+      for (const it of items) {
+        it.spark = sparks[it.symbol] ?? [it.prevClose, it.last]
+      }
+      return items
     } catch {
       // Try the next host.
     }
