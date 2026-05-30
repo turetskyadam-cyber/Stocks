@@ -8,7 +8,7 @@ import { spotSetup } from '@/lib/setups'
 import { marketInfo, fmtCountdown, type Session } from '@/lib/market'
 
 const REFRESH_MS = 30_000
-const COLLAPSED_CARDS = 4
+const COLLAPSED_CARDS = 3 // hero + 2 cards underneath (even row)
 const EXPANDED_CARDS = 10
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -274,7 +274,7 @@ export default function MarketMovers() {
       ) : (
         <div className="max-w-5xl mx-auto px-4 pt-3 flex flex-col gap-2.5">
           {hero && <HeroMover g={hero} maxPct={maxPct} flash={flash[hero.symbol]} />}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-2 gap-2.5">
             {rest.map((g, i) => (
               <MoverCard
                 key={g.symbol}
@@ -282,6 +282,7 @@ export default function MarketMovers() {
                 rank={i + 2}
                 maxPct={maxPct}
                 flash={flash[g.symbol]}
+                wide={rest.length % 2 === 1 && i === rest.length - 1}
               />
             ))}
           </div>
@@ -400,11 +401,13 @@ function MoverCard({
   rank,
   maxPct,
   flash,
+  wide,
 }: {
   g: Gainer
   rank: number
   maxPct: number
   flash?: 'up' | 'down'
+  wide?: boolean
 }) {
   const pct = useCountUp(g.pct)
   const price = useCountUp(g.last)
@@ -418,9 +421,9 @@ function MoverCard({
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -3 }}
       transition={{ type: 'spring', duration: 0.5, bounce: 0.15 }}
-      className={`group relative overflow-hidden rounded-xl border border-border bg-card p-3 flex flex-col gap-2 transition-[box-shadow,border-color] hover:border-accent/60 ${flashRing(
-        flash
-      )}`}
+      className={`group relative overflow-hidden rounded-xl border border-border bg-card p-3 flex flex-col gap-2 transition-[box-shadow,border-color] hover:border-accent/60 ${
+        wide ? 'col-span-2' : ''
+      } ${flashRing(flash)}`}
     >
       {/* stretched Yahoo link (sibling, not a wrapper) */}
       <a
