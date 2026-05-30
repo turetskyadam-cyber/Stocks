@@ -13,7 +13,7 @@ export default function TickerTape() {
 
     const load = async () => {
       try {
-        const res = await fetch('/api/gainers', { cache: 'no-store' })
+        const res = await fetch('/api/gainers/', { cache: 'no-store' })
         if (!res.ok) return
         const data = await res.json()
         if (active && Array.isArray(data.items) && data.items.length) {

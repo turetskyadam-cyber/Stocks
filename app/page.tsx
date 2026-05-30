@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getLessonById } from '@/data/lessons'
+import MarketMovers from '@/components/MarketMovers'
 
 /* Build a flat array of lesson IDs in serpentine order so CSS grid
    naturally renders the Shoots & Ladders layout:
@@ -33,6 +34,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-bg flex flex-col">
+
+      {/* ── Live market movers (above the course map) ── */}
+      <MarketMovers />
 
       {/* ── Header ── */}
       <header className="text-center px-4 pt-12 pb-8 border-b border-border">
